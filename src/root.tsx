@@ -1,7 +1,6 @@
 // @refresh reload
-import { Suspense } from "solid-js";
+import { createSignal, Suspense } from "solid-js";
 import {
-  useLocation,
   A,
   Body,
   ErrorBoundary,
@@ -16,13 +15,24 @@ import {
 import "./root.css";
 
 export default function Root() {
-  const location = useLocation();
-  const active = (path: string) =>
-    path == location.pathname
-      ? "border-sky-600"
-      : "border-transparent hover:border-sky-600";
+  const [currentTheme, setCurrentTheme] = createSignal<string | null>(
+    (typeof localStorage === "undefined" || typeof window === "undefined")
+      ? null
+      : localStorage.getItem("theme")
+  );
+
+  const setTheme = (theme: string | null) => {
+    if (theme === null) {
+      localStorage.removeItem("theme");
+      setCurrentTheme(null);
+    } else {
+      localStorage.setItem("theme", theme);
+      setCurrentTheme(theme);
+    }
+  };
+
   return (
-    <Html lang="en">
+    <Html lang="en" data-theme={currentTheme()}>
       <Head>
         <Title>Gaming Tools</Title>
         <Meta charset="utf-8" />
@@ -31,19 +41,30 @@ export default function Root() {
       <Body>
         <Suspense>
           <ErrorBoundary>
-            <nav class="bg-sky-800">
-              <ul class="container flex items-center p-3 text-gray-200">
-                <li class={`border-b-2 ${active("/")} mx-1.5 sm:mx-6`}>
-                  <A href="/">Home</A>
-                </li>
-                <li class={`border-b-2 ${active("/about")} mx-1.5 sm:mx-6`}>
-                  <A href="/about">About</A>
-                </li>
-                <li class={`border-b-2 ${active("/factorio")} mx-1.5 sm:mx-6`}>
-                  <A href="/factorio">Factorio</A>
-                </li>
-              </ul>
-            </nav>
+            <div class="m-8">
+              <nav class="dui-navbar shadow-xl rounded-box bg-primary text-primary-content">
+                <div class="dui-navbar-start">
+                  <span class="text-xl mx-4">Gaming Tools</span>
+                </div>
+                <div class="dui-navbar-center space-x-4">
+                  <A class="dui-link-hover" href="/">Home</A>
+                  <A class="dui-link-hover" href="/about">About</A>
+                  <A class="dui-link-hover" href="/factorio">Factorio</A>
+                </div>
+                <div class="dui-navbar-end">
+                  <div class="dui-dropdown dui-dropdown-end">
+                    <label tabindex="0" class="dui-btn dui-btn-ghost normal-case">Theme</label>
+                    <div tabindex="0" class="dui-dropdown-content dui-menu p-2 shadow bg-base-100 rounded-box w-52">
+                      <div class="grid grid-cols-1 gap-3 p-3 text-neutral">
+                        <div class="dui-btn normal-case" onClick={() => setTheme(null)}>Default</div>
+                        <div class="dui-btn normal-case" onClick={() => setTheme("light")}>Light</div>
+                        <div class="dui-btn normal-case" onClick={() => setTheme("dark")}>Dark</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
             <Routes>
               <FileRoutes />
             </Routes>
