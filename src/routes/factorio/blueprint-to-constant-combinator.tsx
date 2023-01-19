@@ -1,5 +1,5 @@
 import { createEffect, createSignal } from "solid-js";
-import { decode, encode, } from "@jensforstmann/factorio-blueprint-tools";
+import { addEntity, connectEntities, decode, encode, } from "@jensforstmann/factorio-blueprint-tools";
 import { isBlueprint, isBlueprintBook, Plan } from "@jensforstmann/factorio-blueprint-tools/dist/types/plan";
 import { Blueprint } from "@jensforstmann/factorio-blueprint-tools/dist/types/blueprint";
 import { BlueprintBook } from "@jensforstmann/factorio-blueprint-tools/dist/types/blueprintBook";
@@ -48,71 +48,9 @@ const convert = (inputBp: string, signalsPerCC: number, includeRequester: boolea
 
         processPlan(decode(inputBp));
 
-        const out: Blueprint = {
+        const blueprint: Blueprint = {
             blueprint: {
-                entities: chunkArray([...items.entries()], signalsPerCC).map((chunk, index) => {
-                    const ccId = index + 1;
-                    const reqId = items.size + index + 1;
-
-                    const cc: Entity = {
-                        entity_number: ccId,
-                        name: "constant-combinator",
-                        position: {
-                            x: index,
-                            y: 0,
-                        },
-                        control_behavior: {
-                            filters: chunk.map((item, index) => {
-                                const [name, count] = item;
-                                return {
-                                    signal: {
-                                        type: "item",
-                                        name: name
-                                    },
-                                    count: count,
-                                    index: index + 1
-                                }
-                            })
-                        },
-                        connections: includeRequester ? {
-                            1: {
-                                green: [
-                                    {
-                                        entity_id: reqId
-                                    }
-                                ]
-                            }
-                        } : undefined,
-                    };
-
-                    const req: Entity = {
-                        entity_number: reqId,
-                        name: "logistic-chest-requester",
-                        position: {
-                            x: index,
-                            y: 1
-                        },
-                        control_behavior: {
-                            circuit_mode_of_operation: 1
-                        },
-                        connections: {
-                            1: {
-                                green: [
-                                    {
-                                        entity_id: ccId
-                                    }
-                                ]
-                            }
-                        },
-                        request_from_buffers: requestFromBuffer,
-                    };
-
-                    if (includeRequester) {
-                        return [cc, req];
-                    } else {
-                        return [cc];
-                    }
-                }).flat(),
+                entities: [],
                 icons: [{
                     signal: {
                         type: "item",
@@ -125,7 +63,46 @@ const convert = (inputBp: string, signalsPerCC: number, includeRequester: boolea
             }
         };
 
-        return encode(out);
+        chunkArray([...items.entries()], signalsPerCC).forEach((chunk, index) => {
+            const constantCombinator = addEntity(blueprint, {
+                name: "constant-combinator",
+                position: {
+                    x: index,
+                    y: 0,
+                },
+                control_behavior: {
+                    filters: chunk.map((item, index) => {
+                        const [name, count] = item;
+                        return {
+                            signal: {
+                                type: "item",
+                                name: name
+                            },
+                            count: count,
+                            index: index + 1
+                        }
+                    })
+                },
+            });
+
+            if (includeRequester) {
+                const requesterChest = addEntity(blueprint, {
+                    name: "logistic-chest-requester",
+                    position: {
+                        x: index,
+                        y: 1
+                    },
+                    control_behavior: {
+                        circuit_mode_of_operation: 1,
+                    },
+                    request_from_buffers: requestFromBuffer,
+                });
+
+                connectEntities(constantCombinator, requesterChest, "green");
+            }
+        });
+
+        return encode(blueprint);
 
     } catch (err) {
         console.warn(err);
@@ -145,7 +122,7 @@ const Page = () => {
     });
 
     return (
-        <div class="w-full max-w-[36rem] m-auto">
+        <div class="w-full max-w-4xl m-auto">
             <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
             <div class="prose dui-prose">
                 <h2>Blueprint to Constant Combinator</h2>

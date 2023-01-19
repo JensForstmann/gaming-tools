@@ -17,7 +17,7 @@
     "vite": "^3.1.8"
   },
   "dependencies": {
-    "@jensforstmann/factorio-blueprint-tools": "^1.2.7",
+    "@jensforstmann/factorio-blueprint-tools": "file:../factorio-blueprint-tools",
     "@solidjs/meta": "^0.28.0",
     "@solidjs/router": "^0.6.0",
     "solid-js": "^1.6.2",
