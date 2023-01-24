@@ -1,6 +1,6 @@
-import { decode, encode } from "@jensforstmann/factorio-blueprint-tools";
+import { decodePlan, encodePlan } from "@jensforstmann/factorio-blueprint-tools";
 import { createSignal } from "solid-js";
-import { A, Title } from "solid-start";
+import { Title } from "solid-start";
 
 const Page = () => {
     const [inputBp, setInputBp] = createSignal("");
@@ -25,7 +25,7 @@ const Page = () => {
                         value={inputBp()}
                         onInput={(e) => {
                             try {
-                                setJson(JSON.stringify(decode(e.currentTarget.value), null, 4));
+                                setJson(JSON.stringify(decodePlan(e.currentTarget.value), null, 4));
                                 setInputBp(e.currentTarget.value);
                             } catch (err) {
                                 setJson("invalid blueprint string");
@@ -44,7 +44,7 @@ const Page = () => {
                     onInput={(e) => {
                         setJson(e.currentTarget.value);
                         try {
-                            setOutputBp(encode(JSON.parse(e.currentTarget.value)))
+                            setOutputBp(encodePlan(JSON.parse(e.currentTarget.value)))
                         } catch (err) {
                             setOutputBp("invalid JSON");
                         }

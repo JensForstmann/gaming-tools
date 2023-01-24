@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "target": "ESNext",
     "module": "ESNext",
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "jsxImportSource": "solid-js",
     "jsx": "preserve",

@@ -1,10 +1,5 @@
 import { createEffect, createSignal } from "solid-js";
-import { addEntity, connectEntities, decode, encode, } from "@jensforstmann/factorio-blueprint-tools";
-import { isBlueprint, isBlueprintBook, Plan } from "@jensforstmann/factorio-blueprint-tools/dist/types/plan";
-import { Blueprint } from "@jensforstmann/factorio-blueprint-tools/dist/types/blueprint";
-import { BlueprintBook } from "@jensforstmann/factorio-blueprint-tools/dist/types/blueprintBook";
-import { Tile } from "@jensforstmann/factorio-blueprint-tools/dist/types/tile";
-import { Entity } from "@jensforstmann/factorio-blueprint-tools/dist/types/entity";
+import { addEntity, addEntityConnection, Blueprint, BlueprintBook, decodePlan, encodePlan, Entity, isBlueprint, isBlueprintBook, Plan, Tile, } from "@jensforstmann/factorio-blueprint-tools";
 import { entityItemMap } from "./item-entity-map";
 import { Title } from "solid-start";
 
@@ -46,7 +41,7 @@ const convert = (inputBp: string, signalsPerCC: number, includeRequester: boolea
             items.set(item, (items.get(item) ?? 0) + count);
         };
 
-        processPlan(decode(inputBp));
+        processPlan(decodePlan(inputBp));
 
         const blueprint: Blueprint = {
             blueprint: {
@@ -98,11 +93,11 @@ const convert = (inputBp: string, signalsPerCC: number, includeRequester: boolea
                     request_from_buffers: requestFromBuffer,
                 });
 
-                connectEntities(constantCombinator, requesterChest, "green");
+                addEntityConnection(constantCombinator, requesterChest, "green");
             }
         });
 
-        return encode(blueprint);
+        return encodePlan(blueprint);
 
     } catch (err) {
         console.warn(err);
