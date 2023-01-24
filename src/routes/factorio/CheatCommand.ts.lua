@@ -18,11 +18,23 @@ for _, recipe in pairs(game.player.force.recipes) do
     local main_product = "null"
     local main_product_stack_size = "null"
     if recipe_prototype.main_product then
-        main_product = recipe_prototype.main_product.name
+        main_product = "\"" .. recipe_prototype.main_product.name .. "\""
         if game.item_prototypes[recipe_prototype.main_product.name] then
             main_product_stack_size = game.item_prototypes[recipe_prototype.main_product.name].stack_size
         end
     end
+    local ingredients = ""
+    for _, ing in pairs(recipe_prototype.ingredients) do
+        if game.item_prototypes[ing.name] then
+            ingredients = ingredients .. "{" .. EOL
+                .. "\"name\": \"" .. ing.name .. "\"," .. EOL
+                .. "\"amount\": " .. ing.amount .. "," .. EOL
+                .. "\"stack_size\": " .. game.item_prototypes[ing.name].stack_size .. EOL
+                .. "}," .. EOL
+        end
+    end
+    ingredients = "[" .. EOL .. string.sub(ingredients, 1, string.len(ingredients) - 2) .. EOL .. "]"
+
     recipes_dump = recipes_dump .. "{" .. EOL
         .. "\"name\": \"" .. recipe_prototype.name .. "\"," .. EOL
         .. "\"enabled\": " .. tostring(recipe.enabled) .. "," .. EOL
@@ -35,9 +47,12 @@ for _, recipe in pairs(game.player.force.recipes) do
         .. "\"subgroup_order\": \"" .. recipe_prototype.subgroup.order .. "\"," .. EOL
         .. "\"request_paste_multiplier\": " .. recipe_prototype.request_paste_multiplier .. "," .. EOL
         .. "\"can_be_researched\": " .. can_be_researched .. "," .. EOL
-        .. "\"main_product\": \"" .. main_product .. "\"," .. EOL
-        .. "\"main_product_stack_size\": \"" .. main_product_stack_size .. "\"" .. EOL
+        .. "\"main_product\": " .. main_product .. "," .. EOL
+        .. "\"main_product_stack_size\": " .. main_product_stack_size .. "," .. EOL
+        .. "\"ingredients\": " .. ingredients .. EOL
         .. "}," .. EOL
+
+
 end
 recipes_dump = "[" .. EOL .. string.sub(recipes_dump, 1, string.len(recipes_dump) - 2) .. EOL .. "]"
 game.write_file("recipes_dump.json.txt", recipes_dump)

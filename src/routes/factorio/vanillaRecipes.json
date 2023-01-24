@@ -12,7 +12,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "accumulator",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "battery",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "advanced-circuit",
@@ -27,7 +39,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "advanced-circuit",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "plastic-bar",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 4,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "arithmetic-combinator",
@@ -42,7 +71,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "arithmetic-combinator",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-cable",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "artillery-shell",
@@ -57,7 +98,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "artillery-shell",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "explosives",
+                "amount": 8,
+                "stack_size": 50
+            },
+            {
+                "name": "explosive-cannon-shell",
+                "amount": 4,
+                "stack_size": 200
+            },
+            {
+                "name": "radar",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "artillery-targeting-remote",
@@ -72,7 +130,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "artillery-targeting-remote",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "radar",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "artillery-turret",
@@ -87,7 +157,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "artillery-turret",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 60,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 20,
+                "stack_size": 200
+            },
+            {
+                "name": "concrete",
+                "amount": 60,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "artillery-wagon",
@@ -102,7 +194,34 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "artillery-wagon",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 20,
+                "stack_size": 200
+            },
+            {
+                "name": "engine-unit",
+                "amount": 64,
+                "stack_size": 50
+            },
+            {
+                "name": "pipe",
+                "amount": 16,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "assembling-machine-1",
@@ -117,7 +236,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "assembling-machine-1",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 9,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "assembling-machine-2",
@@ -132,7 +268,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "assembling-machine-2",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "assembling-machine-1",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "assembling-machine-3",
@@ -147,7 +305,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "assembling-machine-3",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "assembling-machine-2",
+                "amount": 2,
+                "stack_size": 50
+            },
+            {
+                "name": "speed-module",
+                "amount": 4,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "atomic-bomb",
@@ -162,7 +332,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "atomic-bomb",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "explosives",
+                "amount": 10,
+                "stack_size": 50
+            },
+            {
+                "name": "rocket-control-unit",
+                "amount": 10,
+                "stack_size": 10
+            },
+            {
+                "name": "uranium-235",
+                "amount": 30,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "automation-science-pack",
@@ -177,7 +364,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "automation-science-pack",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "battery",
@@ -192,7 +391,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "battery",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "battery-equipment",
@@ -207,7 +418,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "battery-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "battery",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "battery-mk2-equipment",
@@ -222,7 +445,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "battery-mk2-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 5,
+                "stack_size": 10
+            },
+            {
+                "name": "battery-equipment",
+                "amount": 10,
+                "stack_size": 20
+            }
+        ]
     },
     {
         "name": "beacon",
@@ -237,7 +477,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "beacon",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 20,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 20,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "belt-immunity-equipment",
@@ -252,7 +514,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "belt-immunity-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "big-electric-pole",
@@ -267,7 +541,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "big-electric-pole",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-stick",
+                "amount": 8,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "boiler",
@@ -282,7 +573,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "boiler",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "pipe",
+                "amount": 4,
+                "stack_size": 100
+            },
+            {
+                "name": "stone-furnace",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "burner-inserter",
@@ -297,7 +600,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "burner-inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "burner-mining-drill",
@@ -312,7 +627,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "burner-mining-drill",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 3,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 3,
+                "stack_size": 100
+            },
+            {
+                "name": "stone-furnace",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "cannon-shell",
@@ -327,7 +659,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "cannon-shell",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "plastic-bar",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "explosives",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "car",
@@ -342,7 +691,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "car",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "engine-unit",
+                "amount": 8,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "cargo-wagon",
@@ -357,7 +723,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "cargo-wagon",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "centrifuge",
@@ -372,7 +755,29 @@
         "request_paste_multiplier": 10,
         "can_be_researched": false,
         "main_product": "centrifuge",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 50,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 100,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 100,
+                "stack_size": 200
+            },
+            {
+                "name": "concrete",
+                "amount": 100,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "chemical-plant",
@@ -387,7 +792,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "chemical-plant",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "pipe",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "chemical-science-pack",
@@ -402,7 +829,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "chemical-science-pack",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "sulfur",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "engine-unit",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "cliff-explosives",
@@ -417,7 +861,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "cliff-explosives",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "explosives",
+                "amount": 10,
+                "stack_size": 50
+            },
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            },
+            {
+                "name": "grenade",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "cluster-grenade",
@@ -432,7 +893,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "cluster-grenade",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "explosives",
+                "amount": 5,
+                "stack_size": 50
+            },
+            {
+                "name": "grenade",
+                "amount": 7,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "combat-shotgun",
@@ -447,7 +925,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "combat-shotgun",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "wood",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "concrete",
@@ -462,7 +962,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "concrete",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-ore",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "stone-brick",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "constant-combinator",
@@ -477,7 +989,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "constant-combinator",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-cable",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "construction-robot",
@@ -492,7 +1016,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "construction-robot",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "flying-robot-frame",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "copper-cable",
@@ -507,7 +1043,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "copper-cable",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "copper-plate",
@@ -522,7 +1065,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "copper-plate",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "copper-ore",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "decider-combinator",
@@ -537,7 +1087,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "decider-combinator",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-cable",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "defender-capsule",
@@ -552,7 +1114,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "defender-capsule",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 3,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "piercing-rounds-magazine",
+                "amount": 3,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "destroyer-capsule",
@@ -567,7 +1146,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "destroyer-capsule",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "speed-module",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "distractor-capsule",
+                "amount": 4,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "discharge-defense-equipment",
@@ -582,7 +1173,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "discharge-defense-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "laser-turret",
+                "amount": 10,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "discharge-defense-remote",
@@ -597,7 +1205,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "discharge-defense-remote",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "distractor-capsule",
@@ -612,7 +1227,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "distractor-capsule",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "defender-capsule",
+                "amount": 4,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "effectivity-module",
@@ -627,7 +1254,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "effectivity-module",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "effectivity-module-2",
@@ -642,7 +1281,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "effectivity-module-2",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "effectivity-module",
+                "amount": 4,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "effectivity-module-3",
@@ -657,7 +1313,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "effectivity-module-3",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "effectivity-module-2",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "electric-energy-interface",
@@ -672,7 +1345,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "electric-energy-interface",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "electric-engine-unit",
@@ -687,7 +1372,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "electric-engine-unit",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "engine-unit",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "electric-furnace",
@@ -702,7 +1399,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "electric-furnace",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "stone-brick",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "electric-mining-drill",
@@ -717,7 +1431,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "electric-mining-drill",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "electronic-circuit",
@@ -732,7 +1463,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "electronic-circuit",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 3,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "empty-barrel",
@@ -747,7 +1490,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "empty-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "energy-shield-equipment",
@@ -762,7 +1512,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "energy-shield-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "energy-shield-mk2-equipment",
@@ -777,7 +1539,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "energy-shield-mk2-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 5,
+                "stack_size": 10
+            },
+            {
+                "name": "energy-shield-equipment",
+                "amount": 10,
+                "stack_size": 20
+            }
+        ]
     },
     {
         "name": "engine-unit",
@@ -792,7 +1571,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "engine-unit",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "pipe",
+                "amount": 2,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "exoskeleton-equipment",
@@ -807,7 +1603,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "exoskeleton-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "processing-unit",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "electric-engine-unit",
+                "amount": 30,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "explosive-cannon-shell",
@@ -822,7 +1635,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "explosive-cannon-shell",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "plastic-bar",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "explosives",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "explosive-rocket",
@@ -837,7 +1667,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "explosive-rocket",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "explosives",
+                "amount": 2,
+                "stack_size": 50
+            },
+            {
+                "name": "rocket",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "explosive-uranium-cannon-shell",
@@ -852,7 +1694,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "explosive-uranium-cannon-shell",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "uranium-238",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "explosive-cannon-shell",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "explosives",
@@ -867,7 +1721,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "explosives",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "coal",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "sulfur",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "express-loader",
@@ -882,7 +1748,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "express-loader",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "express-transport-belt",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "fast-loader",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "express-splitter",
@@ -897,7 +1775,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "express-splitter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "fast-splitter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "express-transport-belt",
@@ -912,7 +1807,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "express-transport-belt",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "fast-transport-belt",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "express-underground-belt",
@@ -927,7 +1834,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "express-underground-belt",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 80,
+                "stack_size": 100
+            },
+            {
+                "name": "fast-underground-belt",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "fast-inserter",
@@ -942,7 +1861,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fast-inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "inserter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "fast-loader",
@@ -957,7 +1893,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fast-loader",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "fast-transport-belt",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "loader",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "fast-splitter",
@@ -972,7 +1920,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fast-splitter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "splitter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "fast-transport-belt",
@@ -987,7 +1952,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fast-transport-belt",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "transport-belt",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "fast-underground-belt",
@@ -1002,7 +1979,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fast-underground-belt",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "underground-belt",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "filter-inserter",
@@ -1017,7 +2006,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "filter-inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 4,
+                "stack_size": 200
+            },
+            {
+                "name": "fast-inserter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "firearm-magazine",
@@ -1032,7 +2033,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "firearm-magazine",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 4,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "flamethrower",
@@ -1047,7 +2055,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "flamethrower",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "flamethrower-ammo",
@@ -1062,7 +2082,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "flamethrower-ammo",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "flamethrower-turret",
@@ -1077,7 +2104,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "flamethrower-turret",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 30,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "engine-unit",
+                "amount": 5,
+                "stack_size": 50
+            },
+            {
+                "name": "pipe",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "fluid-wagon",
@@ -1092,7 +2141,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fluid-wagon",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 16,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "storage-tank",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "pipe",
+                "amount": 8,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "flying-robot-frame",
@@ -1107,7 +2178,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "flying-robot-frame",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "battery",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "electric-engine-unit",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "fusion-reactor-equipment",
@@ -1122,7 +2215,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "fusion-reactor-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 200,
+                "stack_size": 100
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 50,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "gate",
@@ -1137,7 +2242,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "gate",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "stone-wall",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "green-wire",
@@ -1152,7 +2274,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "green-wire",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "copper-cable",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "grenade",
@@ -1167,7 +2301,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "grenade",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "coal",
+                "amount": 10,
+                "stack_size": 50
+            },
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "gun-turret",
@@ -1182,7 +2328,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "gun-turret",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "hazard-concrete",
@@ -1197,7 +2360,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "hazard-concrete",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "concrete",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "heat-exchanger",
@@ -1212,7 +2382,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "heat-exchanger",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 100,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "pipe",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "heat-pipe",
@@ -1227,7 +2414,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "heat-pipe",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "heavy-armor",
@@ -1242,7 +2441,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "heavy-armor",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 100,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 50,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "inserter",
@@ -1257,7 +2468,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "iron-chest",
@@ -1272,7 +2500,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "iron-chest",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 8,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "iron-gear-wheel",
@@ -1287,7 +2522,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "iron-gear-wheel",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 2,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "iron-plate",
@@ -1302,7 +2544,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "iron-plate",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-ore",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "iron-stick",
@@ -1317,7 +2566,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "iron-stick",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "lab",
@@ -1332,7 +2588,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "lab",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "transport-belt",
+                "amount": 4,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "land-mine",
@@ -1347,7 +2620,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "land-mine",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "explosives",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "landfill",
@@ -1362,7 +2647,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "landfill",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "stone",
+                "amount": 20,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "laser-turret",
@@ -1377,7 +2669,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "laser-turret",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "battery",
+                "amount": 12,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 20,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "light-armor",
@@ -1392,7 +2701,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "light-armor",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 40,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "loader",
@@ -1407,7 +2723,34 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "loader",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "transport-belt",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "inserter",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "locomotive",
@@ -1422,7 +2765,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "locomotive",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 30,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "engine-unit",
+                "amount": 20,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-chest-active-provider",
@@ -1437,7 +2797,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-chest-active-provider",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "steel-chest",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-chest-buffer",
@@ -1452,7 +2829,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-chest-buffer",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "steel-chest",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-chest-passive-provider",
@@ -1467,7 +2861,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-chest-passive-provider",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "steel-chest",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-chest-requester",
@@ -1482,7 +2893,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-chest-requester",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "steel-chest",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-chest-storage",
@@ -1497,7 +2925,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-chest-storage",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "steel-chest",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-robot",
@@ -1512,7 +2957,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-robot",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "flying-robot-frame",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "logistic-science-pack",
@@ -1527,7 +2984,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "logistic-science-pack",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "transport-belt",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "inserter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "long-handed-inserter",
@@ -1542,7 +3011,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "long-handed-inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "inserter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "low-density-structure",
@@ -1557,7 +3043,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "low-density-structure",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "plastic-bar",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "lubricant",
@@ -1572,7 +3075,8 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "lubricant",
-        "main_product_stack_size": "null"
+        "main_product_stack_size": null,
+        "ingredients": []
     },
     {
         "name": "medium-electric-pole",
@@ -1587,7 +3091,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "medium-electric-pole",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-stick",
+                "amount": 4,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "military-science-pack",
@@ -1602,7 +3123,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "military-science-pack",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "piercing-rounds-magazine",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "grenade",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "stone-wall",
+                "amount": 2,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "modular-armor",
@@ -1617,7 +3155,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "modular-armor",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 50,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 30,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "night-vision-equipment",
@@ -1632,7 +3182,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "night-vision-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "nuclear-fuel",
@@ -1647,7 +3209,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "nuclear-fuel",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "rocket-fuel",
+                "amount": 1,
+                "stack_size": 10
+            },
+            {
+                "name": "uranium-235",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "nuclear-reactor",
@@ -1662,7 +3236,29 @@
         "request_paste_multiplier": 1,
         "can_be_researched": false,
         "main_product": "nuclear-reactor",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 500,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 500,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 500,
+                "stack_size": 200
+            },
+            {
+                "name": "concrete",
+                "amount": 500,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "offshore-pump",
@@ -1677,7 +3273,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "offshore-pump",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "pipe",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "oil-refinery",
@@ -1692,7 +3305,34 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "oil-refinery",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "pipe",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "stone-brick",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "personal-laser-defense-equipment",
@@ -1707,7 +3347,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "personal-laser-defense-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 5,
+                "stack_size": 10
+            },
+            {
+                "name": "laser-turret",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "personal-roboport-equipment",
@@ -1722,7 +3379,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "personal-roboport-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "battery",
+                "amount": 45,
+                "stack_size": 200
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 10,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "personal-roboport-mk2-equipment",
@@ -1737,7 +3416,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "personal-roboport-mk2-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 100,
+                "stack_size": 100
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 20,
+                "stack_size": 10
+            },
+            {
+                "name": "personal-roboport-equipment",
+                "amount": 5,
+                "stack_size": 20
+            }
+        ]
     },
     {
         "name": "piercing-rounds-magazine",
@@ -1752,7 +3448,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "piercing-rounds-magazine",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "firearm-magazine",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "piercing-shotgun-shell",
@@ -1767,7 +3480,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "piercing-shotgun-shell",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "shotgun-shell",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "pipe",
@@ -1782,7 +3512,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "pipe",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "pipe-to-ground",
@@ -1797,7 +3534,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "pipe-to-ground",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "pipe",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "pistol",
@@ -1812,7 +3561,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "pistol",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "plastic-bar",
@@ -1827,7 +3588,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "plastic-bar",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "coal",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "poison-capsule",
@@ -1842,7 +3610,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "poison-capsule",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "coal",
+                "amount": 10,
+                "stack_size": 50
+            },
+            {
+                "name": "steel-plate",
+                "amount": 3,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 3,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "power-armor",
@@ -1857,7 +3642,24 @@
         "request_paste_multiplier": 1,
         "can_be_researched": false,
         "main_product": "power-armor",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "processing-unit",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "electric-engine-unit",
+                "amount": 20,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "power-armor-mk2",
@@ -1872,7 +3674,34 @@
         "request_paste_multiplier": 1,
         "can_be_researched": false,
         "main_product": "power-armor-mk2",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 60,
+                "stack_size": 100
+            },
+            {
+                "name": "electric-engine-unit",
+                "amount": 40,
+                "stack_size": 50
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 30,
+                "stack_size": 10
+            },
+            {
+                "name": "speed-module-2",
+                "amount": 25,
+                "stack_size": 50
+            },
+            {
+                "name": "effectivity-module-2",
+                "amount": 25,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "power-switch",
@@ -1887,7 +3716,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "power-switch",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "processing-unit",
@@ -1902,7 +3748,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "processing-unit",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 20,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "production-science-pack",
@@ -1917,7 +3775,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "production-science-pack",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "rail",
+                "amount": 30,
+                "stack_size": 100
+            },
+            {
+                "name": "electric-furnace",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "productivity-module",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "productivity-module",
@@ -1932,7 +3807,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "productivity-module",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "productivity-module-2",
@@ -1947,7 +3834,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "productivity-module-2",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "productivity-module",
+                "amount": 4,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "productivity-module-3",
@@ -1962,7 +3866,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "productivity-module-3",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "productivity-module-2",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "programmable-speaker",
@@ -1977,7 +3898,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "programmable-speaker",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 3,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "iron-stick",
+                "amount": 4,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 4,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "pump",
@@ -1992,7 +3935,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "pump",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "engine-unit",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "pipe",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "pumpjack",
@@ -2007,7 +3967,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "pumpjack",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "pipe",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "radar",
@@ -2022,7 +4004,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "radar",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "rail",
@@ -2037,7 +4036,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rail",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "stone",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-stick",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "rail-chain-signal",
@@ -2052,7 +4068,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rail-chain-signal",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "rail-signal",
@@ -2067,7 +4095,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rail-signal",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "red-wire",
@@ -2082,7 +4122,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "red-wire",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "copper-cable",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "refined-concrete",
@@ -2097,7 +4149,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "refined-concrete",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-stick",
+                "amount": 8,
+                "stack_size": 100
+            },
+            {
+                "name": "concrete",
+                "amount": 20,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "refined-hazard-concrete",
@@ -2112,7 +4181,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "refined-hazard-concrete",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "refined-concrete",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "repair-pack",
@@ -2127,7 +4203,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "repair-pack",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "roboport",
@@ -2142,7 +4230,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "roboport",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 45,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 45,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 45,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "rocket",
@@ -2157,7 +4262,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rocket",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "explosives",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "rocket-control-unit",
@@ -2172,7 +4294,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rocket-control-unit",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "speed-module",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "rocket-fuel",
@@ -2187,7 +4321,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rocket-fuel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "solid-fuel",
+                "amount": 10,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "rocket-launcher",
@@ -2202,7 +4343,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rocket-launcher",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "rocket-part",
@@ -2217,7 +4375,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "rocket-part",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "rocket-control-unit",
+                "amount": 10,
+                "stack_size": 10
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 10,
+                "stack_size": 10
+            },
+            {
+                "name": "rocket-fuel",
+                "amount": 10,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "rocket-silo",
@@ -2232,7 +4407,34 @@
         "request_paste_multiplier": 1,
         "can_be_researched": false,
         "main_product": "rocket-silo",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 1000,
+                "stack_size": 100
+            },
+            {
+                "name": "processing-unit",
+                "amount": 200,
+                "stack_size": 100
+            },
+            {
+                "name": "electric-engine-unit",
+                "amount": 200,
+                "stack_size": 50
+            },
+            {
+                "name": "pipe",
+                "amount": 100,
+                "stack_size": 100
+            },
+            {
+                "name": "concrete",
+                "amount": 1000,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "satellite",
@@ -2247,7 +4449,39 @@
         "request_paste_multiplier": 1,
         "can_be_researched": false,
         "main_product": "satellite",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 100,
+                "stack_size": 100
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 100,
+                "stack_size": 10
+            },
+            {
+                "name": "rocket-fuel",
+                "amount": 50,
+                "stack_size": 10
+            },
+            {
+                "name": "solar-panel",
+                "amount": 100,
+                "stack_size": 50
+            },
+            {
+                "name": "accumulator",
+                "amount": 100,
+                "stack_size": 50
+            },
+            {
+                "name": "radar",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "shotgun",
@@ -2262,7 +4496,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "shotgun",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "wood",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-plate",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "shotgun-shell",
@@ -2277,7 +4533,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "shotgun-shell",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 2,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "slowdown-capsule",
@@ -2292,7 +4560,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "slowdown-capsule",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "coal",
+                "amount": 5,
+                "stack_size": 50
+            },
+            {
+                "name": "steel-plate",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "small-electric-pole",
@@ -2307,7 +4592,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "small-electric-pole",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "wood",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 2,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "small-lamp",
@@ -2322,7 +4619,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "small-lamp",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-cable",
+                "amount": 3,
+                "stack_size": 200
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "solar-panel",
@@ -2337,7 +4651,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "solar-panel",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 15,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "solar-panel-equipment",
@@ -2352,7 +4683,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "solar-panel-equipment",
-        "main_product_stack_size": "20"
+        "main_product_stack_size": 20,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 2,
+                "stack_size": 200
+            },
+            {
+                "name": "solar-panel",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "speed-module",
@@ -2367,7 +4715,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "speed-module",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "speed-module-2",
@@ -2382,7 +4742,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "speed-module-2",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "speed-module",
+                "amount": 4,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "speed-module-3",
@@ -2397,7 +4774,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "speed-module-3",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "processing-unit",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "speed-module-2",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "spidertron",
@@ -2412,7 +4806,49 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "spidertron",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "raw-fish",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "rocket-control-unit",
+                "amount": 16,
+                "stack_size": 10
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 150,
+                "stack_size": 10
+            },
+            {
+                "name": "effectivity-module-3",
+                "amount": 2,
+                "stack_size": 50
+            },
+            {
+                "name": "rocket-launcher",
+                "amount": 4,
+                "stack_size": 5
+            },
+            {
+                "name": "fusion-reactor-equipment",
+                "amount": 2,
+                "stack_size": 20
+            },
+            {
+                "name": "exoskeleton-equipment",
+                "amount": 4,
+                "stack_size": 20
+            },
+            {
+                "name": "radar",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "spidertron-remote",
@@ -2427,7 +4863,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "spidertron-remote",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "rocket-control-unit",
+                "amount": 1,
+                "stack_size": 10
+            },
+            {
+                "name": "radar",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "splitter",
@@ -2442,7 +4890,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "splitter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "transport-belt",
+                "amount": 4,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "stack-filter-inserter",
@@ -2457,7 +4922,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "stack-filter-inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            },
+            {
+                "name": "stack-inserter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "stack-inserter",
@@ -2472,7 +4949,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "stack-inserter",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-gear-wheel",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 15,
+                "stack_size": 200
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 1,
+                "stack_size": 200
+            },
+            {
+                "name": "fast-inserter",
+                "amount": 1,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "steam-engine",
@@ -2487,7 +4986,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "steam-engine",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 8,
+                "stack_size": 100
+            },
+            {
+                "name": "pipe",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "steam-turbine",
@@ -2502,7 +5018,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "steam-turbine",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 50,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 50,
+                "stack_size": 100
+            },
+            {
+                "name": "pipe",
+                "amount": 20,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "steel-chest",
@@ -2517,7 +5050,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "steel-chest",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 8,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "steel-furnace",
@@ -2532,7 +5072,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "steel-furnace",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 6,
+                "stack_size": 100
+            },
+            {
+                "name": "stone-brick",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "steel-plate",
@@ -2547,7 +5099,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "steel-plate",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "stone-brick",
@@ -2562,7 +5121,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "stone-brick",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "stone",
+                "amount": 2,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "stone-furnace",
@@ -2577,7 +5143,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "stone-furnace",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "stone",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "stone-wall",
@@ -2592,7 +5165,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "stone-wall",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "stone-brick",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "storage-tank",
@@ -2607,7 +5187,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "storage-tank",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 20,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "submachine-gun",
@@ -2622,7 +5214,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "submachine-gun",
-        "main_product_stack_size": "5"
+        "main_product_stack_size": 5,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 10,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "substation",
@@ -2637,7 +5246,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "substation",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "copper-plate",
+                "amount": 5,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "sulfur",
@@ -2652,7 +5278,8 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "sulfur",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": []
     },
     {
         "name": "sulfuric-acid",
@@ -2667,7 +5294,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "sulfuric-acid",
-        "main_product_stack_size": "null"
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "sulfur",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "tank",
@@ -2682,7 +5321,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "tank",
-        "main_product_stack_size": "1"
+        "main_product_stack_size": 1,
+        "ingredients": [
+            {
+                "name": "steel-plate",
+                "amount": 50,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 15,
+                "stack_size": 100
+            },
+            {
+                "name": "advanced-circuit",
+                "amount": 10,
+                "stack_size": 200
+            },
+            {
+                "name": "engine-unit",
+                "amount": 32,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "train-stop",
@@ -2697,7 +5358,29 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "train-stop",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 6,
+                "stack_size": 100
+            },
+            {
+                "name": "steel-plate",
+                "amount": 3,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-stick",
+                "amount": 6,
+                "stack_size": 100
+            },
+            {
+                "name": "electronic-circuit",
+                "amount": 5,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "transport-belt",
@@ -2712,7 +5395,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "transport-belt",
-        "main_product_stack_size": "100"
+        "main_product_stack_size": 100,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "iron-gear-wheel",
+                "amount": 1,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "underground-belt",
@@ -2727,7 +5422,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "underground-belt",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "transport-belt",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "uranium-cannon-shell",
@@ -2742,7 +5449,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "uranium-cannon-shell",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "uranium-238",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "cannon-shell",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "uranium-fuel-cell",
@@ -2757,7 +5476,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "uranium-fuel-cell",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "iron-plate",
+                "amount": 10,
+                "stack_size": 100
+            },
+            {
+                "name": "uranium-235",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "uranium-238",
+                "amount": 19,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "uranium-rounds-magazine",
@@ -2772,7 +5508,19 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "uranium-rounds-magazine",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "uranium-238",
+                "amount": 1,
+                "stack_size": 100
+            },
+            {
+                "name": "piercing-rounds-magazine",
+                "amount": 1,
+                "stack_size": 200
+            }
+        ]
     },
     {
         "name": "utility-science-pack",
@@ -2787,7 +5535,24 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "utility-science-pack",
-        "main_product_stack_size": "200"
+        "main_product_stack_size": 200,
+        "ingredients": [
+            {
+                "name": "processing-unit",
+                "amount": 2,
+                "stack_size": 100
+            },
+            {
+                "name": "flying-robot-frame",
+                "amount": 1,
+                "stack_size": 50
+            },
+            {
+                "name": "low-density-structure",
+                "amount": 3,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "wooden-chest",
@@ -2802,7 +5567,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "wooden-chest",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": [
+            {
+                "name": "wood",
+                "amount": 2,
+                "stack_size": 100
+            }
+        ]
     },
     {
         "name": "basic-oil-processing",
@@ -2816,8 +5588,9 @@
         "subgroup_order": "a",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": []
     },
     {
         "name": "advanced-oil-processing",
@@ -2831,8 +5604,9 @@
         "subgroup_order": "a",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": []
     },
     {
         "name": "coal-liquefaction",
@@ -2846,8 +5620,15 @@
         "subgroup_order": "a",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "coal",
+                "amount": 10,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "fill-crude-oil-barrel",
@@ -2862,7 +5643,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "crude-oil-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "fill-heavy-oil-barrel",
@@ -2877,7 +5665,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "heavy-oil-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "fill-light-oil-barrel",
@@ -2892,7 +5687,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "light-oil-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "fill-lubricant-barrel",
@@ -2907,7 +5709,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "lubricant-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "fill-petroleum-gas-barrel",
@@ -2922,7 +5731,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "petroleum-gas-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "fill-sulfuric-acid-barrel",
@@ -2937,7 +5753,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "sulfuric-acid-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "fill-water-barrel",
@@ -2952,7 +5775,14 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "water-barrel",
-        "main_product_stack_size": "10"
+        "main_product_stack_size": 10,
+        "ingredients": [
+            {
+                "name": "empty-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "heavy-oil-cracking",
@@ -2966,8 +5796,9 @@
         "subgroup_order": "a",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": []
     },
     {
         "name": "light-oil-cracking",
@@ -2981,8 +5812,9 @@
         "subgroup_order": "a",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": []
     },
     {
         "name": "solid-fuel-from-light-oil",
@@ -2997,7 +5829,8 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "solid-fuel",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": []
     },
     {
         "name": "solid-fuel-from-petroleum-gas",
@@ -3012,7 +5845,8 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "solid-fuel",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": []
     },
     {
         "name": "solid-fuel-from-heavy-oil",
@@ -3027,7 +5861,8 @@
         "request_paste_multiplier": 30,
         "can_be_researched": false,
         "main_product": "solid-fuel",
-        "main_product_stack_size": "50"
+        "main_product_stack_size": 50,
+        "ingredients": []
     },
     {
         "name": "empty-crude-oil-barrel",
@@ -3041,8 +5876,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "crude-oil-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "empty-heavy-oil-barrel",
@@ -3056,8 +5898,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "heavy-oil-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "empty-light-oil-barrel",
@@ -3071,8 +5920,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "light-oil-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "empty-lubricant-barrel",
@@ -3086,8 +5942,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "lubricant-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "empty-petroleum-gas-barrel",
@@ -3101,8 +5964,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "petroleum-gas-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "empty-sulfuric-acid-barrel",
@@ -3116,8 +5986,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "sulfuric-acid-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "empty-water-barrel",
@@ -3131,8 +6008,15 @@
         "subgroup_order": "f",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "water-barrel",
+                "amount": 1,
+                "stack_size": 10
+            }
+        ]
     },
     {
         "name": "uranium-processing",
@@ -3146,8 +6030,15 @@
         "subgroup_order": "c",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "uranium-ore",
+                "amount": 10,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "nuclear-fuel-reprocessing",
@@ -3161,8 +6052,15 @@
         "subgroup_order": "g",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "used-up-uranium-fuel-cell",
+                "amount": 5,
+                "stack_size": 50
+            }
+        ]
     },
     {
         "name": "kovarex-enrichment-process",
@@ -3176,7 +6074,19 @@
         "subgroup_order": "g",
         "request_paste_multiplier": 30,
         "can_be_researched": false,
-        "main_product": "null",
-        "main_product_stack_size": "null"
+        "main_product": null,
+        "main_product_stack_size": null,
+        "ingredients": [
+            {
+                "name": "uranium-235",
+                "amount": 40,
+                "stack_size": 100
+            },
+            {
+                "name": "uranium-238",
+                "amount": 5,
+                "stack_size": 100
+            }
+        ]
     }
 ]
