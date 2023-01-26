@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component, Show } from "solid-js";
 
 export const TextInput: Component<{
     label?: string;
@@ -7,7 +7,9 @@ export const TextInput: Component<{
 }> = (props) => {
     return (
         <label class="flex flex-col">
-            <span class="dui-label-text px-1 py-2">{props.label}</span>
+            <Show when={props.label !== undefined}>
+                <span class="dui-label-text px-1 py-2">{props.label}</span>
+            </Show>
             <input
                 type="text"
                 value={props.value}
@@ -27,7 +29,9 @@ export const NumberInput: Component<{
 }> = (props) => {
     return (
         <label class="flex flex-col">
-            <span class="dui-label-text px-1 py-2">{props.label}</span>
+            <Show when={props.label !== undefined}>
+                <span class="dui-label-text px-1 py-2">{props.label}</span>
+            </Show>
             <input
                 type="number"
                 value={props.value}
@@ -48,7 +52,9 @@ export const CheckboxInput: Component<{
 }> = (props) => {
     return (
         <label class="flex flex-col justify-between">
-            <span class="dui-label-text px-1 py-2">{props.label}</span>
+            <Show when={props.label !== undefined}>
+                <span class="dui-label-text px-1 py-2">{props.label}</span>
+            </Show>
             <input
                 type="checkbox"
                 checked={props.value}

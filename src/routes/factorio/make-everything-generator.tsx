@@ -1,8 +1,9 @@
 import { addEntity, createEmptyBlueprint, encodePlan } from "@jensforstmann/factorio-blueprint-tools";
-import { Component, For } from "solid-js";
+import { Component, createEffect, createSignal, For } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
 import { Title } from "solid-start";
 import { CheckboxInput, NumberInput, TextInput } from "~/components/inputs";
+import { CheatCommand } from "./CheatCommand";
 import VanillaRecipes from "./vanillaRecipes.json";
 
 type Recipe = {
@@ -192,6 +193,7 @@ const Settings: Component<{
 
 const Page = () => {
     let globalCheckbox: HTMLInputElement | undefined;
+    let showPopupInput: HTMLInputElement | undefined;
     const [recipes, setRecipes] = createStore<Array<Recipe>>(VanillaRecipes);
     const [settings, setSettings] = createStore<Settings>({
         machineName: "assembling-machine-3",
@@ -217,88 +219,187 @@ const Page = () => {
     const toggleRecipe = (name: string) => {
         setRecipes((recipe) => recipe.name === name, "selected", (selected) => !selected)
     };
+    const categories = [...new Set(recipes.map((r) => r.category))].sort();
+    const groups = [...new Set(recipes.map((r) => r.group_name))].sort();
+    const subGroups = [...new Set(recipes.map((r) => r.subgroup_name))].sort();
+    const [categoryFilter, setCategoryFilter] = createSignal("");
+    const [groupFilter, setGroupFilter] = createSignal("");
+    const [subGroupFilter, setSubGroupFilter] = createSignal("");
+    const [search, setSearch] = createSignal("");
+
+    const filteredRecipes = () => {
+        return recipes.filter(r => (search() === "" || r.name.includes(search())) && (categoryFilter() === "" || r.category === categoryFilter()) && (groupFilter() === "" || r.group_name === groupFilter()) && (subGroupFilter() === "" || r.subgroup_name === subGroupFilter()))
+    };
+
+    createEffect(() => {
+        if (globalCheckbox) {
+            const selected = filteredRecipes().filter((r) => r.selected === true).length;
+            const notSelected = filteredRecipes().length - selected;
+            if (selected === 0) {
+                globalCheckbox.indeterminate = false;
+                globalCheckbox.checked = false;
+            } else if (notSelected === 0) {
+                globalCheckbox.indeterminate = false;
+                globalCheckbox.checked = true;
+            } else {
+                globalCheckbox.indeterminate = true;
+                globalCheckbox.checked = false;
+            }
+        }
+    });
+
     return (
-        <div class="w-full max-w-4xl m-auto mb-48">
+        <div class="w-full max-w-4xl m-auto mb-48 prose dui-prose">
             <Title>Make Everything Generator | Factorio | Gaming Tools</Title>
             <div class="prose dui-prose">
                 <h2>Make Everything Generator</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quas nesciunt laudantium et debitis corporis accusamus quasi repudiandae nobis vero dolorem delectus voluptatum fuga recusandae dolor veritatis expedita, voluptas tempore.</p>
             </div>
-            <div class="overflow-x-auto w-full">
-                <table class="dui-table w-full">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" class="dui-checkbox"
-                                        ref={globalCheckbox}
-                                        onChange={() => {
-                                            if (recipes.filter((recipe) => recipe.selected).length === recipes.length) {
-                                                setRecipes(() => true, "selected", false);
-                                            } else {
-                                                setRecipes(() => true, "selected", true);
-                                            }
-                                            if (globalCheckbox) {
-                                                globalCheckbox.indeterminate = false;
-                                            }
-                                        }}
-                                    />
-                                </label>
-                            </th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Group</th>
-                            <th>Subgroup</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <For each={recipes}>
-                            {(recipe) =>
-                                <tr>
-                                    <th>
-                                        <label>
-                                            <input
-                                                type="checkbox"
-                                                class="dui-checkbox"
-                                                checked={recipe.selected}
-                                                onChange={() => {
-                                                    toggleRecipe(recipe.name);
-                                                    if (globalCheckbox) {
-                                                        const selected = recipes.filter(recipe => recipe.selected).length;
-                                                        globalCheckbox.indeterminate = selected > 0 && selected !== recipes.length;
-                                                        globalCheckbox.checked = selected === recipes.length;
-                                                    }
-                                                }}
-                                            />
-                                        </label>
-                                    </th>
-                                    <td>{recipe.name}</td>
-                                    <td>{recipe.category}</td>
-                                    <td>{recipe.group_name}</td>
-                                    <td>{recipe.subgroup_name}</td>
-                                </tr>
-                            }
-                        </For>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Group</th>
-                            <th>Subgroup</th>
-                        </tr>
-                    </tfoot>
-
-                </table>
+            <div class="mt-8">
+                <label for="import" class="dui-btn">Import Custom Recipes (Modded Gameplay)</label>
+                <input type="checkbox" id="import" class="dui-modal-toggle" ref={showPopupInput} />
+                <label for="import" class="dui-modal cursor-pointer">
+                    <div class="dui-modal-box relative">
+                        <label for="import" class="dui-btn dui-btn-sm dui-btn-circle absolute right-2 top-2">✕</label>
+                        <h3 class="mt-0">Import Recipes</h3>
+                        <button class="dui-btn dui-btn-primary" onClick={() => navigator.clipboard.writeText(CheatCommand)}>
+                            Copy Cheat Command
+                        </button>
+                        <p>
+                            Copy this cheat command and execute it ingame.<br />
+                            A file called "recipes_dump.json" will be created in
+                            your <a href="https://wiki.factorio.com/Application_directory" target="_blank">script-output</a> folder
+                            of Factorio which you must select below.
+                        </p>
+                        <input
+                            type="file"
+                            class="dui-file-input dui-file-input-bordered w-full max-w-xs"
+                            accept="application/json"
+                            onChange={async (e) => {
+                                const file = e.currentTarget.files?.[0];
+                                const input = e.currentTarget;
+                                if (file) {
+                                    try {
+                                        const text = await file.text();
+                                        const recipes: Recipe[] = JSON.parse(text);
+                                        setRecipes(recipes);
+                                        if (showPopupInput) {
+                                            input.value = "";
+                                            showPopupInput.checked = false;
+                                        }
+                                    } catch (err) {
+                                        console.error(err);
+                                    }
+                                }
+                            }}
+                        />
+                    </div>
+                </label>
             </div>
-            <div>
+            <table class="dui-table dui-table-compact w-full mt-8">
+                <thead class="sticky top-0">
+                    <tr>
+                        <th class="py-6 align-middle">
+                            <label>
+                                <input type="checkbox" class="dui-checkbox dui-checkbox-lg"
+                                    ref={globalCheckbox}
+                                    onChange={() => {
+                                        if (filteredRecipes().filter((recipe) => recipe.selected).length === filteredRecipes().length) {
+                                            console.log("unselect")
+                                            setRecipes((r) => filteredRecipes().find(r2 => r2.name === r.name) !== undefined, "selected", false);
+                                        } else {
+                                            console.log("select")
+                                            setRecipes((r) => filteredRecipes().find(r2 => r2.name === r.name) !== undefined, "selected", true);
+                                        }
+                                        if (globalCheckbox) {
+                                            // globalCheckbox.indeterminate = false;
+                                        }
+                                    }}
+                                />
+                            </label>
+                        </th>
+                        <th class="py-6 align-top">
+                            Name
+                            <TextInput
+                                value={search()}
+                                setValue={setSearch}
+                            />
+                        </th>
+                        <th class="py-6 align-top">
+                            <div>
+                                Category
+                            </div>
+                            <select class="dui-select w-full max-w-xs" onChange={(e) => setCategoryFilter(e.currentTarget.value)}>
+                                <option value={""}>filter...</option>
+                                <For each={categories}>
+                                    {(category) => <option>{category}</option>}
+                                </For>
+                            </select>
+                        </th>
+                        <th class="py-6 align-top">
+                            <div>
+                                Group
+                            </div>
+                            <select class="dui-select w-full max-w-xs" onChange={(e) => setGroupFilter(e.currentTarget.value)}>
+                                <option value={""}>filter...</option>
+                                <For each={groups}>
+                                    {(group) => <option>{group}</option>}
+                                </For>
+                            </select>
+                        </th>
+                        <th class="py-6 align-top">
+                            <div>
+                                Subgroup
+                            </div>
+                            <select class="dui-select w-full max-w-xs" onChange={(e) => setSubGroupFilter(e.currentTarget.value)}>
+                                <option value={""}>filter...</option>
+                                <For each={subGroups}>
+                                    {(subGroup) => <option>{subGroup}</option>}
+                                </For>
+                            </select>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <For each={filteredRecipes()}>
+                        {(recipe) =>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            class="dui-checkbox"
+                                            checked={recipe.selected}
+                                            onChange={() => toggleRecipe(recipe.name)}
+                                        />
+                                    </label>
+                                </td>
+                                <td>{recipe.name}</td>
+                                <td>{recipe.category}</td>
+                                <td>{recipe.group_name}</td>
+                                <td>{recipe.subgroup_name}</td>
+                            </tr>
+                        }
+                    </For>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Group</th>
+                        <th>Subgroup</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="mt-8">
+                <h3>Settings</h3>
                 <Settings
                     settings={settings}
                     setSettings={setSettings}
                 />
             </div>
-            <div>
+            <div class="mt-8">
                 <button class="dui-btn" onClick={() => {
                     navigator.clipboard.writeText(
                         getBlueprint(settings, recipes.filter((r) => r.selected))
