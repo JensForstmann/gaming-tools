@@ -37,6 +37,7 @@ export default function Root() {
         <Title>Gaming Tools</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script defer src="/_vercel/insights/script.js"></script>
       </Head>
       <Body>
         <Suspense>
