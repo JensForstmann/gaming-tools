@@ -5,6 +5,9 @@ import {
 import { createSignal } from "solid-js";
 import { Title } from "solid-start";
 
+export const description =
+  "Simply decode blueprint strings to JSON and encode JSON back to factorio blueprint strings.";
+
 const Page = () => {
   const [inputBp, setInputBp] = createSignal("");
   const [json, setJson] = createSignal("");
@@ -15,12 +18,7 @@ const Page = () => {
       <Title>Blueprint Decoder & Encoder | Factorio | Gaming Tools</Title>
       <div class="prose dui-prose">
         <h2>Blueprint Decoder & Encoder</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
-          ab et nulla perferendis, dolor fuga quia, vitae adipisci dolorem ut
-          quasi in dolores esse deleniti quam ipsa voluptatem eligendi
-          exercitationem.
-        </p>
+        <p>{description}</p>
       </div>
       <div class="my-8">
         <div class="dui-form-control">

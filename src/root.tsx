@@ -68,7 +68,7 @@ export default function Root() {
                     </label>
                     <div
                       tabindex="0"
-                      class="dui-dropdown-content dui-menu p-2 shadow bg-base-100 rounded-box w-52"
+                      class="dui-dropdown-content dui-menu p-2 shadow bg-base-200 rounded-box w-52"
                     >
                       <div class="grid grid-cols-1 gap-3 p-3 text-neutral">
                         <div

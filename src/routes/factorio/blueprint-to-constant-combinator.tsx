@@ -123,6 +123,9 @@ const convert = (
   }
 };
 
+export const description =
+  "Convert a factorio blueprint string to constant combinators holding the signals of items needed to build the blueprint.";
+
 const Page = () => {
   const [inputBp, setInputBp] = createSignal("");
   const [signalsPerCC, setSignalsPerCC] = createSignal(1);
@@ -146,12 +149,7 @@ const Page = () => {
       <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
       <div class="prose dui-prose">
         <h2>Blueprint to Constant Combinator</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque
-          quod quasi libero dolorem exercitationem, accusantium hic laborum ad
-          repellat ipsa dolores mollitia expedita? Totam, voluptates. Sint cum
-          illo dolores tempora.
-        </p>
+        <p>{description}</p>
       </div>
       <div class="my-8">
         <div class="dui-form-control">

@@ -313,6 +313,9 @@ const Settings: Component<{
   );
 };
 
+export const description =
+  "This tool can be used to build bot based malls/hubs.";
+
 const Page = () => {
   let globalCheckbox: HTMLInputElement | undefined;
   let showPopupInput: HTMLInputElement | undefined;
@@ -387,12 +390,7 @@ const Page = () => {
       <Title>Make Everything Generator | Factorio | Gaming Tools</Title>
       <div class="prose dui-prose">
         <h2>Make Everything Generator</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          quas nesciunt laudantium et debitis corporis accusamus quasi
-          repudiandae nobis vero dolorem delectus voluptatum fuga recusandae
-          dolor veritatis expedita, voluptas tempore.
-        </p>
+        <p>{description}</p>
       </div>
       <div class="mt-8">
         <label for="import" class="dui-btn">
