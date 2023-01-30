@@ -28,7 +28,9 @@ export const entityItemMap: {
   "se-fuel-refinery-spaced": { item: "se-fuel-refinery" },
   "se-meteor-defence-container": { item: "se-meteor-defence" },
   "se-meteor-point-defence-container": { item: "se-meteor-point-defence" },
-  "se-pylon-construction-radar-radar": { item: "se-pylon-construction-radar" },
+  "se-pylon-construction-radar-radar": {
+    item: "se-pylon-construction-radar",
+  },
   "se-pylon-construction-radar-roboport": {
     item: "se-pylon-construction-radar",
   },

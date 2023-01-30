@@ -16,7 +16,7 @@ import "./root.css";
 
 export default function Root() {
   const [currentTheme, setCurrentTheme] = createSignal<string | null>(
-    (typeof localStorage === "undefined" || typeof window === "undefined")
+    typeof localStorage === "undefined" || typeof window === "undefined"
       ? null
       : localStorage.getItem("theme")
   );
@@ -48,18 +48,47 @@ export default function Root() {
                   <span class="text-xl mx-4">Gaming Tools</span>
                 </div>
                 <div class="dui-navbar-center space-x-4">
-                  <A class="dui-link-hover" href="/">Home</A>
-                  <A class="dui-link-hover" href="/about">About</A>
-                  <A class="dui-link-hover" href="/factorio">Factorio</A>
+                  <A class="dui-link-hover" href="/">
+                    Home
+                  </A>
+                  <A class="dui-link-hover" href="/about">
+                    About
+                  </A>
+                  <A class="dui-link-hover" href="/factorio">
+                    Factorio
+                  </A>
                 </div>
                 <div class="dui-navbar-end">
                   <div class="dui-dropdown dui-dropdown-end">
-                    <label tabindex="0" class="dui-btn dui-btn-ghost normal-case">Theme</label>
-                    <div tabindex="0" class="dui-dropdown-content dui-menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <label
+                      tabindex="0"
+                      class="dui-btn dui-btn-ghost normal-case"
+                    >
+                      Theme
+                    </label>
+                    <div
+                      tabindex="0"
+                      class="dui-dropdown-content dui-menu p-2 shadow bg-base-100 rounded-box w-52"
+                    >
                       <div class="grid grid-cols-1 gap-3 p-3 text-neutral">
-                        <div class="dui-btn normal-case" onClick={() => setTheme(null)}>Default</div>
-                        <div class="dui-btn normal-case" onClick={() => setTheme("light")}>Light</div>
-                        <div class="dui-btn normal-case" onClick={() => setTheme("dark")}>Dark</div>
+                        <div
+                          class="dui-btn normal-case"
+                          onClick={() => setTheme(null)}
+                        >
+                          Default
+                        </div>
+                        <div
+                          class="dui-btn normal-case"
+                          onClick={() => setTheme("light")}
+                        >
+                          Light
+                        </div>
+                        <div
+                          class="dui-btn normal-case"
+                          onClick={() => setTheme("dark")}
+                        >
+                          Dark
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "solid-start dev",
     "build": "solid-start build",
-    "start": "solid-start start"
+    "start": "solid-start start",
+    "prettier-check": "npx prettier --check .",
+    "prettier-write": "npx prettier --write ."
   },
   "type": "module",
   "devDependencies": {
