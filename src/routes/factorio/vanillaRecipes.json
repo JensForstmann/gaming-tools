@@ -10,7 +10,7 @@
     "subgroup_name": "energy",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "accumulator",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -37,7 +37,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "advanced-circuit",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -69,7 +69,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "arithmetic-combinator",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -96,7 +96,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "artillery-shell",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -128,7 +128,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "artillery-targeting-remote",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -155,7 +155,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "artillery-turret",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -192,7 +192,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "artillery-wagon",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -234,7 +234,7 @@
     "subgroup_name": "production-machine",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "assembling-machine-1",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -266,7 +266,7 @@
     "subgroup_name": "production-machine",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "assembling-machine-2",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -303,7 +303,7 @@
     "subgroup_name": "production-machine",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "assembling-machine-3",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -330,7 +330,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "atomic-bomb",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -389,7 +389,7 @@
     "subgroup_name": "raw-material",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "battery",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -416,7 +416,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "battery-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -443,7 +443,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "battery-mk2-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -475,7 +475,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "beacon",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -512,7 +512,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "belt-immunity-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -539,7 +539,7 @@
     "subgroup_name": "energy-pipe-distribution",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "big-electric-pole",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -657,7 +657,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "cannon-shell",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -689,7 +689,7 @@
     "subgroup_name": "transport",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "car",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -721,7 +721,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "cargo-wagon",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -753,7 +753,7 @@
     "subgroup_name": "production-machine",
     "subgroup_order": "e",
     "request_paste_multiplier": 10,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "centrifuge",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -790,7 +790,7 @@
     "subgroup_name": "production-machine",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "chemical-plant",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -827,7 +827,7 @@
     "subgroup_name": "science-pack",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "chemical-science-pack",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -859,7 +859,7 @@
     "subgroup_name": "terrain",
     "subgroup_order": "i",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "cliff-explosives",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -891,7 +891,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "cluster-grenade",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -923,7 +923,7 @@
     "subgroup_name": "gun",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "combat-shotgun",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -960,7 +960,7 @@
     "subgroup_name": "terrain",
     "subgroup_order": "i",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "concrete",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -987,7 +987,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "constant-combinator",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1014,7 +1014,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "construction-robot",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1085,7 +1085,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "decider-combinator",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1112,7 +1112,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "defender-capsule",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -1144,7 +1144,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "destroyer-capsule",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -1171,7 +1171,7 @@
     "subgroup_name": "military-equipment",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "discharge-defense-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -1203,7 +1203,7 @@
     "subgroup_name": "military-equipment",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "discharge-defense-remote",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -1225,7 +1225,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "distractor-capsule",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -1252,7 +1252,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "effectivity-module",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1279,7 +1279,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "effectivity-module-2",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1311,7 +1311,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "effectivity-module-3",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1370,7 +1370,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "electric-engine-unit",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1397,7 +1397,7 @@
     "subgroup_name": "smelting-machine",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "electric-furnace",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1488,7 +1488,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "empty-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -1510,7 +1510,7 @@
     "subgroup_name": "military-equipment",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "energy-shield-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -1537,7 +1537,7 @@
     "subgroup_name": "military-equipment",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "energy-shield-mk2-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -1569,7 +1569,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "engine-unit",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1601,7 +1601,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "exoskeleton-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -1633,7 +1633,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "explosive-cannon-shell",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -1665,7 +1665,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "explosive-rocket",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -1692,7 +1692,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "explosive-uranium-cannon-shell",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -1719,7 +1719,7 @@
     "subgroup_name": "raw-material",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "explosives",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1773,7 +1773,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "express-splitter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1805,7 +1805,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "express-transport-belt",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -1832,7 +1832,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "express-underground-belt",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1859,7 +1859,7 @@
     "subgroup_name": "inserter",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "fast-inserter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1918,7 +1918,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "fast-splitter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -1950,7 +1950,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "fast-transport-belt",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -1977,7 +1977,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "fast-underground-belt",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2004,7 +2004,7 @@
     "subgroup_name": "inserter",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "filter-inserter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2053,7 +2053,7 @@
     "subgroup_name": "gun",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "flamethrower",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -2080,7 +2080,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "flamethrower-ammo",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -2102,7 +2102,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "flamethrower-turret",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2139,7 +2139,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "fluid-wagon",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -2176,7 +2176,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "flying-robot-frame",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2213,7 +2213,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "fusion-reactor-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -2240,7 +2240,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "gate",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2272,7 +2272,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "green-wire",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -2299,7 +2299,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "grenade",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -2326,7 +2326,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "gun-turret",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2358,7 +2358,7 @@
     "subgroup_name": "terrain",
     "subgroup_order": "i",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "hazard-concrete",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -2380,7 +2380,7 @@
     "subgroup_name": "energy",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "heat-exchanger",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2412,7 +2412,7 @@
     "subgroup_name": "energy",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "heat-pipe",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2439,7 +2439,7 @@
     "subgroup_name": "armor",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "heavy-armor",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -2618,7 +2618,7 @@
     "subgroup_name": "gun",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "land-mine",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -2645,7 +2645,7 @@
     "subgroup_name": "terrain",
     "subgroup_order": "i",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "landfill",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -2667,7 +2667,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "laser-turret",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2763,7 +2763,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "locomotive",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -2795,7 +2795,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-chest-active-provider",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2827,7 +2827,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-chest-buffer",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2859,7 +2859,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-chest-passive-provider",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2891,7 +2891,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-chest-requester",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2923,7 +2923,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-chest-storage",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2955,7 +2955,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-robot",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -2982,7 +2982,7 @@
     "subgroup_name": "science-pack",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "logistic-science-pack",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -3009,7 +3009,7 @@
     "subgroup_name": "inserter",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "long-handed-inserter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3041,7 +3041,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "low-density-structure",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -3073,7 +3073,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "lubricant",
     "main_product_stack_size": null,
     "ingredients": []
@@ -3089,7 +3089,7 @@
     "subgroup_name": "energy-pipe-distribution",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "medium-electric-pole",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3121,7 +3121,7 @@
     "subgroup_name": "science-pack",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "military-science-pack",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -3153,7 +3153,7 @@
     "subgroup_name": "armor",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "modular-armor",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -3180,7 +3180,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "night-vision-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -3207,7 +3207,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "nuclear-fuel",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -3234,7 +3234,7 @@
     "subgroup_name": "energy",
     "subgroup_order": "b",
     "request_paste_multiplier": 1,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "nuclear-reactor",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -3303,7 +3303,7 @@
     "subgroup_name": "production-machine",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "oil-refinery",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -3345,7 +3345,7 @@
     "subgroup_name": "military-equipment",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "personal-laser-defense-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -3377,7 +3377,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "personal-roboport-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -3414,7 +3414,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "personal-roboport-mk2-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -3446,7 +3446,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "piercing-rounds-magazine",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -3478,7 +3478,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "piercing-shotgun-shell",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -3586,7 +3586,7 @@
     "subgroup_name": "raw-material",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "plastic-bar",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -3608,7 +3608,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "poison-capsule",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -3640,7 +3640,7 @@
     "subgroup_name": "armor",
     "subgroup_order": "d",
     "request_paste_multiplier": 1,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "power-armor",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -3672,7 +3672,7 @@
     "subgroup_name": "armor",
     "subgroup_order": "d",
     "request_paste_multiplier": 1,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "power-armor-mk2",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -3714,7 +3714,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "power-switch",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3746,7 +3746,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "processing-unit",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -3773,7 +3773,7 @@
     "subgroup_name": "science-pack",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "production-science-pack",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -3805,7 +3805,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "productivity-module",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3832,7 +3832,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "productivity-module-2",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3864,7 +3864,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "productivity-module-3",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3896,7 +3896,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "programmable-speaker",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3933,7 +3933,7 @@
     "subgroup_name": "energy-pipe-distribution",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "pump",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -3965,7 +3965,7 @@
     "subgroup_name": "extraction-machine",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "pumpjack",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -4034,7 +4034,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rail",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -4066,7 +4066,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rail-chain-signal",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4093,7 +4093,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rail-signal",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4120,7 +4120,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "red-wire",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -4147,7 +4147,7 @@
     "subgroup_name": "terrain",
     "subgroup_order": "i",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "refined-concrete",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -4179,7 +4179,7 @@
     "subgroup_name": "terrain",
     "subgroup_order": "i",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "refined-hazard-concrete",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -4228,7 +4228,7 @@
     "subgroup_name": "logistic-network",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "roboport",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -4260,7 +4260,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rocket",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -4292,7 +4292,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rocket-control-unit",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -4319,7 +4319,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rocket-fuel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -4341,7 +4341,7 @@
     "subgroup_name": "gun",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rocket-launcher",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -4373,7 +4373,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rocket-part",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -4405,7 +4405,7 @@
     "subgroup_name": "space-related",
     "subgroup_order": "g",
     "request_paste_multiplier": 1,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "rocket-silo",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -4447,7 +4447,7 @@
     "subgroup_name": "space-related",
     "subgroup_order": "g",
     "request_paste_multiplier": 1,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "satellite",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -4494,7 +4494,7 @@
     "subgroup_name": "gun",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "shotgun",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -4531,7 +4531,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "shotgun-shell",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -4558,7 +4558,7 @@
     "subgroup_name": "capsule",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "slowdown-capsule",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -4617,7 +4617,7 @@
     "subgroup_name": "circuit-network",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "small-lamp",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4649,7 +4649,7 @@
     "subgroup_name": "energy",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "solar-panel",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4681,7 +4681,7 @@
     "subgroup_name": "equipment",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "solar-panel-equipment",
     "main_product_stack_size": 20,
     "ingredients": [
@@ -4713,7 +4713,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "speed-module",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4740,7 +4740,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "speed-module-2",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4772,7 +4772,7 @@
     "subgroup_name": "module",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "speed-module-3",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4804,7 +4804,7 @@
     "subgroup_name": "transport",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "spidertron",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -4861,7 +4861,7 @@
     "subgroup_name": "transport",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "spidertron-remote",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -4888,7 +4888,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "splitter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4920,7 +4920,7 @@
     "subgroup_name": "inserter",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "stack-filter-inserter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -4947,7 +4947,7 @@
     "subgroup_name": "inserter",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "stack-inserter",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5016,7 +5016,7 @@
     "subgroup_name": "energy",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "steam-turbine",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5048,7 +5048,7 @@
     "subgroup_name": "storage",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "steel-chest",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5070,7 +5070,7 @@
     "subgroup_name": "smelting-machine",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "steel-furnace",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5097,7 +5097,7 @@
     "subgroup_name": "raw-material",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "steel-plate",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -5163,7 +5163,7 @@
     "subgroup_name": "defensive-structure",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "stone-wall",
     "main_product_stack_size": 100,
     "ingredients": [
@@ -5185,7 +5185,7 @@
     "subgroup_name": "storage",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "storage-tank",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5212,7 +5212,7 @@
     "subgroup_name": "gun",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "submachine-gun",
     "main_product_stack_size": 5,
     "ingredients": [
@@ -5244,7 +5244,7 @@
     "subgroup_name": "energy-pipe-distribution",
     "subgroup_order": "d",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "substation",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5276,7 +5276,7 @@
     "subgroup_name": "raw-material",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "sulfur",
     "main_product_stack_size": 50,
     "ingredients": []
@@ -5292,7 +5292,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "sulfuric-acid",
     "main_product_stack_size": null,
     "ingredients": [
@@ -5319,7 +5319,7 @@
     "subgroup_name": "transport",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "tank",
     "main_product_stack_size": 1,
     "ingredients": [
@@ -5356,7 +5356,7 @@
     "subgroup_name": "train-transport",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "train-stop",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5420,7 +5420,7 @@
     "subgroup_name": "belt",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "underground-belt",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5447,7 +5447,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "uranium-cannon-shell",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -5474,7 +5474,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "uranium-fuel-cell",
     "main_product_stack_size": 50,
     "ingredients": [
@@ -5506,7 +5506,7 @@
     "subgroup_name": "ammo",
     "subgroup_order": "b",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "uranium-rounds-magazine",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -5533,7 +5533,7 @@
     "subgroup_name": "science-pack",
     "subgroup_order": "h",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "utility-science-pack",
     "main_product_stack_size": 200,
     "ingredients": [
@@ -5587,7 +5587,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": []
@@ -5603,7 +5603,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": []
@@ -5619,7 +5619,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -5641,7 +5641,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "crude-oil-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5663,7 +5663,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "heavy-oil-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5685,7 +5685,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "light-oil-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5707,7 +5707,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "lubricant-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5729,7 +5729,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "petroleum-gas-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5751,7 +5751,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "sulfuric-acid-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5773,7 +5773,7 @@
     "subgroup_name": "fill-barrel",
     "subgroup_order": "e",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "water-barrel",
     "main_product_stack_size": 10,
     "ingredients": [
@@ -5795,7 +5795,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": []
@@ -5811,7 +5811,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": []
@@ -5827,7 +5827,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "solid-fuel",
     "main_product_stack_size": 50,
     "ingredients": []
@@ -5843,7 +5843,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "solid-fuel",
     "main_product_stack_size": 50,
     "ingredients": []
@@ -5859,7 +5859,7 @@
     "subgroup_name": "fluid-recipes",
     "subgroup_order": "a",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": "solid-fuel",
     "main_product_stack_size": 50,
     "ingredients": []
@@ -5875,7 +5875,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -5897,7 +5897,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -5919,7 +5919,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -5941,7 +5941,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -5963,7 +5963,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -5985,7 +5985,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -6007,7 +6007,7 @@
     "subgroup_name": "empty-barrel",
     "subgroup_order": "f",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -6029,7 +6029,7 @@
     "subgroup_name": "raw-material",
     "subgroup_order": "c",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -6051,7 +6051,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [
@@ -6073,7 +6073,7 @@
     "subgroup_name": "intermediate-product",
     "subgroup_order": "g",
     "request_paste_multiplier": 30,
-    "can_be_researched": false,
+    "can_be_researched": true,
     "main_product": null,
     "main_product_stack_size": null,
     "ingredients": [

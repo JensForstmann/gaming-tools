@@ -325,10 +325,16 @@ const Settings: Component<{
 export const description =
   "This tool can be used to build bot based malls/hubs.";
 
+const filterRecipes = (recipes: Array<Recipe>) => {
+  return recipes.filter((r) => r.enabled || r.can_be_researched);
+};
+
 const Page = () => {
   let globalCheckbox: HTMLInputElement | undefined;
   let showPopupInput: HTMLInputElement | undefined;
-  const [recipes, setRecipes] = createStore<Array<Recipe>>(VanillaRecipes);
+  const [recipes, setRecipes] = createStore<Array<Recipe>>(
+    filterRecipes(VanillaRecipes),
+  );
   const [settings, setSettings] = createStore<Settings>({
     machineName: "assembling-machine-3",
     machineWidth: 3,
@@ -448,7 +454,7 @@ const Page = () => {
                   try {
                     const text = await file.text();
                     const recipes: Recipe[] = JSON.parse(text);
-                    setRecipes(recipes);
+                    setRecipes(filterRecipes(recipes));
                     if (showPopupInput) {
                       input.value = "";
                       showPopupInput.checked = false;

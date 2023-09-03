@@ -2,18 +2,18 @@ export const CheatCommand = `
 /c
 local EOL = "\\n"
 local recipes_dump = ""
-local can_be_researched = {}
+local can_be_researched_map = {}
 for _, tech in pairs(game.technology_prototypes) do
         for i, effect in ipairs(tech.effects) do
             if effect.type == "unlock-recipe" then
-                can_be_researched[effect.recipe] = true
+                can_be_researched_map[effect.recipe] = true
             end
         end
 end
 for _, recipe in pairs(game.player.force.recipes) do
     local recipe_prototype = recipe.prototype
     local can_be_researched = "false"
-    if can_be_researched[recipe_prototype.name] then
+    if can_be_researched_map[recipe_prototype.name] then
         can_be_researched = "true"
     end
     local main_product = "null"
