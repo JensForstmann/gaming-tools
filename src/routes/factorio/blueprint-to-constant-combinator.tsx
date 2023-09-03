@@ -34,7 +34,7 @@ const convert = (
   inputBp: string,
   signalsPerCC: number,
   includeRequester: boolean,
-  requestFromBuffer: boolean
+  requestFromBuffer: boolean,
 ): string => {
   try {
     const items = new Map<string, number>();
@@ -139,8 +139,8 @@ const Page = () => {
         inputBp(),
         signalsPerCC(),
         includeRequester(),
-        requestFromBuffer()
-      )
+        requestFromBuffer(),
+      ),
     );
   });
 

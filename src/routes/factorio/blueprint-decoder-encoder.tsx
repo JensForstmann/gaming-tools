@@ -32,7 +32,7 @@ const Page = () => {
             onInput={(e) => {
               try {
                 setJson(
-                  JSON.stringify(decodePlan(e.currentTarget.value), null, 4)
+                  JSON.stringify(decodePlan(e.currentTarget.value), null, 4),
                 );
                 setInputBp(e.currentTarget.value);
               } catch (err) {

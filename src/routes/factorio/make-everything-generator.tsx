@@ -60,7 +60,7 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
   const blockWidth =
     Math.max(
       settings.machineWidth,
-      settings.sourceChestWidth + settings.targetChestWidth
+      settings.sourceChestWidth + settings.targetChestWidth,
     ) + settings.columnSpace;
   const blockHeight =
     settings.machineHeight +
@@ -150,10 +150,10 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
                     (ing.amount *
                       r.request_paste_multiplier *
                       settings.machineSpeed) /
-                      r.energy
-                  )
-                )
-              )
+                      r.energy,
+                  ),
+                ),
+              ),
             ),
           };
         }),
@@ -354,7 +354,7 @@ const Page = () => {
     setRecipes(
       (recipe) => recipe.name === name,
       "selected",
-      (selected) => !selected
+      (selected) => !selected,
     );
   };
   const categories = [...new Set(recipes.map((r) => r.category))].sort();
@@ -371,14 +371,14 @@ const Page = () => {
         (search() === "" || r.name.includes(search())) &&
         (categoryFilter() === "" || r.category === categoryFilter()) &&
         (groupFilter() === "" || r.group_name === groupFilter()) &&
-        (subGroupFilter() === "" || r.subgroup_name === subGroupFilter())
+        (subGroupFilter() === "" || r.subgroup_name === subGroupFilter()),
     );
   };
 
   createEffect(() => {
     if (globalCheckbox) {
       const selected = filteredRecipes().filter(
-        (r) => r.selected === true
+        (r) => r.selected === true,
       ).length;
       const notSelected = filteredRecipes().length - selected;
       if (selected === 0) {
@@ -482,7 +482,7 @@ const Page = () => {
                           filteredRecipes().find((r2) => r2.name === r.name) !==
                           undefined,
                         "selected",
-                        false
+                        false,
                       );
                     } else {
                       console.log("select");
@@ -491,7 +491,7 @@ const Page = () => {
                           filteredRecipes().find((r2) => r2.name === r.name) !==
                           undefined,
                         "selected",
-                        true
+                        true,
                       );
                     }
                     if (globalCheckbox) {
@@ -584,8 +584,8 @@ const Page = () => {
             navigator.clipboard.writeText(
               getBlueprint(
                 settings,
-                recipes.filter((r) => r.selected)
-              )
+                recipes.filter((r) => r.selected),
+              ),
             );
           }}
         >

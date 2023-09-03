@@ -18,7 +18,7 @@ export default function Root() {
   const [currentTheme, setCurrentTheme] = createSignal<string | null>(
     typeof localStorage === "undefined" || typeof window === "undefined"
       ? null
-      : localStorage.getItem("theme")
+      : localStorage.getItem("theme"),
   );
 
   const setTheme = (theme: string | null) => {
