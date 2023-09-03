@@ -81,6 +81,15 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
 
   recipes
     .filter((r) => r.selected)
+    .sort((a, b) => {
+      if (a.group_name === b.group_name) {
+        if (a.subgroup_name === b.subgroup_name) {
+          return a.order > b.order ? 1 : -1;
+        }
+        return a.subgroup_order > b.subgroup_order ? 1 : -1;
+      }
+      return a.group_order > b.group_order ? 1 : -1;
+    })
     .forEach((r) => {
       addEntity(bp, {
         name: settings.machineName,
