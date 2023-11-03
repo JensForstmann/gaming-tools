@@ -126,6 +126,28 @@ const convert = (
 export const description =
   "Convert a factorio blueprint string to constant combinators holding the signals of items needed to build the blueprint.";
 
+const HelpSection = () => {
+  return (
+    <div class="collapse collapse-arrow bg-base-200">
+      <input type="checkbox" />
+      <h3 class="collapse-title m-0">Help / Example</h3>
+      <div class="collapse-content">
+        <img src="/images/blueprint-to-constant-combinator-blueprint.png" />
+        <p>
+          Export Blueprint String and paste into the Input Blueprint String
+          field.
+        </p>
+
+        <p>
+          Copy the Output Blueprint String and import into Factorio. Result:
+        </p>
+        <img src="/images/blueprint-to-constant-combinator-outcome.png" />
+        <img src="/images/blueprint-to-constant-combinator-requester.png" />
+      </div>
+    </div>
+  );
+};
+
 const Page = () => {
   const [inputBp, setInputBp] = createSignal("");
   const [signalsPerCC, setSignalsPerCC] = createSignal(1);
@@ -145,12 +167,14 @@ const Page = () => {
   });
 
   return (
-    <div class="w-full max-w-4xl m-auto">
+    <div class="w-full max-w-4xl m-auto prose">
       <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
-      <div class="prose">
+      <div>
         <h2>Blueprint to Constant Combinator</h2>
         <p>{description}</p>
       </div>
+      <div class="h-8"></div>
+      <HelpSection />
       <div class="my-8">
         <div class="form-control">
           <label class="label">

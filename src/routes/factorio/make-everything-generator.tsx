@@ -194,7 +194,7 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
 
 const HelpSection = () => {
   return (
-    <div class="propse collapse collapse-arrow bg-base-200">
+    <div class="collapse collapse-arrow bg-base-200">
       <input type="checkbox" />
       <h3 class="collapse-title m-0">Help / Example</h3>
       <div class="collapse-content">
@@ -451,7 +451,7 @@ const Page = () => {
   return (
     <div class="w-full max-w-4xl m-auto mb-48 prose">
       <Title>Make Everything Generator | Factorio | Gaming Tools</Title>
-      <div class="prose">
+      <div>
         <h2>Make Everything Generator</h2>
         <p>{description}</p>
       </div>
