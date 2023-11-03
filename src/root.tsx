@@ -61,10 +61,10 @@ export default function Root() {
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
         <script defer src="/_vercel/insights/script.js"></script>
       </Head>
-      <Body>
+      <Body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
         <Suspense>
           <ErrorBoundary>
-            <div class="m-8">
+            <div class="p-8">
               <nav class="navbar shadow-xl rounded-box bg-primary text-primary-content">
                 <div class="navbar-start">
                   <span class="text-xl mx-4">Gaming Tools</span>
@@ -117,6 +117,16 @@ export default function Root() {
             <Routes>
               <FileRoutes />
             </Routes>
+            <div class="bg-base-300 pt-4 pb-4 text-center">
+              Source code available on{" "}
+              <a
+                href="https://github.com/JensForstmann/gaming-tools"
+                class="link"
+              >
+                GitHub
+              </a>
+              . Feel free to report bugs or request features there.
+            </div>
           </ErrorBoundary>
         </Suspense>
         <Scripts />
