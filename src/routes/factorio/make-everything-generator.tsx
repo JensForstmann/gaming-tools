@@ -192,6 +192,55 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
   return encodePlan(bp);
 };
 
+const HelpSection = () => {
+  return (
+    <div class="propse collapse collapse-arrow bg-base-200">
+      <input type="checkbox" />
+      <h3 class="collapse-title m-0">Help / Example</h3>
+      <div class="collapse-content">
+        <p>
+          This generator gives you a blueprint to produce the selected recipes.
+        </p>
+        <img
+          src="/images/make-everything-generator-assembling-machines.png"
+          alt="assembling machines"
+        />
+
+        <p>
+          The requester chest will request the items you need for the recipe. It
+          will respect the speed of the machine and the time needed to craft the
+          item.
+        </p>
+        <img
+          src="/images/make-everything-generator-requester-chest.png"
+          alt="requester chest"
+        />
+
+        <p>The outserter will prevent producing too much of one item.</p>
+        <img
+          src="/images/make-everything-generator-outserter.png"
+          alt="outserter"
+        />
+
+        <p>
+          The buffer chest will request the product so manually picking up items
+          is as easy as always.
+        </p>
+        <img
+          src="/images/make-everything-generator-buffer-chest.png"
+          alt="buffer chest"
+        />
+
+        <p>
+          This app and the generated blueprint can be fully customized by
+          changing several settings. Mods are also fully supported via a cheat
+          command to extract the recipes from your current game.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const Settings: Component<{
   settings: Settings;
   setSettings: SetStoreFunction<Settings>;
@@ -406,6 +455,8 @@ const Page = () => {
         <h2>Make Everything Generator</h2>
         <p>{description}</p>
       </div>
+      <div class="h-8"></div>
+      <HelpSection />
       <div class="mt-8">
         <label for="import" class="btn">
           Import Custom Recipes (Modded Gameplay)
