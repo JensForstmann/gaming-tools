@@ -1,5 +1,5 @@
 // @refresh reload
-import { createSignal, Suspense } from "solid-js";
+import { createEffect, createSignal, onMount, Suspense } from "solid-js";
 import {
   A,
   Body,
@@ -14,22 +14,44 @@ import {
 } from "solid-start";
 import "./root.css";
 
+const Themes = ["light", "dark"] as const;
+type Theme = (typeof Themes)[number];
+
+const systemWantsDark = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+const systemPreferredTheme = (): Theme =>
+  systemWantsDark() ? "dark" : "light";
+
+const getThemeFromLocalStorage = (): Theme => {
+  if (typeof localStorage === "undefined" || typeof window === "undefined") {
+    return "light"; // SSR in light mode
+  }
+  const data = localStorage?.getItem("theme") ?? null;
+  if (Themes.includes(data as Theme)) {
+    return data as Theme;
+  }
+  return systemPreferredTheme();
+};
+
 export default function Root() {
-  const [currentTheme, setCurrentTheme] = createSignal<string | null>(
-    typeof localStorage === "undefined" || typeof window === "undefined"
-      ? null
-      : localStorage.getItem("theme"),
+  const [currentTheme, setCurrentTheme] = createSignal<Theme>(
+    getThemeFromLocalStorage(),
   );
 
-  const setTheme = (theme: string | null) => {
+  const setTheme = (theme: Theme | null) => {
     if (theme === null) {
       localStorage.removeItem("theme");
-      setCurrentTheme(null);
+      setCurrentTheme(systemPreferredTheme());
     } else {
       localStorage.setItem("theme", theme);
       setCurrentTheme(theme);
     }
   };
+
+  onMount(() => {
+    document.documentElement.dataset.theme = currentTheme();
+  });
 
   return (
     <Html lang="en" data-theme={currentTheme()}>
@@ -43,48 +65,45 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <div class="m-8">
-              <nav class="dui-navbar shadow-xl rounded-box bg-primary text-primary-content">
-                <div class="dui-navbar-start">
+              <nav class="navbar shadow-xl rounded-box bg-primary text-primary-content">
+                <div class="navbar-start">
                   <span class="text-xl mx-4">Gaming Tools</span>
                 </div>
-                <div class="dui-navbar-center space-x-4">
-                  <A class="dui-link-hover" href="/">
+                <div class="navbar-center space-x-4">
+                  <A class="link-hover" href="/">
                     Home
                   </A>
-                  <A class="dui-link-hover" href="/about">
+                  <A class="link-hover" href="/about">
                     About
                   </A>
-                  <A class="dui-link-hover" href="/factorio">
+                  <A class="link-hover" href="/factorio">
                     Factorio
                   </A>
                 </div>
-                <div class="dui-navbar-end">
-                  <div class="dui-dropdown dui-dropdown-end">
-                    <label
-                      tabindex="0"
-                      class="dui-btn dui-btn-ghost normal-case"
-                    >
+                <div class="navbar-end">
+                  <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="btn btn-ghost normal-case">
                       Theme
                     </label>
                     <div
                       tabindex="0"
-                      class="dui-dropdown-content dui-menu p-2 shadow bg-base-200 rounded-box w-52"
+                      class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52"
                     >
                       <div class="grid grid-cols-1 gap-3 p-3 text-neutral">
                         <div
-                          class="dui-btn normal-case"
+                          class="btn normal-case"
                           onClick={() => setTheme(null)}
                         >
                           Default
                         </div>
                         <div
-                          class="dui-btn normal-case"
+                          class="btn normal-case"
                           onClick={() => setTheme("light")}
                         >
                           Light
                         </div>
                         <div
-                          class="dui-btn normal-case"
+                          class="btn normal-case"
                           onClick={() => setTheme("dark")}
                         >
                           Dark

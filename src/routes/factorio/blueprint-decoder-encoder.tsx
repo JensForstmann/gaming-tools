@@ -16,17 +16,17 @@ const Page = () => {
   return (
     <div class="w-full max-w-4xl m-auto mb-48">
       <Title>Blueprint Decoder & Encoder | Factorio | Gaming Tools</Title>
-      <div class="prose dui-prose">
+      <div class="prose">
         <h2>Blueprint Decoder & Encoder</h2>
         <p>{description}</p>
       </div>
       <div class="my-8">
-        <div class="dui-form-control">
-          <label class="dui-label">
-            <span class="dui-label-text">Input Blueprint String</span>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Input Blueprint String</span>
           </label>
           <textarea
-            class="dui-textarea dui-textarea-bordered h-24"
+            class="textarea textarea-bordered h-24"
             placeholder="Paste Blueprint String here"
             value={inputBp()}
             onInput={(e) => {
@@ -42,12 +42,12 @@ const Page = () => {
           ></textarea>
         </div>
       </div>
-      <div class="dui-form-control">
-        <label class="dui-label">
-          <span class="dui-label-text">Decoded (JSON)</span>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Decoded (JSON)</span>
         </label>
         <textarea
-          class="dui-textarea dui-textarea-bordered h-96"
+          class="textarea textarea-bordered h-96"
           value={json()}
           onInput={(e) => {
             setJson(e.currentTarget.value);
@@ -59,12 +59,12 @@ const Page = () => {
           }}
         ></textarea>
       </div>
-      <div class="dui-form-control">
-        <label class="dui-label">
-          <span class="dui-label-text">Output Blueprint String</span>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Output Blueprint String</span>
         </label>
         <textarea
-          class="dui-textarea dui-textarea-bordered h-24"
+          class="textarea textarea-bordered h-24"
           value={outputBp()}
         ></textarea>
       </div>

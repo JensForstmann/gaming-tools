@@ -400,33 +400,33 @@ const Page = () => {
   });
 
   return (
-    <div class="w-full max-w-4xl m-auto mb-48 prose dui-prose">
+    <div class="w-full max-w-4xl m-auto mb-48 prose">
       <Title>Make Everything Generator | Factorio | Gaming Tools</Title>
-      <div class="prose dui-prose">
+      <div class="prose">
         <h2>Make Everything Generator</h2>
         <p>{description}</p>
       </div>
       <div class="mt-8">
-        <label for="import" class="dui-btn">
+        <label for="import" class="btn">
           Import Custom Recipes (Modded Gameplay)
         </label>
         <input
           type="checkbox"
           id="import"
-          class="dui-modal-toggle"
+          class="modal-toggle"
           ref={showPopupInput}
         />
-        <label for="import" class="dui-modal cursor-pointer">
-          <div class="dui-modal-box relative">
+        <label for="import" class="modal cursor-pointer">
+          <div class="modal-box relative">
             <label
               for="import"
-              class="dui-btn dui-btn-sm dui-btn-circle absolute right-2 top-2"
+              class="btn btn-sm btn-circle absolute right-2 top-2"
             >
               ✕
             </label>
             <h3 class="mt-0">Import Recipes</h3>
             <button
-              class="dui-btn dui-btn-primary"
+              class="btn btn-primary"
               onClick={() => navigator.clipboard.writeText(CheatCommand)}
             >
               Copy Cheat Command
@@ -444,7 +444,7 @@ const Page = () => {
             </p>
             <input
               type="file"
-              class="dui-file-input dui-file-input-bordered w-full max-w-xs"
+              class="file-input file-input-bordered w-full max-w-xs"
               accept="application/json"
               onChange={async (e) => {
                 const file = e.currentTarget.files?.[0];
@@ -467,14 +467,14 @@ const Page = () => {
           </div>
         </label>
       </div>
-      <table class="dui-table dui-table-compact w-full mt-8">
-        <thead class="sticky top-0">
-          <tr>
-            <th class="py-6 align-middle">
+      <table class="table table-sm w-full mt-8 table-pin-rows">
+        <thead>
+          <tr class="bg-base-300">
+            <th class="py-6 align-middle rounded-tl-lg">
               <label>
                 <input
                   type="checkbox"
-                  class="dui-checkbox dui-checkbox-lg"
+                  class="checkbox checkbox-lg"
                   ref={globalCheckbox}
                   onChange={() => {
                     const _filteredRecipes = filteredRecipes();
@@ -499,7 +499,7 @@ const Page = () => {
             <th class="py-6 align-top">
               <div>Category</div>
               <select
-                class="dui-select w-full max-w-xs"
+                class="select w-full max-w-xs"
                 onChange={(e) => setCategoryFilter(e.currentTarget.value)}
               >
                 <option value={""}>filter...</option>
@@ -511,17 +511,17 @@ const Page = () => {
             <th class="py-6 align-top">
               <div>Group</div>
               <select
-                class="dui-select w-full max-w-xs"
+                class="select w-full max-w-xs"
                 onChange={(e) => setGroupFilter(e.currentTarget.value)}
               >
                 <option value={""}>filter...</option>
                 <For each={groups}>{(group) => <option>{group}</option>}</For>
               </select>
             </th>
-            <th class="py-6 align-top">
+            <th class="py-6 align-top rounded-tr-lg">
               <div>Subgroup</div>
               <select
-                class="dui-select w-full max-w-xs"
+                class="select w-full max-w-xs"
                 onChange={(e) => setSubGroupFilter(e.currentTarget.value)}
               >
                 <option value={""}>filter...</option>
@@ -540,7 +540,7 @@ const Page = () => {
                   <label>
                     <input
                       type="checkbox"
-                      class="dui-checkbox"
+                      class="checkbox"
                       checked={recipe.selected}
                       onChange={() => toggleRecipe(recipe.name)}
                     />
@@ -555,12 +555,12 @@ const Page = () => {
           </For>
         </tbody>
         <tfoot>
-          <tr>
-            <th></th>
+          <tr class="bg-base-300">
+            <th class="rounded-bl-lg"></th>
             <th>Name</th>
             <th>Category</th>
             <th>Group</th>
-            <th>Subgroup</th>
+            <th class="rounded-br-lg">Subgroup</th>
           </tr>
         </tfoot>
       </table>
@@ -570,7 +570,7 @@ const Page = () => {
       </div>
       <div class="mt-8">
         <button
-          class="dui-btn"
+          class="btn btn-primary"
           onClick={() => {
             navigator.clipboard.writeText(
               getBlueprint(

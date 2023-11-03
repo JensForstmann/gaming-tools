@@ -147,25 +147,25 @@ const Page = () => {
   return (
     <div class="w-full max-w-4xl m-auto">
       <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
-      <div class="prose dui-prose">
+      <div class="prose">
         <h2>Blueprint to Constant Combinator</h2>
         <p>{description}</p>
       </div>
       <div class="my-8">
-        <div class="dui-form-control">
-          <label class="dui-label">
-            <span class="dui-label-text">Input Blueprint String</span>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Input Blueprint String</span>
           </label>
           <textarea
-            class="dui-textarea dui-textarea-bordered h-24"
+            class="textarea textarea-bordered h-24"
             placeholder="Paste Blueprint String here"
             value={inputBp()}
             onInput={(e) => setInputBp(e.currentTarget.value)}
           ></textarea>
         </div>
-        <div class="dui-form-control">
-          <label class="dui-label">
-            <span class="dui-label-text">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">
               Maximum Signals per Constant Combinator
             </span>
           </label>
@@ -175,51 +175,43 @@ const Page = () => {
             onInput={(e) => setSignalsPerCC(parseInt(e.currentTarget.value))}
             min={1}
             step={1}
-            class="dui-input dui-input-bordered"
+            class="input input-bordered"
           />
         </div>
-        <div class="dui-form-control">
-          <label class="dui-label cursor-pointer">
-            <span class="dui-label-text">Include Requester Chests</span>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Include Requester Chests</span>
             <input
               type="checkbox"
               checked={includeRequester()}
               onInput={(e) => setIncludeRequester(e.currentTarget.checked)}
-              class="dui-checkbox"
+              class="checkbox"
             />
           </label>
         </div>
-        <div class="dui-form-control">
-          <label
-            class={"dui-label" + (includeRequester() ? " cursor-pointer" : "")}
-          >
-            <span
-              class={
-                "dui-label-text" + (!includeRequester() ? " text-base-300" : "")
-              }
-            >
-              Request from Buffer Chests
-            </span>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class={"label-text"}>Request from Buffer Chests</span>
             <input
               type="checkbox"
               disabled={!includeRequester()}
               checked={requestFromBuffer()}
               onInput={(e) => setRequestFromBuffer(e.currentTarget.checked)}
-              class="dui-checkbox"
+              class="checkbox"
             />
           </label>
         </div>
-        <div class="dui-form-control">
-          <label class="dui-label">
-            <span class="dui-label-text">Output Blueprint String</span>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Output Blueprint String</span>
           </label>
           <textarea
-            class="dui-textarea dui-textarea-bordered h-24"
+            class="textarea textarea-bordered h-24"
             value={outputBp()}
           ></textarea>
         </div>
         <div
-          class="dui-btn my-4 dui-btn-primary w-full"
+          class="btn my-4 btn-primary w-full"
           onMouseDown={() => navigator.clipboard.writeText(outputBp())}
         >
           Copy
