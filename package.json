@@ -22,7 +22,7 @@
     "vite": "^4.5.0"
   },
   "dependencies": {
-    "@jensforstmann/factorio-blueprint-tools": "^1.3.3",
+    "@jensforstmann/factorio-blueprint-tools": "^1.3.4",
     "@solidjs/meta": "^0.29.1",
     "@solidjs/router": "^0.8.3",
     "@vercel/analytics": "^1.1.1",
