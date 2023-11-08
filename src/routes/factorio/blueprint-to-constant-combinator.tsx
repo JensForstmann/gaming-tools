@@ -50,12 +50,21 @@ const convert = (
       book.blueprint_book.blueprints.forEach((bp) => processPlan(bp));
     };
     const processBp = (bp: Blueprint) => {
-      bp.blueprint.entities.forEach(addEntityOrTile);
-      bp.blueprint.tiles?.forEach(addEntityOrTile);
+      bp.blueprint.entities?.forEach((entity) => {
+        addByEntityName(entity.name);
+        for (let name in entity.items) {
+          // modules
+          addToItems(name, entity.items[name]);
+        }
+      });
+      bp.blueprint.tiles?.forEach((tile) => addByEntityName(tile.name));
     };
-    const addEntityOrTile = (x: Tile | Entity) => {
-      const { item, count } = convertEntityToItem(x.name);
-      items.set(item, (items.get(item) ?? 0) + count);
+    const addByEntityName = (name: string) => {
+      const { item, count } = convertEntityToItem(name);
+      addToItems(item, count);
+    };
+    const addToItems = (name: string, count: number) => {
+      items.set(name, (items.get(name) ?? 0) + count);
     };
 
     processPlan(decodePlan(inputBp));
@@ -156,14 +165,16 @@ const Page = () => {
   const [outputBp, setOutputBp] = createSignal("");
 
   createEffect(() => {
-    setOutputBp(
-      convert(
-        inputBp(),
-        signalsPerCC(),
-        includeRequester(),
-        requestFromBuffer(),
-      ),
-    );
+    if (inputBp()) {
+      setOutputBp(
+        convert(
+          inputBp(),
+          signalsPerCC(),
+          includeRequester(),
+          requestFromBuffer(),
+        ),
+      );
+    }
   });
 
   return (
