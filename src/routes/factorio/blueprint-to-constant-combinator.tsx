@@ -64,6 +64,9 @@ const convert = (
       addToItems(item, count);
     };
     const addToItems = (name: string, count: number) => {
+      if (count === 0) {
+        return;
+      }
       items.set(name, (items.get(name) ?? 0) + count);
     };
 

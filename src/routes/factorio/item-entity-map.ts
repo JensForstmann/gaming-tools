@@ -1,7 +1,5 @@
-// 1.) select lines to sort -> F1 -> Sort Lines Ascending
-// https://toniguga.it/blog/2020/03/17/how-to-remove-duplicate-lines-in-visual-studio-code/
 export const entityItemMap: {
-  [key: string]: { item: string; count?: number };
+  [key: string]: { item?: string; count?: number };
 } = {
   "chute-miniloader-inserter": { item: "chute-miniloader" },
   "concrete-wall-ruin": { item: "concrete-wall" },
@@ -16,6 +14,8 @@ export const entityItemMap: {
   "hazard-concrete-right": { item: "hazard-concrete" },
   "iron-wood-chest-remnants": { item: "iron-chest" },
   "iron-wood-chest": { item: "iron-chest" },
+  "logistic-train-stop-input": { count: 0 },
+  "logistic-train-stop-output": { count: 0 },
   "miniloader-inserter": { item: "miniloader" },
   "railloader-chest": { item: "railloader" },
   "railloader-placement-proxy": { item: "railloader" },
