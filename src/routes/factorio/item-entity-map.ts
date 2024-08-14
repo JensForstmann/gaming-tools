@@ -78,6 +78,7 @@ export const entityItemMap: {
   "stone-wall-ruin": { item: "stone-wall" },
   "straight-rail": { item: "rail" },
   vase: { item: "wood" },
+  water: { item: "waterfill" },
   "wood-half-chest-left": { item: "wooden-chest" },
   "wood-half-chest-right": { item: "wooden-chest" },
   "wooden-barrel": { item: "wood" },
