@@ -3,9 +3,9 @@ import {
   createEmptyBlueprint,
   encodePlan,
 } from "@jensforstmann/factorio-blueprint-tools";
+import { Title } from "@solidjs/meta";
 import { Component, createEffect, createSignal, For } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
-import { Title } from "solid-start";
 import { CheckboxInput, NumberInput, TextInput } from "~/components/inputs";
 import { CheatCommand } from "./CheatCommand";
 import VanillaRecipes from "./vanillaRecipes.json";
@@ -370,9 +370,6 @@ const Settings: Component<{
   );
 };
 
-export const description =
-  "This tool can be used to build bot based malls/hubs.";
-
 const filterRecipes = (recipes: Array<Recipe>) => {
   return recipes.filter((r) => r.enabled || r.can_be_researched);
 };
@@ -453,7 +450,7 @@ const Page = () => {
       <Title>Make Everything Generator | Factorio | Gaming Tools</Title>
       <div>
         <h2>Make Everything Generator</h2>
-        <p>{description}</p>
+        <p>This tool can be used to build bot based malls/hubs.</p>
       </div>
       <div class="h-8"></div>
       <HelpSection />

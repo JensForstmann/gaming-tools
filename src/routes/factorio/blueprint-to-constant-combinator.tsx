@@ -1,4 +1,3 @@
-import { createEffect, createSignal } from "solid-js";
 import {
   addEntity,
   addEntityConnection,
@@ -6,14 +5,13 @@ import {
   BlueprintBook,
   decodePlan,
   encodePlan,
-  Entity,
   isBlueprint,
   isBlueprintBook,
-  Plan,
-  Tile,
+  Plan
 } from "@jensforstmann/factorio-blueprint-tools";
+import { Title } from "@solidjs/meta";
+import { createEffect, createSignal } from "solid-js";
 import { entityItemMap } from "./item-entity-map";
-import { Title } from "solid-start";
 
 const convertEntityToItem = (entity: string) => {
   return {
@@ -135,9 +133,6 @@ const convert = (
   }
 };
 
-export const description =
-  "Convert a factorio blueprint string to constant combinators holding the signals of items needed to build the blueprint.";
-
 const HelpSection = () => {
   return (
     <div class="collapse collapse-arrow bg-base-200">
@@ -185,7 +180,7 @@ const Page = () => {
       <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
       <div>
         <h2>Blueprint to Constant Combinator</h2>
-        <p>{description}</p>
+        <p>Convert a factorio blueprint string to constant combinators holding the signals of items needed to build the blueprint.</p>
       </div>
       <div class="h-8"></div>
       <HelpSection />

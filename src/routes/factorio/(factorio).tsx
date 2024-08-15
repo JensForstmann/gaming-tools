@@ -1,7 +1,5 @@
-import { A, Title } from "solid-start";
-import { description as decoderEncoderDescription } from "./blueprint-decoder-encoder";
-import { description as bpCcDescription } from "./blueprint-to-constant-combinator";
-import { description as makeEverythingDescription } from "./make-everything-generator";
+import { Title } from "@solidjs/meta";
+import { A } from "@solidjs/router";
 
 const Page = () => {
   return (
@@ -10,7 +8,7 @@ const Page = () => {
       <div class="m-12 card w-full shadow-xl">
         <div class="card-body">
           <h2 class="card-title">"Make Everything" Blueprint Generator</h2>
-          <p>{makeEverythingDescription}</p>
+          <p>This tool can be used to build bot based malls/hubs.</p>
           <div class="card-actions justify-end">
             <A
               href="/factorio/make-everything-generator"
@@ -26,7 +24,7 @@ const Page = () => {
           <h2 class="card-title">
             Blueprint Entities and Items to Constant Combinator
           </h2>
-          <p>{bpCcDescription}</p>
+          <p>Convert a factorio blueprint string to constant combinators holding the signals of items needed to build the blueprint.</p>
           <div class="card-actions justify-end">
             <A
               href="/factorio/blueprint-to-constant-combinator"
@@ -40,7 +38,7 @@ const Page = () => {
       <div class="m-12 card w-full shadow-xl">
         <div class="card-body">
           <h2 class="card-title">Blueprint Decoder & Encoder</h2>
-          <p>{decoderEncoderDescription}</p>
+          <p>Simply decode blueprint strings to JSON and encode JSON back to factorio blueprint strings.</p>
           <div class="card-actions justify-end">
             <A
               href="/factorio/blueprint-decoder-encoder"
