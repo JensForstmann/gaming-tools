@@ -1,22 +1,23 @@
 import {
   addEntity,
-  addEntityConnection,
   Blueprint,
   BlueprintBook,
+  COMPARATOR,
+  createEmptyBlueprint,
   decodePlan,
   encodePlan,
   isBlueprint,
   isBlueprintBook,
-  Plan
+  Plan,
 } from "@jensforstmann/factorio-blueprint-tools";
 import { Title } from "@solidjs/meta";
 import { createEffect, createSignal } from "solid-js";
-import { entityItemMap } from "./item-entity-map";
+import { itemMapping } from "./item-mapping";
 
-const convertEntityToItem = (entity: string) => {
+const convertToItem = (entity: string) => {
   return {
-    item: entityItemMap[entity]?.item ?? entity,
-    count: entityItemMap[entity]?.count ?? 1,
+    item: itemMapping[entity]?.item ?? entity,
+    count: itemMapping[entity]?.count ?? 1,
   };
 };
 
@@ -28,6 +29,12 @@ const chunkArray = <T,>(myArray: T[], chunk_size: number): T[][] => {
   return results;
 };
 
+type ItemToBuild = {
+  name: string;
+  quality?: string;
+  count: number;
+};
+
 const convert = (
   inputBp: string,
   signalsPerCC: number,
@@ -35,7 +42,7 @@ const convert = (
   requestFromBuffer: boolean,
 ): string => {
   try {
-    const items = new Map<string, number>();
+    const items: ItemToBuild[] = [];
 
     const processPlan = (bp: Plan) => {
       if (isBlueprintBook(bp)) {
@@ -45,84 +52,106 @@ const convert = (
       }
     };
     const processBook = (book: BlueprintBook) => {
-      book.blueprint_book.blueprints.forEach((bp) => processPlan(bp));
+      book.blueprint_book.blueprints?.forEach((bp) => processPlan(bp));
     };
     const processBp = (bp: Blueprint) => {
       bp.blueprint.entities?.forEach((entity) => {
-        addByEntityName(entity.name);
-        for (let name in entity.items) {
+        const { item, count } = convertToItem(entity.name);
+        addToItems(item, count, entity.quality ?? "normal");
+        entity.items?.forEach((item) => {
           // modules
-          addToItems(name, entity.items[name]);
-        }
+          const count = item.items.in_inventory?.length ?? 0;
+          addToItems(item.id.name, count, item.id.quality ?? "normal");
+        });
       });
-      bp.blueprint.tiles?.forEach((tile) => addByEntityName(tile.name));
+      bp.blueprint.tiles?.forEach((tile) => {
+        const { item, count } = convertToItem(tile.name);
+        addToItems(item, count, "normal");
+      });
     };
-    const addByEntityName = (name: string) => {
-      const { item, count } = convertEntityToItem(name);
-      addToItems(item, count);
-    };
-    const addToItems = (name: string, count: number) => {
+    const addToItems = (name: string, count: number, quality: string) => {
       if (count === 0) {
         return;
       }
-      items.set(name, (items.get(name) ?? 0) + count);
+      const existing = items.find(
+        (item) => item.name === name && item.quality === quality,
+      );
+      if (existing) {
+        existing.count += count;
+      } else {
+        items.push({
+          name: name,
+          quality: quality,
+          count: count,
+        });
+      }
     };
 
     processPlan(decodePlan(inputBp));
 
-    const blueprint: Blueprint = {
-      blueprint: {
-        entities: [],
-        icons: [
-          {
-            signal: {
-              type: "item",
-              name: "constant-combinator",
-            },
-            index: 1,
-          },
-        ],
-        item: "blueprint",
-        version: 68722819072,
-      },
-    };
+    const blueprint = createEmptyBlueprint();
 
-    chunkArray([...items.entries()], signalsPerCC).forEach((chunk, index) => {
+    blueprint.blueprint.icons = [
+      {
+        signal: {
+          type: "item",
+          name: "constant-combinator",
+        },
+        index: 1,
+      },
+    ];
+    blueprint.blueprint.wires = [];
+
+    chunkArray(items, signalsPerCC).forEach((chunk, index) => {
       const constantCombinator = addEntity(blueprint, {
         name: "constant-combinator",
         position: {
-          x: index,
-          y: 0,
+          x: 0.5 + index,
+          y: 0.5,
         },
         control_behavior: {
-          filters: chunk.map((item, index) => {
-            const [name, count] = item;
-            return {
-              signal: {
-                type: "item",
-                name: name,
+          sections: {
+            sections: [
+              {
+                index: 1,
+                filters: chunk.map((item, index) => {
+                  return {
+                    index: index + 1,
+                    name: item.name,
+                    quality: item.quality,
+                    comparator: COMPARATOR.equal,
+                    count: item.count,
+                  };
+                }),
               },
-              count: count,
-              index: index + 1,
-            };
-          }),
+            ],
+          },
         },
       });
 
       if (includeRequester) {
         const requesterChest = addEntity(blueprint, {
-          name: "logistic-chest-requester",
+          name: "requester-chest",
           position: {
-            x: index,
-            y: 1,
+            x: 0.5 + index,
+            y: 1.5,
           },
           control_behavior: {
             circuit_mode_of_operation: 1,
+            circuit_condition_enabled: false,
           },
-          request_from_buffers: requestFromBuffer,
+          request_filters: {
+            request_from_buffers: requestFromBuffer,
+          },
         });
 
-        addEntityConnection(constantCombinator, requesterChest, "green");
+        // add green wire
+        blueprint.blueprint.wires!.push([
+          constantCombinator.entity_number,
+          2,
+          requesterChest.entity_number,
+          2,
+        ]);
       }
     });
 
@@ -180,7 +209,10 @@ const Page = () => {
       <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
       <div>
         <h2>Blueprint to Constant Combinator</h2>
-        <p>Convert a factorio blueprint string to constant combinators holding the signals of items needed to build the blueprint.</p>
+        <p>
+          Convert a factorio blueprint string to constant combinators holding
+          the signals of items needed to build the blueprint.
+        </p>
       </div>
       <div class="h-8"></div>
       <HelpSection />

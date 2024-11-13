@@ -67,22 +67,13 @@ function Nav() {
               class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52"
             >
               <div class="grid grid-cols-1 gap-3 p-3 text-neutral">
-                <div
-                  class="btn normal-case"
-                  onClick={() => setTheme(null)}
-                >
+                <div class="btn normal-case" onClick={() => setTheme(null)}>
                   Default
                 </div>
-                <div
-                  class="btn normal-case"
-                  onClick={() => setTheme("light")}
-                >
+                <div class="btn normal-case" onClick={() => setTheme("light")}>
                   Light
                 </div>
-                <div
-                  class="btn normal-case"
-                  onClick={() => setTheme("dark")}
-                >
+                <div class="btn normal-case" onClick={() => setTheme("dark")}>
                   Dark
                 </div>
               </div>
@@ -100,7 +91,7 @@ export default function App() {
   });
   return (
     <Router
-      root={props => (
+      root={(props) => (
         <MetaProvider>
           <Title>Gaming Tools</Title>
           <Nav />

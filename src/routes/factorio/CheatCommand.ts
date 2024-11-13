@@ -1,60 +1,102 @@
 export const CheatCommand = `
 /c
-local EOL = "\\n"
-local recipes_dump = ""
+
+local data = {
+    recipes = {},
+    items = {},
+    entities = {},
+    groups = {},
+    subgroups = {},
+}
+
 local can_be_researched_map = {}
-for _, tech in pairs(game.technology_prototypes) do
-        for i, effect in ipairs(tech.effects) do
-            if effect.type == "unlock-recipe" then
-                can_be_researched_map[effect.recipe] = true
+for _, tech in pairs(prototypes.technology) do
+    for _, effect in ipairs(tech.effects) do
+        if effect.type == "unlock-recipe" then
+            can_be_researched_map[effect.recipe] = true
+        end
+    end
+end
+
+local items = {}
+local groups = {}
+local subgroups = {}
+local locale = {}
+local categories = {}
+for _, recipe_prototype in pairs(prototypes.recipe) do
+    if recipe_prototype.hidden == false and recipe_prototype.main_product and recipe_prototype.main_product.type == "item" and (recipe_prototype.enabled or can_be_researched_map[recipe_prototype.name]) then
+        local ingredients = {}
+        for _, ingredient in pairs(recipe_prototype.ingredients) do
+            if ingredient.type == "item" then
+                table.insert(ingredients, {
+                    name = ingredient.name,
+                    amount = ingredient.amount,
+                })
+                items[ingredient.name] = true
             end
         end
-end
-for _, recipe in pairs(game.player.force.recipes) do
-    local recipe_prototype = recipe.prototype
-    local can_be_researched = "false"
-    if can_be_researched_map[recipe_prototype.name] then
-        can_be_researched = "true"
-    end
-    local main_product = "null"
-    local main_product_stack_size = "null"
-    if recipe_prototype.main_product then
-        main_product = "\\"" .. recipe_prototype.main_product.name .. "\\""
-        if game.item_prototypes[recipe_prototype.main_product.name] then
-            main_product_stack_size = game.item_prototypes[recipe_prototype.main_product.name].stack_size
+        table.insert(data.recipes, {
+            name = recipe_prototype.name,
+            category = recipe_prototype.category,
+            order = recipe_prototype.order,
+            energy = recipe_prototype.energy,
+            group_name = recipe_prototype.group.name,
+            subgroup_name = recipe_prototype.subgroup.name,
+            request_paste_multiplier = recipe_prototype.request_paste_multiplier,
+            main_product = recipe_prototype.main_product.name,
+            ingredients = ingredients,
+        })
+        items[recipe_prototype.main_product.name] = true
+        categories[recipe_prototype.category] = true
+        groups[recipe_prototype.group.name] = recipe_prototype.group
+        subgroups[recipe_prototype.subgroup.name] = recipe_prototype.subgroup
+        if recipe_prototype.localised_name then
+            locale["recipes." .. recipe_prototype.name] = recipe_prototype.localised_name
         end
     end
-    local ingredients = ""
-    for _, ing in pairs(recipe_prototype.ingredients) do
-        if game.item_prototypes[ing.name] then
-            ingredients = ingredients .. "{" .. EOL
-                .. "\\"name\\": \\"" .. ing.name .. "\\"," .. EOL
-                .. "\\"amount\\": " .. ing.amount .. "," .. EOL
-                .. "\\"stack_size\\": " .. game.item_prototypes[ing.name].stack_size .. EOL
-                .. "}," .. EOL
+end
+
+for item_name, _ in pairs(items) do
+    table.insert(data.items, {
+        name = item_name,
+        stack_size = prototypes.item[item_name].stack_size,
+    })
+end
+
+local function add_groups(list, key)
+    for _, group in pairs(list) do
+        table.insert(data[key], {
+            name = group.name,
+            order = group.order,
+        })
+        locale[key .. "." .. group.name] = group.localised_name
+    end 
+end
+add_groups(groups, "groups")
+add_groups(subgroups, "subgroups")
+
+for _, entity_prototype in pairs(prototypes.entity) do
+    local crafting_categories = {}
+    for crafting_category, _ in pairs(entity_prototype.crafting_categories or {}) do
+        if categories[crafting_category] then
+            table.insert(crafting_categories, crafting_category)
         end
     end
-    ingredients = "[" .. EOL .. string.sub(ingredients, 1, string.len(ingredients) - 2) .. EOL .. "]"
-
-    recipes_dump = recipes_dump .. "{" .. EOL
-        .. "\\"name\\": \\"" .. recipe_prototype.name .. "\\"," .. EOL
-        .. "\\"enabled\\": " .. tostring(recipe.enabled) .. "," .. EOL
-        .. "\\"category\\": \\"" .. recipe_prototype.category .. "\\"," .. EOL
-        .. "\\"order\\": \\"" .. recipe_prototype.order .. "\\"," .. EOL
-        .. "\\"energy\\": " .. recipe_prototype.energy .. "," .. EOL
-        .. "\\"group_name\\": \\"" .. recipe_prototype.group.name .. "\\"," .. EOL
-        .. "\\"group_order\\": \\"" .. recipe_prototype.group.order .. "\\"," .. EOL
-        .. "\\"subgroup_name\\": \\"" .. recipe_prototype.subgroup.name .. "\\"," .. EOL
-        .. "\\"subgroup_order\\": \\"" .. recipe_prototype.subgroup.order .. "\\"," .. EOL
-        .. "\\"request_paste_multiplier\\": " .. recipe_prototype.request_paste_multiplier .. "," .. EOL
-        .. "\\"can_be_researched\\": " .. can_be_researched .. "," .. EOL
-        .. "\\"main_product\\": " .. main_product .. "," .. EOL
-        .. "\\"main_product_stack_size\\": " .. main_product_stack_size .. "," .. EOL
-        .. "\\"ingredients\\": " .. ingredients .. EOL
-        .. "}," .. EOL
-
-
+    if #crafting_categories > 0 then
+        table.insert(data.entities, {
+            name = entity_prototype.name,
+            tile_width = entity_prototype.tile_width,
+            tile_height = entity_prototype.tile_height,
+            crafting_categories = crafting_categories,
+        })
+    end
 end
-recipes_dump = "[" .. EOL .. string.sub(recipes_dump, 1, string.len(recipes_dump) - 2) .. EOL .. "]"
-game.write_file("recipes_dump.json", recipes_dump)
+
+local filename = "make-everything-generator-export.meg"
+helpers.write_file(filename, helpers.table_to_json(data), false, game.player.index)
+
+helpers.write_file(filename, "\\n\\n", true, game.player.index)
+for k, v in pairs(locale) do
+    helpers.write_file(filename, {"?", {"", k .. "=", v, "\\n"}, ""}, true, game.player.index)
+end
 `;

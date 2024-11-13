@@ -15,7 +15,10 @@ const Page = () => {
       <Title>Blueprint Decoder & Encoder | Factorio | Gaming Tools</Title>
       <div class="prose">
         <h2>Blueprint Decoder & Encoder</h2>
-        <p>Simply decode blueprint strings to JSON and encode JSON back to factorio blueprint strings.</p>
+        <p>
+          Simply decode blueprint strings to JSON and encode JSON back to
+          factorio blueprint strings.
+        </p>
       </div>
       <div class="my-8">
         <div class="form-control">

@@ -1,4 +1,4 @@
-export const entityItemMap: {
+export const itemMapping: {
   [key: string]: { item?: string; count?: number };
 } = {
   "chute-miniloader-inserter": { item: "chute-miniloader" },

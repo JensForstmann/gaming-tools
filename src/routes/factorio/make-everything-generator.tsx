@@ -1,5 +1,6 @@
 import {
   addEntity,
+  COMPARATOR,
   createEmptyBlueprint,
   encodePlan,
 } from "@jensforstmann/factorio-blueprint-tools";
@@ -8,29 +9,112 @@ import { Component, createEffect, createSignal, For } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
 import { CheckboxInput, NumberInput, TextInput } from "~/components/inputs";
 import { CheatCommand } from "./CheatCommand";
-import VanillaRecipes from "./vanillaRecipes.json";
+import VanillaDataRaw from "./vanillaData.json";
+import VanillaLocalesRaw from "./vanillaLocales";
 
-type Recipe = {
+type EmptyObj = Record<PropertyKey, never>;
+type EmptyLuaArray = EmptyObj; // Factorio's helpers.table_to_json() function will convert an empty array/table to {} instead of []
+
+type SourceRecipe<EmptyArray> = {
   name: string;
-  enabled: boolean;
   category: string;
   order: string;
   energy: number;
   group_name: string;
-  group_order: string;
   subgroup_name: string;
-  subgroup_order: string;
   request_paste_multiplier: number;
-  can_be_researched: boolean;
-  main_product: null | string;
-  main_product_stack_size: null | number;
-  ingredients: Array<{
-    name: string;
-    amount: number;
-    stack_size: number;
-  }>;
-  selected?: boolean;
+  main_product: string;
+  ingredients:
+    | {
+        name: string;
+        amount: number;
+      }[]
+    | EmptyArray;
 };
+
+type SourceItem = {
+  name: string;
+  stack_size: number;
+};
+
+type SourceEntity = {
+  name: string;
+  tile_width: number;
+  tile_height: number;
+  crafting_categories: string[]; // length >= 1 (ensured by cheat command)
+};
+
+type SourceGroup = {
+  name: string;
+  order: string;
+};
+
+type SourceData<EmptyArray> = {
+  recipes: SourceRecipe<EmptyArray>[];
+  items: SourceItem[] | EmptyArray;
+  entities: SourceEntity[] | EmptyArray;
+  groups: SourceGroup[] | EmptyArray;
+  subgroups: SourceGroup[] | EmptyArray;
+};
+
+// assign imported data here to let typescript check our assumption (the defined types above)
+const VanillaDataChecked: SourceData<EmptyLuaArray> = VanillaDataRaw;
+
+type AppData = {
+  recipes: Array<
+    SourceRecipe<[]> & {
+      selected: boolean;
+      display_name: string;
+      group_display_name: string;
+    }
+  >;
+  items: SourceItem[];
+  entities: SourceEntity[];
+  groups: Array<SourceGroup & { display_name: string }>;
+  subgroups: SourceGroup[];
+  categories: string[];
+};
+
+const getLocale = (rawLocales: string, key: string) => {
+  return rawLocales
+    .split("\n")
+    .find((row) => row.startsWith(key + "="))
+    ?.split("=", 2)[1];
+};
+
+const convertSourceDataToAppData = (
+  data: SourceData<EmptyLuaArray>,
+  locales: string,
+): AppData => {
+  const categories = new Set<string>();
+  data.recipes.forEach((r) => categories.add(r.category));
+  return {
+    recipes: data.recipes.map((recipe) => ({
+      ...recipe,
+      ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
+      selected: false,
+      display_name: getLocale(locales, "recipes." + recipe.name) || recipe.name,
+      group_display_name:
+        getLocale(locales, "groups." + recipe.group_name) || recipe.group_name,
+    })),
+    items: !Array.isArray(data.items) ? [] : data.items,
+    entities: !Array.isArray(data.entities) ? [] : data.entities,
+    groups: !Array.isArray(data.groups)
+      ? []
+      : data.groups.map((group) => ({
+          ...group,
+          display_name:
+            getLocale(locales, "groups." + group.name) || group.name,
+        })),
+    subgroups: !Array.isArray(data.subgroups) ? [] : data.subgroups,
+    categories: Array.from(categories),
+  };
+};
+
+const VanillaAppData = convertSourceDataToAppData(
+  VanillaDataChecked,
+  VanillaLocalesRaw,
+);
 
 type Settings = {
   machineName: string;
@@ -54,7 +138,13 @@ type Settings = {
   craftStackLimit: number;
 };
 
-const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
+type AppRecipe = SourceRecipe<[]> & { selected?: boolean };
+
+const getItemStackSize = (itemName: string, items: SourceItem[]) => {
+  return items.find((i) => i.name === itemName)?.stack_size ?? 1;
+};
+
+const getBlueprint = (settings: Settings, appData: AppData): string => {
   let currentRow = 0;
   let currentCol = 0;
   const blockWidth =
@@ -78,17 +168,8 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
     { signal: { type: "virtual", name: "signal-black" }, index: 4 },
   ];
 
-  recipes
+  appData.recipes
     .filter((r) => r.selected)
-    .sort((a, b) => {
-      if (a.group_name === b.group_name) {
-        if (a.subgroup_name === b.subgroup_name) {
-          return a.order > b.order ? 1 : -1;
-        }
-        return a.subgroup_order > b.subgroup_order ? 1 : -1;
-      }
-      return a.group_order > b.group_order ? 1 : -1;
-    })
     .forEach((r) => {
       addEntity(bp, {
         name: settings.machineName,
@@ -104,7 +185,7 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
           x: currentCol * blockWidth + 0.5,
           y: currentRow * blockHeight + settings.machineHeight + 0.5,
         },
-        direction: 4,
+        direction: 8,
       });
       addEntity(bp, {
         name: settings.outserterName,
@@ -119,8 +200,9 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
               name: r.main_product,
             },
             constant:
-              (r.main_product_stack_size ?? 1) * settings.craftStackLimit,
-            comparator: "<",
+              getItemStackSize(r.main_product, appData.items) *
+              settings.craftStackLimit,
+            comparator: COMPARATOR.lessThan,
           },
           connect_to_logistic_network: true,
         },
@@ -135,28 +217,38 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
             1 +
             settings.sourceChestHeight / 2,
         },
-        request_filters: r.ingredients.map((ing, idx) => {
-          return {
-            index: idx + 1,
-            name: ing.name,
-            count: Math.max(
-              1,
-              Math.floor(
-                Math.min(
-                  ing.stack_size * settings.requestStackLimit,
-                  Math.max(
-                    ing.amount,
-                    (ing.amount *
-                      r.request_paste_multiplier *
-                      settings.machineSpeed) /
-                      r.energy,
+        request_filters: {
+          sections: [
+            {
+              index: 1,
+              filters: r.ingredients.map((ing, idx) => {
+                return {
+                  index: idx + 1,
+                  name: ing.name,
+                  quality: "normal",
+                  comparator: COMPARATOR.equal,
+                  count: Math.max(
+                    1,
+                    Math.floor(
+                      Math.min(
+                        getItemStackSize(ing.name, appData.items) *
+                          settings.requestStackLimit,
+                        Math.max(
+                          ing.amount,
+                          (ing.amount *
+                            r.request_paste_multiplier *
+                            settings.machineSpeed) /
+                            r.energy,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          };
-        }),
-        request_from_buffers: settings.requestFromBufferChests,
+                };
+              }),
+            },
+          ],
+          request_from_buffers: settings.requestFromBufferChests,
+        },
       });
       addEntity(bp, {
         name: settings.targetChestName,
@@ -171,16 +263,24 @@ const getBlueprint = (settings: Settings, recipes: Recipe[]): string => {
             1 +
             settings.targetChestHeight / 2,
         },
-        request_filters:
-          settings.targetChestSetRequest && r.main_product
-            ? [
+        request_filters: settings.targetChestSetRequest
+          ? {
+              sections: [
                 {
                   index: 1,
-                  name: r.main_product,
-                  count: 1_000_000,
+                  filters: [
+                    {
+                      index: 1,
+                      name: r.main_product,
+                      quality: "normal",
+                      comparator: COMPARATOR.equal,
+                      count: 1_000_000,
+                    },
+                  ],
                 },
-              ]
-            : [],
+              ],
+            }
+          : undefined,
       });
 
       currentCol++;
@@ -370,16 +470,17 @@ const Settings: Component<{
   );
 };
 
-const filterRecipes = (recipes: Array<Recipe>) => {
-  return recipes.filter((r) => r.enabled || r.can_be_researched);
-};
-
 const Page = () => {
   let globalCheckbox: HTMLInputElement | undefined;
   let showPopupInput: HTMLInputElement | undefined;
-  const [recipes, setRecipes] = createStore<Array<Recipe>>(
-    filterRecipes(VanillaRecipes),
-  );
+
+  const [appData, setAppData] = createStore<AppData>(VanillaAppData);
+
+  const [search, setSearch] = createSignal("");
+  const [categoryFilter, setCategoryFilter] = createSignal("");
+  const [groupFilter, setGroupFilter] = createSignal("");
+  const [subgroupFilter, setSubgroupFilter] = createSignal("");
+
   const [settings, setSettings] = createStore<Settings>({
     machineName: "assembling-machine-3",
     machineWidth: 3,
@@ -388,41 +489,45 @@ const Page = () => {
     rowLength: 5,
     columnSpace: 0,
     rowSpace: 0,
-    sourceChestName: "logistic-chest-requester",
+    sourceChestName: "requester-chest",
     sourceChestWidth: 1,
     sourceChestHeight: 1,
     requestFromBufferChests: true,
-    targetChestName: "logistic-chest-buffer",
+    targetChestName: "buffer-chest",
     targetChestWidth: 1,
     targetChestHeight: 1,
     targetChestSetRequest: true,
-    inserterName: "stack-inserter",
-    outserterName: "stack-inserter",
+    inserterName: "bulk-inserter",
+    outserterName: "bulk-inserter",
     requestStackLimit: 3,
     craftStackLimit: 4,
   });
+
   const toggleRecipe = (name: string) => {
-    setRecipes(
+    setAppData(
+      "recipes",
       (recipe) => recipe.name === name,
       "selected",
       (selected) => !selected,
     );
   };
-  const categories = [...new Set(recipes.map((r) => r.category))].sort();
-  const groups = [...new Set(recipes.map((r) => r.group_name))].sort();
-  const subGroups = [...new Set(recipes.map((r) => r.subgroup_name))].sort();
-  const [categoryFilter, setCategoryFilter] = createSignal("");
-  const [groupFilter, setGroupFilter] = createSignal("");
-  const [subGroupFilter, setSubGroupFilter] = createSignal("");
-  const [search, setSearch] = createSignal("");
+
+  const resetSearchAndFilters = () => {
+    setSearch("");
+    setCategoryFilter("");
+    setGroupFilter("");
+    setSubgroupFilter("");
+  };
 
   const filteredRecipes = () => {
-    return recipes.filter(
+    return appData.recipes.filter(
       (r) =>
-        (search() === "" || r.name.includes(search())) &&
+        (search() === "" ||
+          r.name.includes(search()) ||
+          r.display_name.includes(search())) &&
         (categoryFilter() === "" || r.category === categoryFilter()) &&
         (groupFilter() === "" || r.group_name === groupFilter()) &&
-        (subGroupFilter() === "" || r.subgroup_name === subGroupFilter()),
+        (subgroupFilter() === "" || r.subgroup_name === subgroupFilter()),
     );
   };
 
@@ -493,15 +598,18 @@ const Page = () => {
             <input
               type="file"
               class="file-input file-input-bordered w-full max-w-xs"
-              accept="application/json"
+              accept=".meg"
               onChange={async (e) => {
                 const file = e.currentTarget.files?.[0];
                 const input = e.currentTarget;
                 if (file) {
                   try {
                     const text = await file.text();
-                    const recipes: Recipe[] = JSON.parse(text);
-                    setRecipes(filterRecipes(recipes));
+                    const [json, locales] = text.split("\n\n", 2);
+                    setAppData(
+                      convertSourceDataToAppData(JSON.parse(json), locales),
+                    );
+                    resetSearchAndFilters();
                     if (showPopupInput) {
                       input.value = "";
                       showPopupInput.checked = false;
@@ -529,7 +637,8 @@ const Page = () => {
                     const _selectedRecipes = _filteredRecipes.filter(
                       (recipe) => recipe.selected,
                     );
-                    setRecipes(
+                    setAppData(
+                      "recipes",
                       (r) =>
                         _filteredRecipes.find((r2) => r2.name === r.name) !==
                         undefined,
@@ -541,20 +650,8 @@ const Page = () => {
               </label>
             </th>
             <th class="py-6 align-top">
-              Name
+              Recipe
               <TextInput value={search()} setValue={setSearch} />
-            </th>
-            <th class="py-6 align-top">
-              <div>Category</div>
-              <select
-                class="select w-full max-w-xs"
-                onChange={(e) => setCategoryFilter(e.currentTarget.value)}
-              >
-                <option value={""}>filter...</option>
-                <For each={categories}>
-                  {(category) => <option>{category}</option>}
-                </For>
-              </select>
             </th>
             <th class="py-6 align-top">
               <div>Group</div>
@@ -563,18 +660,36 @@ const Page = () => {
                 onChange={(e) => setGroupFilter(e.currentTarget.value)}
               >
                 <option value={""}>filter...</option>
-                <For each={groups}>{(group) => <option>{group}</option>}</For>
+                <For each={appData.groups}>
+                  {(group) => (
+                    <option value={group.name}>{group.display_name}</option>
+                  )}
+                </For>
               </select>
             </th>
-            <th class="py-6 align-top rounded-tr-lg">
+            <th class="py-6 align-top">
               <div>Subgroup</div>
               <select
                 class="select w-full max-w-xs"
-                onChange={(e) => setSubGroupFilter(e.currentTarget.value)}
+                onChange={(e) => setSubgroupFilter(e.currentTarget.value)}
               >
                 <option value={""}>filter...</option>
-                <For each={subGroups}>
-                  {(subGroup) => <option>{subGroup}</option>}
+                <For each={appData.subgroups}>
+                  {(subgroup) => (
+                    <option value={subgroup.name}>{subgroup.name}</option>
+                  )}
+                </For>
+              </select>
+            </th>
+            <th class="py-6 align-top rounded-tr-lg">
+              <div>Category</div>
+              <select
+                class="select w-full max-w-xs"
+                onChange={(e) => setCategoryFilter(e.currentTarget.value)}
+              >
+                <option value={""}>filter...</option>
+                <For each={appData.categories}>
+                  {(category) => <option>{category}</option>}
                 </For>
               </select>
             </th>
@@ -594,10 +709,10 @@ const Page = () => {
                     />
                   </label>
                 </td>
-                <td>{recipe.name}</td>
-                <td>{recipe.category}</td>
-                <td>{recipe.group_name}</td>
+                <td>{recipe.display_name}</td>
+                <td>{recipe.group_display_name}</td>
                 <td>{recipe.subgroup_name}</td>
+                <td>{recipe.category}</td>
               </tr>
             )}
           </For>
@@ -605,10 +720,10 @@ const Page = () => {
         <tfoot>
           <tr class="bg-base-300">
             <th class="rounded-bl-lg"></th>
-            <th>Name</th>
-            <th>Category</th>
+            <th>Recipe</th>
             <th>Group</th>
-            <th class="rounded-br-lg">Subgroup</th>
+            <th>Subgroup</th>
+            <th class="rounded-br-lg">Category</th>
           </tr>
         </tfoot>
       </table>
@@ -620,12 +735,7 @@ const Page = () => {
         <button
           class="btn btn-primary"
           onClick={() => {
-            navigator.clipboard.writeText(
-              getBlueprint(
-                settings,
-                recipes.filter((r) => r.selected),
-              ),
-            );
+            navigator.clipboard.writeText(getBlueprint(settings, appData));
           }}
         >
           Copy Blueprint
