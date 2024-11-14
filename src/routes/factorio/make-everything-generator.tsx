@@ -41,7 +41,19 @@ type SourceEntity = {
   name: string;
   tile_width: number;
   tile_height: number;
-  crafting_categories: string[]; // length >= 1 (ensured by cheat command)
+};
+
+type SourceCraftingMachine<EmptyArray> = SourceEntity & {
+  crafting_categories: string[] | EmptyArray;
+};
+
+type SourceInserter = SourceEntity & {
+  inserter_pickup_position: number[];
+  inserter_drop_position: number[];
+};
+
+type SourceLogisticContainer = SourceEntity & {
+  logistic_mode: string;
 };
 
 type SourceGroup = {
@@ -50,9 +62,11 @@ type SourceGroup = {
 };
 
 type SourceData<EmptyArray> = {
-  recipes: SourceRecipe<EmptyArray>[];
+  recipes: SourceRecipe<EmptyArray>[] | EmptyArray;
   items: SourceItem[] | EmptyArray;
-  entities: SourceEntity[] | EmptyArray;
+  crafting_machines: SourceCraftingMachine<EmptyArray>[] | EmptyArray;
+  inserters: SourceInserter[] | EmptyArray;
+  logistic_containers: SourceLogisticContainer[] | EmptyArray;
   groups: SourceGroup[] | EmptyArray;
   subgroups: SourceGroup[] | EmptyArray;
 };
@@ -69,7 +83,21 @@ type AppData = {
     }
   >;
   items: SourceItem[];
-  entities: SourceEntity[];
+  crafting_machines: Array<
+    SourceCraftingMachine<[]> & {
+      display_name: string;
+    }
+  >;
+  inserters: Array<
+    SourceInserter & {
+      display_name: string;
+    }
+  >;
+  logistic_containers: Array<
+    SourceLogisticContainer & {
+      display_name: string;
+    }
+  >;
   groups: Array<SourceGroup & { display_name: string }>;
   subgroups: SourceGroup[];
   categories: string[];
@@ -89,16 +117,51 @@ const convertSourceDataToAppData = (
   const categories = new Set<string>();
   data.recipes.forEach((r) => categories.add(r.category));
   return {
-    recipes: data.recipes.map((recipe) => ({
-      ...recipe,
-      ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
-      selected: false,
-      display_name: getLocale(locales, "recipes." + recipe.name) || recipe.name,
-      group_display_name:
-        getLocale(locales, "groups." + recipe.group_name) || recipe.group_name,
-    })),
+    recipes: !Array.isArray(data.recipes)
+      ? []
+      : data.recipes.map((recipe) => ({
+          ...recipe,
+          ingredients: Array.isArray(recipe.ingredients)
+            ? recipe.ingredients
+            : [],
+          selected: false,
+          display_name:
+            getLocale(locales, "recipes." + recipe.name) || recipe.name,
+          group_display_name:
+            getLocale(locales, "groups." + recipe.group_name) ||
+            recipe.group_name,
+        })),
     items: !Array.isArray(data.items) ? [] : data.items,
-    entities: !Array.isArray(data.entities) ? [] : data.entities,
+    crafting_machines: !Array.isArray(data.crafting_machines)
+      ? []
+      : data.crafting_machines.map((crafting_machine) => ({
+          ...crafting_machine,
+          crafting_categories: Array.isArray(
+            crafting_machine.crafting_categories,
+          )
+            ? crafting_machine.crafting_categories
+            : [],
+          display_name:
+            getLocale(locales, "crafting_machines." + crafting_machine.name) ||
+            crafting_machine.name,
+        })),
+    inserters: !Array.isArray(data.inserters)
+      ? []
+      : data.inserters.map((inserter) => ({
+          ...inserter,
+          display_name:
+            getLocale(locales, "inserters." + inserter.name) || inserter.name,
+        })),
+    logistic_containers: !Array.isArray(data.logistic_containers)
+      ? []
+      : data.logistic_containers.map((logistic_container) => ({
+          ...logistic_container,
+          display_name:
+            getLocale(
+              locales,
+              "logistic_containers." + logistic_container.name,
+            ) || logistic_container.name,
+        })),
     groups: !Array.isArray(data.groups)
       ? []
       : data.groups.map((group) => ({

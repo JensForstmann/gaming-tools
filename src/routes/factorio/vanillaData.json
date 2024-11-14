@@ -7157,24 +7157,27 @@
       "stack_size": 10
     }
   ],
-  "entities": [
+  "crafting_machines": [
     {
       "name": "stone-furnace",
       "tile_width": 2,
       "tile_height": 2,
-      "crafting_categories": ["smelting"]
+      "crafting_categories": ["smelting"],
+      "crafting_speed": 1
     },
     {
       "name": "steel-furnace",
       "tile_width": 2,
       "tile_height": 2,
-      "crafting_categories": ["smelting"]
+      "crafting_categories": ["smelting"],
+      "crafting_speed": 2
     },
     {
       "name": "electric-furnace",
       "tile_width": 3,
       "tile_height": 3,
-      "crafting_categories": ["smelting"]
+      "crafting_categories": ["smelting"],
+      "crafting_speed": 2
     },
     {
       "name": "foundry",
@@ -7185,7 +7188,15 @@
         "pressing",
         "crafting-with-fluid-or-metallurgy",
         "metallurgy-or-assembling"
-      ]
+      ],
+      "crafting_speed": 4
+    },
+    {
+      "name": "recycler",
+      "tile_width": 2,
+      "tile_height": 4,
+      "crafting_categories": {},
+      "crafting_speed": 0.5
     },
     {
       "name": "biochamber",
@@ -7195,13 +7206,15 @@
         "organic",
         "organic-or-assembling",
         "organic-or-chemistry"
-      ]
+      ],
+      "crafting_speed": 2
     },
     {
       "name": "captive-biter-spawner",
       "tile_width": 5,
       "tile_height": 5,
-      "crafting_categories": ["captive-spawner-process"]
+      "crafting_categories": ["captive-spawner-process"],
+      "crafting_speed": 1
     },
     {
       "name": "assembling-machine-1",
@@ -7212,7 +7225,8 @@
         "advanced-crafting",
         "electronics",
         "pressing"
-      ]
+      ],
+      "crafting_speed": 0.5
     },
     {
       "name": "assembling-machine-2",
@@ -7230,7 +7244,8 @@
         "electronics-or-assembling",
         "cryogenics-or-assembling",
         "crafting-with-fluid-or-metallurgy"
-      ]
+      ],
+      "crafting_speed": 0.75
     },
     {
       "name": "assembling-machine-3",
@@ -7248,7 +7263,15 @@
         "electronics-or-assembling",
         "cryogenics-or-assembling",
         "crafting-with-fluid-or-metallurgy"
-      ]
+      ],
+      "crafting_speed": 1.25
+    },
+    {
+      "name": "oil-refinery",
+      "tile_width": 5,
+      "tile_height": 5,
+      "crafting_categories": {},
+      "crafting_speed": 1
     },
     {
       "name": "chemical-plant",
@@ -7258,13 +7281,15 @@
         "chemistry",
         "chemistry-or-cryogenics",
         "organic-or-chemistry"
-      ]
+      ],
+      "crafting_speed": 1
     },
     {
       "name": "centrifuge",
       "tile_width": 3,
       "tile_height": 3,
-      "crafting_categories": ["centrifuging"]
+      "crafting_categories": ["centrifuging"],
+      "crafting_speed": 1
     },
     {
       "name": "electromagnetic-plant",
@@ -7275,7 +7300,8 @@
         "electronics",
         "electronics-with-fluid",
         "electronics-or-assembling"
-      ]
+      ],
+      "crafting_speed": 2
     },
     {
       "name": "cryogenic-plant",
@@ -7285,24 +7311,110 @@
         "cryogenics",
         "chemistry-or-cryogenics",
         "cryogenics-or-assembling"
-      ]
+      ],
+      "crafting_speed": 2
     },
     {
       "name": "rocket-silo",
       "tile_width": 9,
       "tile_height": 9,
-      "crafting_categories": ["rocket-building"]
+      "crafting_categories": ["rocket-building"],
+      "crafting_speed": 1
     },
     {
-      "name": "character",
+      "name": "crusher",
+      "tile_width": 2,
+      "tile_height": 3,
+      "crafting_categories": {},
+      "crafting_speed": 1
+    }
+  ],
+  "inserters": [
+    {
+      "name": "burner-inserter",
       "tile_width": 1,
       "tile_height": 1,
-      "crafting_categories": [
-        "crafting",
-        "electronics",
-        "pressing",
-        "organic-or-assembling"
+      "inserter_pickup_position": [0, -1],
+      "inserter_drop_position": [
+        0, 1.19999999999999996447286321199499070644378662109375
       ]
+    },
+    {
+      "name": "inserter",
+      "tile_width": 1,
+      "tile_height": 1,
+      "inserter_pickup_position": [0, -1],
+      "inserter_drop_position": [
+        0, 1.19999999999999996447286321199499070644378662109375
+      ]
+    },
+    {
+      "name": "long-handed-inserter",
+      "tile_width": 1,
+      "tile_height": 1,
+      "inserter_pickup_position": [0, -2],
+      "inserter_drop_position": [
+        0, 2.20000000000000017763568394002504646778106689453125
+      ]
+    },
+    {
+      "name": "fast-inserter",
+      "tile_width": 1,
+      "tile_height": 1,
+      "inserter_pickup_position": [0, -1],
+      "inserter_drop_position": [
+        0, 1.19999999999999996447286321199499070644378662109375
+      ]
+    },
+    {
+      "name": "bulk-inserter",
+      "tile_width": 1,
+      "tile_height": 1,
+      "inserter_pickup_position": [0, -1],
+      "inserter_drop_position": [
+        0, 1.19999999999999996447286321199499070644378662109375
+      ]
+    },
+    {
+      "name": "stack-inserter",
+      "tile_width": 1,
+      "tile_height": 1,
+      "inserter_pickup_position": [0, -1],
+      "inserter_drop_position": [
+        0, 1.19999999999999996447286321199499070644378662109375
+      ]
+    }
+  ],
+  "logistic_containers": [
+    {
+      "name": "active-provider-chest",
+      "tile_width": 1,
+      "tile_height": 1,
+      "logistic_mode": "active-provider"
+    },
+    {
+      "name": "passive-provider-chest",
+      "tile_width": 1,
+      "tile_height": 1,
+      "logistic_mode": "passive-provider"
+    },
+    {
+      "name": "storage-chest",
+      "tile_width": 1,
+      "tile_height": 1,
+      "logistic_mode": "storage"
+    },
+    {
+      "name": "buffer-chest",
+      "tile_width": 1,
+      "tile_height": 1,
+      "logistic_mode": "buffer"
+    },
+    {
+      "name": "requester-chest",
+      "tile_width": 1,
+      "tile_height": 1,
+      "logistic_mode": "requester"
     }
   ],
   "groups": [

@@ -4,7 +4,9 @@ export const CheatCommand = `
 local data = {
     recipes = {},
     items = {},
-    entities = {},
+    crafting_machines = {},
+    inserters = {},
+    logistic_containers = {},
     groups = {},
     subgroups = {},
 }
@@ -70,26 +72,47 @@ local function add_groups(list, key)
             order = group.order,
         })
         locale[key .. "." .. group.name] = group.localised_name
-    end 
+    end
 end
 add_groups(groups, "groups")
 add_groups(subgroups, "subgroups")
 
-for _, entity_prototype in pairs(prototypes.entity) do
+for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"inserter"}}}) do
+    table.insert(data.inserters, {
+        name = entity_prototype.name,
+        tile_width = entity_prototype.tile_width,
+        tile_height = entity_prototype.tile_height,
+        inserter_pickup_position = entity_prototype.inserter_pickup_position,
+        inserter_drop_position = entity_prototype.inserter_drop_position,
+    })
+    locale["inserters." .. entity_prototype.name] = entity_prototype.localised_name
+end
+
+for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"logistic-container"}}}) do
+    table.insert(data.logistic_containers, {
+        name = entity_prototype.name,
+        tile_width = entity_prototype.tile_width,
+        tile_height = entity_prototype.tile_height,
+        logistic_mode = entity_prototype.logistic_mode,
+    })
+    locale["logistic_containers." .. entity_prototype.name] = entity_prototype.localised_name
+end
+
+for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"assembling-machine", "furnace", "rocket-silo"}}}) do
     local crafting_categories = {}
     for crafting_category, _ in pairs(entity_prototype.crafting_categories or {}) do
         if categories[crafting_category] then
             table.insert(crafting_categories, crafting_category)
         end
     end
-    if #crafting_categories > 0 then
-        table.insert(data.entities, {
-            name = entity_prototype.name,
-            tile_width = entity_prototype.tile_width,
-            tile_height = entity_prototype.tile_height,
-            crafting_categories = crafting_categories,
-        })
-    end
+    table.insert(data.crafting_machines, {
+        name = entity_prototype.name,
+        tile_width = entity_prototype.tile_width,
+        tile_height = entity_prototype.tile_height,
+        crafting_categories = crafting_categories,
+        crafting_speed = entity_prototype.get_crafting_speed(),
+    })
+    locale["crafting_machines." .. entity_prototype.name] = entity_prototype.localised_name
 end
 
 local filename = "make-everything-generator-export.meg"
