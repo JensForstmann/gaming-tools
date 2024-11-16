@@ -7163,21 +7163,24 @@
       "tile_width": 2,
       "tile_height": 2,
       "crafting_categories": ["smelting"],
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": true
     },
     {
       "name": "steel-furnace",
       "tile_width": 2,
       "tile_height": 2,
       "crafting_categories": ["smelting"],
-      "crafting_speed": 2
+      "crafting_speed": 2,
+      "is_burner": true
     },
     {
       "name": "electric-furnace",
       "tile_width": 3,
       "tile_height": 3,
       "crafting_categories": ["smelting"],
-      "crafting_speed": 2
+      "crafting_speed": 2,
+      "is_burner": false
     },
     {
       "name": "foundry",
@@ -7189,14 +7192,16 @@
         "crafting-with-fluid-or-metallurgy",
         "metallurgy-or-assembling"
       ],
-      "crafting_speed": 4
+      "crafting_speed": 4,
+      "is_burner": false
     },
     {
       "name": "recycler",
       "tile_width": 2,
       "tile_height": 4,
       "crafting_categories": {},
-      "crafting_speed": 0.5
+      "crafting_speed": 0.5,
+      "is_burner": false
     },
     {
       "name": "biochamber",
@@ -7207,14 +7212,16 @@
         "organic-or-assembling",
         "organic-or-chemistry"
       ],
-      "crafting_speed": 2
+      "crafting_speed": 2,
+      "is_burner": true
     },
     {
       "name": "captive-biter-spawner",
       "tile_width": 5,
       "tile_height": 5,
       "crafting_categories": ["captive-spawner-process"],
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": true
     },
     {
       "name": "assembling-machine-1",
@@ -7226,7 +7233,8 @@
         "electronics",
         "pressing"
       ],
-      "crafting_speed": 0.5
+      "crafting_speed": 0.5,
+      "is_burner": false
     },
     {
       "name": "assembling-machine-2",
@@ -7245,7 +7253,8 @@
         "cryogenics-or-assembling",
         "crafting-with-fluid-or-metallurgy"
       ],
-      "crafting_speed": 0.75
+      "crafting_speed": 0.75,
+      "is_burner": false
     },
     {
       "name": "assembling-machine-3",
@@ -7264,14 +7273,16 @@
         "cryogenics-or-assembling",
         "crafting-with-fluid-or-metallurgy"
       ],
-      "crafting_speed": 1.25
+      "crafting_speed": 1.25,
+      "is_burner": false
     },
     {
       "name": "oil-refinery",
       "tile_width": 5,
       "tile_height": 5,
       "crafting_categories": {},
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": false
     },
     {
       "name": "chemical-plant",
@@ -7282,14 +7293,16 @@
         "chemistry-or-cryogenics",
         "organic-or-chemistry"
       ],
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": false
     },
     {
       "name": "centrifuge",
       "tile_width": 3,
       "tile_height": 3,
       "crafting_categories": ["centrifuging"],
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": false
     },
     {
       "name": "electromagnetic-plant",
@@ -7301,7 +7314,8 @@
         "electronics-with-fluid",
         "electronics-or-assembling"
       ],
-      "crafting_speed": 2
+      "crafting_speed": 2,
+      "is_burner": false
     },
     {
       "name": "cryogenic-plant",
@@ -7312,21 +7326,24 @@
         "chemistry-or-cryogenics",
         "cryogenics-or-assembling"
       ],
-      "crafting_speed": 2
+      "crafting_speed": 2,
+      "is_burner": false
     },
     {
       "name": "rocket-silo",
       "tile_width": 9,
       "tile_height": 9,
       "crafting_categories": ["rocket-building"],
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": false
     },
     {
       "name": "crusher",
       "tile_width": 2,
       "tile_height": 3,
       "crafting_categories": {},
-      "crafting_speed": 1
+      "crafting_speed": 1,
+      "is_burner": false
     }
   ],
   "inserters": [
@@ -7603,6 +7620,23 @@
     {
       "name": "turret",
       "order": "i"
+    }
+  ],
+  "qualities": [
+    {
+      "name": "normal"
+    },
+    {
+      "name": "uncommon"
+    },
+    {
+      "name": "rare"
+    },
+    {
+      "name": "epic"
+    },
+    {
+      "name": "legendary"
     }
   ]
 }

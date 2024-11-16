@@ -9,6 +9,7 @@ local data = {
     logistic_containers = {},
     groups = {},
     subgroups = {},
+    qualities = {},
 }
 
 local can_be_researched_map = {}
@@ -111,8 +112,18 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
         tile_height = entity_prototype.tile_height,
         crafting_categories = crafting_categories,
         crafting_speed = entity_prototype.get_crafting_speed(),
+        is_burner = entity_prototype.burner_prototype ~= nil
     })
     locale["crafting_machines." .. entity_prototype.name] = entity_prototype.localised_name
+end
+
+for _, quality_prototype in pairs(prototypes.quality) do
+    if not quality_prototype.hidden then
+        table.insert(data.qualities, {
+            name = quality_prototype.name,
+        })
+        locale["qualities." .. quality_prototype.name] = quality_prototype.localised_name
+    end
 end
 
 local filename = "make-everything-generator-export.meg"

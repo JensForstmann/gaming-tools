@@ -3,11 +3,17 @@ import {
   COMPARATOR,
   createEmptyBlueprint,
   encodePlan,
+  Entity,
 } from "@jensforstmann/factorio-blueprint-tools";
 import { Title } from "@solidjs/meta";
-import { Component, createEffect, createSignal, For } from "solid-js";
+import { Component, createEffect, createSignal, For, Show } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
-import { CheckboxInput, NumberInput, TextInput } from "~/components/inputs";
+import {
+  CheckboxInput,
+  NumberInput,
+  SelectInput,
+  TextInput,
+} from "~/components/inputs";
 import { CheatCommand } from "./CheatCommand";
 import VanillaDataRaw from "./vanillaData.json";
 import VanillaLocalesRaw from "./vanillaLocales";
@@ -45,6 +51,8 @@ type SourceEntity = {
 
 type SourceCraftingMachine<EmptyArray> = SourceEntity & {
   crafting_categories: string[] | EmptyArray;
+  crafting_speed: number;
+  is_burner: boolean;
 };
 
 type SourceInserter = SourceEntity & {
@@ -61,6 +69,10 @@ type SourceGroup = {
   order: string;
 };
 
+type SourceQuality = {
+  name: string;
+};
+
 type SourceData<EmptyArray> = {
   recipes: SourceRecipe<EmptyArray>[] | EmptyArray;
   items: SourceItem[] | EmptyArray;
@@ -69,38 +81,62 @@ type SourceData<EmptyArray> = {
   logistic_containers: SourceLogisticContainer[] | EmptyArray;
   groups: SourceGroup[] | EmptyArray;
   subgroups: SourceGroup[] | EmptyArray;
+  qualities: Array<SourceQuality> | EmptyArray;
 };
 
 // assign imported data here to let typescript check our assumption (the defined types above)
 const VanillaDataChecked: SourceData<EmptyLuaArray> = VanillaDataRaw;
 
+type AppCraftingMachine = SourceCraftingMachine<never> & {
+  display_name: string;
+};
+
+type AppCategory = {
+  name: string;
+  machines: Array<AppCraftingMachine>;
+  selectedMachine: string;
+};
+
+const LogisticModes = [
+  "active-provider",
+  "passive-provider",
+  "storage",
+  "buffer",
+  "requester",
+] as const;
+type LogisticMode = (typeof LogisticModes)[number];
+const isLogisticMode = (x: unknown): x is LogisticMode =>
+  LogisticModes.includes(x as any);
+
+type AppLogisticContainer = SourceEntity & {
+  display_name: string;
+  logistic_mode: LogisticMode;
+};
+
+type AppQuality = SourceQuality & {
+  display_name: string;
+};
+
 type AppData = {
   recipes: Array<
-    SourceRecipe<[]> & {
+    SourceRecipe<never> & {
       selected: boolean;
       display_name: string;
       group_display_name: string;
     }
   >;
   items: SourceItem[];
-  crafting_machines: Array<
-    SourceCraftingMachine<[]> & {
-      display_name: string;
-    }
-  >;
   inserters: Array<
     SourceInserter & {
       display_name: string;
     }
   >;
-  logistic_containers: Array<
-    SourceLogisticContainer & {
-      display_name: string;
-    }
-  >;
+  logistic_containers: Array<AppLogisticContainer>;
   groups: Array<SourceGroup & { display_name: string }>;
   subgroups: SourceGroup[];
-  categories: string[];
+  categories: Array<AppCategory>;
+  qualities: Array<AppQuality>;
+  settings: Settings;
 };
 
 const getLocale = (rawLocales: string, key: string) => {
@@ -110,12 +146,52 @@ const getLocale = (rawLocales: string, key: string) => {
     ?.split("=", 2)[1];
 };
 
+const getBestCraftingMachine = (machines: AppCraftingMachine[]) => {
+  let fastest: SourceCraftingMachine<string[]> | undefined;
+
+  machines.forEach((machine) => {
+    if (!fastest) {
+      fastest = machine;
+      return;
+    }
+    if (fastest.is_burner && !machine.is_burner) {
+      fastest = machine; // electrical machines are always better (mostly)
+      return;
+    }
+    if (
+      fastest.is_burner === machine.is_burner &&
+      machine.crafting_speed > fastest.crafting_speed
+    ) {
+      fastest = machine;
+    }
+  });
+
+  return fastest;
+};
+
 const convertSourceDataToAppData = (
   data: SourceData<EmptyLuaArray>,
   locales: string,
 ): AppData => {
-  const categories = new Set<string>();
-  data.recipes.forEach((r) => categories.add(r.category));
+  const categoriesSet = new Set<string>();
+  data.recipes.forEach((r) => categoriesSet.add(r.category));
+  const categories = Array.from(categoriesSet).sort((a, b) =>
+    a.localeCompare(b),
+  );
+  const crafting_machines: AppCraftingMachine[] = !Array.isArray(
+    data.crafting_machines,
+  )
+    ? []
+    : data.crafting_machines.map((crafting_machine) => ({
+        ...crafting_machine,
+        crafting_categories: Array.isArray(crafting_machine.crafting_categories)
+          ? crafting_machine.crafting_categories
+          : [],
+        display_name:
+          getLocale(locales, "crafting_machines." + crafting_machine.name) ||
+          crafting_machine.name,
+      }));
+
   return {
     recipes: !Array.isArray(data.recipes)
       ? []
@@ -132,19 +208,6 @@ const convertSourceDataToAppData = (
             recipe.group_name,
         })),
     items: !Array.isArray(data.items) ? [] : data.items,
-    crafting_machines: !Array.isArray(data.crafting_machines)
-      ? []
-      : data.crafting_machines.map((crafting_machine) => ({
-          ...crafting_machine,
-          crafting_categories: Array.isArray(
-            crafting_machine.crafting_categories,
-          )
-            ? crafting_machine.crafting_categories
-            : [],
-          display_name:
-            getLocale(locales, "crafting_machines." + crafting_machine.name) ||
-            crafting_machine.name,
-        })),
     inserters: !Array.isArray(data.inserters)
       ? []
       : data.inserters.map((inserter) => ({
@@ -154,14 +217,22 @@ const convertSourceDataToAppData = (
         })),
     logistic_containers: !Array.isArray(data.logistic_containers)
       ? []
-      : data.logistic_containers.map((logistic_container) => ({
-          ...logistic_container,
-          display_name:
-            getLocale(
-              locales,
-              "logistic_containers." + logistic_container.name,
-            ) || logistic_container.name,
-        })),
+      : data.logistic_containers.map((logistic_container) => {
+          if (!isLogisticMode(logistic_container.logistic_mode)) {
+            throw new Error(
+              `unknown logistic_mode for ${logistic_container.name}`,
+            );
+          }
+          return {
+            ...logistic_container,
+            logistic_mode: logistic_container.logistic_mode,
+            display_name:
+              getLocale(
+                locales,
+                "logistic_containers." + logistic_container.name,
+              ) || logistic_container.name,
+          };
+        }),
     groups: !Array.isArray(data.groups)
       ? []
       : data.groups.map((group) => ({
@@ -170,7 +241,49 @@ const convertSourceDataToAppData = (
             getLocale(locales, "groups." + group.name) || group.name,
         })),
     subgroups: !Array.isArray(data.subgroups) ? [] : data.subgroups,
-    categories: Array.from(categories),
+    categories: categories.map((category) => {
+      const machines = crafting_machines.filter((machine) =>
+        machine.crafting_categories.includes(category),
+      );
+      return {
+        name: category,
+        machines: machines,
+        selectedMachine: getBestCraftingMachine(machines)?.name ?? "",
+      };
+    }),
+    qualities: !Array.isArray(data.qualities)
+      ? []
+      : data.qualities.map((quality) => ({
+          ...quality,
+          display_name:
+            getLocale(locales, "qualities." + quality.name) || quality.name,
+        })),
+    settings: {
+      blueprintMaxWidth: 12,
+      columnSpace: 0,
+      rowSpace: 0,
+      sourceChest: {
+        name: "requester-chest",
+        requestFromBuffers: true,
+        trashUnrequested: true,
+        limitRequestStacks: 3,
+      },
+      targetChest: {
+        name: "buffer-chest",
+        trashUnrequested: true,
+        setRequestFilter: true,
+      },
+      inserter: {
+        name: "bulk-inserter",
+        setLimit: false,
+      },
+      outserter: {
+        name: "bulk-inserter",
+        setLimit: true,
+      },
+      craftStackLimit: 4,
+      productQuality: "normal",
+    },
   };
 };
 
@@ -180,46 +293,37 @@ const VanillaAppData = convertSourceDataToAppData(
 );
 
 type Settings = {
-  machineName: string;
-  machineWidth: number;
-  machineHeight: number;
-  machineSpeed: number;
-  rowLength: number;
+  blueprintMaxWidth: number;
   columnSpace: number;
   rowSpace: number;
-  sourceChestName: string;
-  sourceChestWidth: number;
-  sourceChestHeight: number;
-  requestFromBufferChests: boolean;
-  targetChestName: string;
-  targetChestWidth: number;
-  targetChestHeight: number;
-  targetChestSetRequest: boolean;
-  inserterName: string;
-  outserterName: string;
-  requestStackLimit: number;
+  sourceChest: {
+    name: string;
+    trashUnrequested: boolean;
+    requestFromBuffers: boolean;
+    limitRequestStacks: number;
+  };
+  targetChest: {
+    name: string;
+    trashUnrequested: boolean;
+    setRequestFilter: boolean;
+  };
+  inserter: {
+    name: string;
+    setLimit: boolean;
+  };
+  outserter: {
+    name: string;
+    setLimit: boolean;
+  };
   craftStackLimit: number;
+  productQuality: string;
 };
-
-type AppRecipe = SourceRecipe<[]> & { selected?: boolean };
 
 const getItemStackSize = (itemName: string, items: SourceItem[]) => {
   return items.find((i) => i.name === itemName)?.stack_size ?? 1;
 };
 
 const getBlueprint = (settings: Settings, appData: AppData): string => {
-  let currentRow = 0;
-  let currentCol = 0;
-  const blockWidth =
-    Math.max(
-      settings.machineWidth,
-      settings.sourceChestWidth + settings.targetChestWidth,
-    ) + settings.columnSpace;
-  const blockHeight =
-    settings.machineHeight +
-    Math.max(settings.sourceChestHeight, settings.targetChestHeight) +
-    settings.rowSpace +
-    1;
   const bp = createEmptyBlueprint();
   bp.blueprint.label = "Factorio-Make-Everything";
   bp.blueprint.description =
@@ -231,102 +335,191 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
     { signal: { type: "virtual", name: "signal-black" }, index: 4 },
   ];
 
+  const inserter = appData.inserters.find(
+    (i) => i.name === appData.settings.inserter.name,
+  );
+  if (!inserter) {
+    throw new Error(`Inserter ${appData.settings.inserter.name} not found`);
+  }
+
+  const outserter = appData.inserters.find(
+    (i) => i.name === appData.settings.outserter.name,
+  );
+  if (!outserter) {
+    throw new Error(`Outserter ${appData.settings.outserter.name} not found`);
+  }
+
+  const sourceChest = appData.logistic_containers.find(
+    (c) => c.name === appData.settings.sourceChest.name,
+  );
+  if (!sourceChest) {
+    throw new Error(
+      `Requester chest ${appData.settings.sourceChest.name} not found`,
+    );
+  }
+
+  const targetChest = appData.logistic_containers.find(
+    (c) => c.name === appData.settings.targetChest.name,
+  );
+  if (!targetChest) {
+    throw new Error(
+      `Provider chest ${appData.settings.targetChest.name} not found`,
+    );
+  }
+
+  const getInserterLimitControlBehavior = (
+    main_product: string,
+  ): Entity["control_behavior"] => ({
+    logistic_condition: {
+      first_signal: {
+        type: "item",
+        name: main_product,
+        quality: settings.productQuality,
+      },
+      constant:
+        getItemStackSize(main_product, appData.items) *
+        settings.craftStackLimit,
+      comparator: COMPARATOR.lessThan,
+    },
+    connect_to_logistic_network: true,
+  });
+
+  let currentX = 0;
+  let currentY = 0;
+  let currentMaxHeight = 0;
+
   appData.recipes
     .filter((r) => r.selected)
     .forEach((r) => {
+      const category = appData.categories.find((c) => c.name === r.category);
+      if (!category) {
+        throw new Error(`category ${r.category} not found`);
+      }
+      const machine = category.machines.find(
+        (machine) => machine.name === category.selectedMachine,
+      );
+      if (!machine) {
+        throw new Error(
+          `selected machine ${category.selectedMachine} not found for category ${category.name}`,
+        );
+      }
+
+      const blockWidth = Math.max(
+        machine.tile_width,
+        Math.max(inserter.tile_width, sourceChest.tile_width) +
+          Math.max(outserter.tile_width, targetChest.tile_width),
+      );
+      const blockHeight =
+        machine.tile_height +
+        Math.max(
+          inserter.tile_height + sourceChest.tile_height,
+          outserter.tile_height + targetChest.tile_height,
+        );
+
+      if (
+        currentX + blockWidth > settings.blueprintMaxWidth &&
+        currentX !== 0
+      ) {
+        currentX = 0;
+        currentY += currentMaxHeight + settings.rowSpace;
+        currentMaxHeight = 0;
+      }
+
+      currentMaxHeight = Math.max(currentMaxHeight, blockHeight);
+
       addEntity(bp, {
-        name: settings.machineName,
+        name: machine.name,
         position: {
-          x: currentCol * blockWidth + settings.machineWidth / 2,
-          y: currentRow * blockHeight + settings.machineHeight / 2,
+          x: currentX + machine.tile_width / 2,
+          y: currentY + machine.tile_height / 2,
         },
         recipe: r.name,
+        recipe_quality: settings.productQuality,
       });
-      addEntity(bp, {
-        name: settings.inserterName,
-        position: {
-          x: currentCol * blockWidth + 0.5,
-          y: currentRow * blockHeight + settings.machineHeight + 0.5,
-        },
-        direction: 8,
-      });
-      addEntity(bp, {
-        name: settings.outserterName,
-        position: {
-          x: currentCol * blockWidth + settings.sourceChestWidth + 0.5,
-          y: currentRow * blockHeight + settings.machineHeight + 0.5,
-        },
-        control_behavior: {
-          logistic_condition: {
-            first_signal: {
-              type: "item",
-              name: r.main_product,
-            },
-            constant:
-              getItemStackSize(r.main_product, appData.items) *
-              settings.craftStackLimit,
-            comparator: COMPARATOR.lessThan,
+      if (r.ingredients.length > 0) {
+        addEntity(bp, {
+          name: settings.inserter.name,
+          position: {
+            x: currentX + inserter.tile_width / 2,
+            y: currentY + machine.tile_height + inserter.tile_height / 2,
           },
-          connect_to_logistic_network: true,
-        },
-      });
+          direction: 8,
+          control_behavior: settings.inserter.setLimit
+            ? getInserterLimitControlBehavior(r.main_product)
+            : undefined,
+        });
+      }
       addEntity(bp, {
-        name: settings.sourceChestName,
+        name: settings.outserter.name,
         position: {
-          x: currentCol * blockWidth + settings.sourceChestWidth / 2,
-          y:
-            currentRow * blockHeight +
-            settings.machineHeight +
-            1 +
-            settings.sourceChestHeight / 2,
+          x:
+            currentX +
+            Math.max(inserter.tile_width, sourceChest.tile_width) +
+            outserter.tile_width / 2,
+          y: currentY + machine.tile_height + outserter.tile_height / 2,
         },
-        request_filters: {
-          sections: [
-            {
-              index: 1,
-              filters: r.ingredients.map((ing, idx) => {
-                return {
+        control_behavior: settings.outserter.setLimit
+          ? getInserterLimitControlBehavior(r.main_product)
+          : undefined,
+      });
+      if (r.ingredients.length > 0) {
+        addEntity(bp, {
+          name: settings.sourceChest.name,
+          position: {
+            x: currentX + sourceChest.tile_width / 2,
+            y:
+              currentY +
+              machine.tile_height +
+              inserter.tile_height +
+              sourceChest.tile_height / 2,
+          },
+          request_filters: {
+            sections: [
+              {
+                index: 1,
+                filters: r.ingredients.map((ing, idx) => ({
                   index: idx + 1,
                   name: ing.name,
-                  quality: "normal",
+                  quality: settings.productQuality,
                   comparator: COMPARATOR.equal,
                   count: Math.max(
                     1,
                     Math.floor(
                       Math.min(
                         getItemStackSize(ing.name, appData.items) *
-                          settings.requestStackLimit,
+                          settings.sourceChest.limitRequestStacks,
                         Math.max(
                           ing.amount,
                           (ing.amount *
                             r.request_paste_multiplier *
-                            settings.machineSpeed) /
+                            machine.crafting_speed) /
                             r.energy,
                         ),
                       ),
                     ),
                   ),
-                };
-              }),
-            },
-          ],
-          request_from_buffers: settings.requestFromBufferChests,
-        },
-      });
+                })),
+              },
+            ],
+            request_from_buffers: settings.sourceChest.requestFromBuffers,
+            trash_not_requested: settings.sourceChest.trashUnrequested,
+          },
+        });
+      }
       addEntity(bp, {
-        name: settings.targetChestName,
+        name: settings.targetChest.name,
         position: {
           x:
-            currentCol * blockWidth +
-            settings.sourceChestWidth +
-            settings.targetChestWidth / 2,
+            currentX +
+            Math.max(inserter.tile_width, sourceChest.tile_width) +
+            targetChest.tile_width / 2,
           y:
-            currentRow * blockHeight +
-            settings.machineHeight +
-            1 +
-            settings.targetChestHeight / 2,
+            currentY +
+            machine.tile_height +
+            outserter.tile_height +
+            targetChest.tile_height / 2,
         },
-        request_filters: settings.targetChestSetRequest
+        request_filters: settings.targetChest.setRequestFilter
           ? {
               sections: [
                 {
@@ -335,22 +528,19 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
                     {
                       index: 1,
                       name: r.main_product,
-                      quality: "normal",
+                      quality: settings.productQuality,
                       comparator: COMPARATOR.equal,
                       count: 1_000_000,
                     },
                   ],
                 },
               ],
+              trash_not_requested: settings.targetChest.trashUnrequested,
             }
           : undefined,
       });
 
-      currentCol++;
-      if (currentCol === settings.rowLength) {
-        currentCol = 0;
-        currentRow++;
-      }
+      currentX += blockWidth + settings.columnSpace;
     });
   return encodePlan(bp);
 };
@@ -405,128 +595,218 @@ const HelpSection = () => {
 };
 
 const Settings: Component<{
-  settings: Settings;
-  setSettings: SetStoreFunction<Settings>;
+  appData: AppData;
+  setAppData: SetStoreFunction<AppData>;
 }> = (props) => {
+  const currentCategories = () => {
+    const categories = new Set<string>();
+    props.appData.recipes
+      .filter((r) => r.selected)
+      .forEach((r) => categories.add(r.category));
+    return Array.from(categories);
+  };
+  const getChestByName = (name: string) => {
+    return props.appData.logistic_containers.find((lc) => lc.name === name);
+  };
+  const currentSourceChest = () => {
+    return getChestByName(props.appData.settings.sourceChest.name);
+  };
+  const currentTargetChest = () => {
+    return getChestByName(props.appData.settings.targetChest.name);
+  };
   return (
     <>
-      <div class="grid grid-cols-4 space-x-4">
-        <TextInput
-          label="Machine Name"
-          value={props.settings.machineName}
-          setValue={(v) => props.setSettings("machineName", v)}
+      <h3>Settings</h3>
+      <p>Most parameters of the blueprint can be adjusted here.</p>
+
+      <h4>Crafting Machines</h4>
+      <Show when={currentCategories().length === 0}>
+        Select recipes to produce. Then configure the crafting machines here.
+      </Show>
+      <div class="grid grid-cols-3 gap-x-4">
+        <For each={props.appData.categories}>
+          {(category, idx) => (
+            <Show when={currentCategories().includes(category.name)}>
+              <SelectInput
+                label={category.name}
+                entries={category.machines.map((machine) => ({
+                  label: machine.display_name,
+                  value: machine.name,
+                }))}
+                currentValue={category.selectedMachine}
+                setValue={(v) =>
+                  props.setAppData("categories", idx(), "selectedMachine", v)
+                }
+              />
+            </Show>
+          )}
+        </For>
+      </div>
+
+      <h4>Products</h4>
+      <div class="grid grid-cols-3 gap-x-4">
+        <NumberInput
+          label="Wanted product amount (in stacks)"
+          value={props.appData.settings.craftStackLimit}
+          setValue={(v) => props.setAppData("settings", "craftStackLimit", v)}
+          min={0}
+        />
+        <SelectInput
+          label="Product quality"
+          currentValue={props.appData.settings.productQuality}
+          entries={props.appData.qualities.map((q) => ({
+            label: q.display_name,
+            value: q.name,
+          }))}
+          setValue={(v) => props.setAppData("settings", "productQuality", v)}
+        />
+      </div>
+
+      <h4>Layout</h4>
+      <div class="grid grid-cols-3 gap-x-4">
+        <NumberInput
+          label="Blueprint max width (in tiles)"
+          value={props.appData.settings.blueprintMaxWidth}
+          setValue={(v) => props.setAppData("settings", "blueprintMaxWidth", v)}
+          min={0}
         />
         <NumberInput
-          label="Machine Width"
-          value={props.settings.machineWidth}
-          setValue={(v) => props.setSettings("machineWidth", v)}
-          min={1}
+          label="Space between rows (in tiles)"
+          value={props.appData.settings.rowSpace}
+          setValue={(v) => props.setAppData("settings", "rowSpace", v)}
+          min={0}
         />
         <NumberInput
-          label="Machine Height"
-          value={props.settings.machineHeight}
-          setValue={(v) => props.setSettings("machineHeight", v)}
-          min={1}
-        />
-        <NumberInput
-          label="Machine Speed"
-          value={props.settings.machineSpeed}
-          setValue={(v) => props.setSettings("machineSpeed", v)}
+          label="Space between columns (in tiles)"
+          value={props.appData.settings.columnSpace}
+          setValue={(v) => props.setAppData("settings", "columnSpace", v)}
           min={0}
         />
       </div>
-      <div class="grid grid-cols-4 space-x-4">
-        <NumberInput
-          label="Machines per Row"
-          value={props.settings.rowLength}
-          setValue={(v) => props.setSettings("rowLength", v)}
-          min={1}
-        />
-        <NumberInput
-          label="Space between Rows"
-          value={props.settings.rowSpace}
-          setValue={(v) => props.setSettings("rowSpace", v)}
-          min={0}
-        />
-        <NumberInput
-          label="Space between Machines"
-          value={props.settings.columnSpace}
-          setValue={(v) => props.setSettings("columnSpace", v)}
-          min={0}
-        />
-      </div>
-      <div class="grid grid-cols-4 space-x-4">
-        <TextInput
-          label="Source Chest Name"
-          value={props.settings.sourceChestName}
-          setValue={(v) => props.setSettings("sourceChestName", v)}
-        />
-        <NumberInput
-          label="Source Chest Width"
-          value={props.settings.sourceChestWidth}
-          setValue={(v) => props.setSettings("sourceChestWidth", v)}
-          min={1}
-        />
-        <NumberInput
-          label="Source Chest Height"
-          value={props.settings.sourceChestHeight}
-          setValue={(v) => props.setSettings("sourceChestHeight", v)}
-          min={1}
+
+      <h4>Input Chest</h4>
+      <div class="grid grid-cols-3 gap-x-4">
+        <SelectInput
+          label="Input chest"
+          entries={props.appData.logistic_containers
+            .filter((c) => ["buffer", "requester"].includes(c.logistic_mode))
+            .map((c) => ({
+              label: c.display_name,
+              value: c.name,
+            }))}
+          currentValue={props.appData.settings.sourceChest.name}
+          setValue={(v) =>
+            props.setAppData("settings", "sourceChest", "name", v)
+          }
         />
         <CheckboxInput
-          label="Request from Buffer Chests"
-          value={props.settings.requestFromBufferChests}
-          setValue={(v) => props.setSettings("requestFromBufferChests", v)}
+          label="Trash unrequested"
+          value={props.appData.settings.sourceChest.trashUnrequested}
+          setValue={(v) =>
+            props.setAppData("settings", "sourceChest", "trashUnrequested", v)
+          }
         />
-      </div>
-      <div class="grid grid-cols-4 space-x-4">
-        <TextInput
-          label="Target Chest Name"
-          value={props.settings.targetChestName}
-          setValue={(v) => props.setSettings("targetChestName", v)}
-        />
+        <div></div>
         <NumberInput
-          label="Target Chest Width"
-          value={props.settings.targetChestWidth}
-          setValue={(v) => props.setSettings("targetChestWidth", v)}
-          min={1}
-        />
-        <NumberInput
-          label="Target Chest Height"
-          value={props.settings.targetChestHeight}
-          setValue={(v) => props.setSettings("targetChestHeight", v)}
-          min={1}
+          label="Limit requested items (in stacks)"
+          value={props.appData.settings.sourceChest.limitRequestStacks}
+          setValue={(v) =>
+            props.setAppData("settings", "sourceChest", "limitRequestStacks", v)
+          }
+          min={0}
         />
         <CheckboxInput
-          label="Target Chest set Requests"
-          value={props.settings.targetChestSetRequest}
-          setValue={(v) => props.setSettings("targetChestSetRequest", v)}
+          label="Request from buffer chests"
+          value={props.appData.settings.sourceChest.requestFromBuffers}
+          setValue={(v) =>
+            props.setAppData("settings", "sourceChest", "requestFromBuffers", v)
+          }
+          disabled={(["buffer"] as LogisticMode[]).includes(
+            currentSourceChest()?.logistic_mode!,
+          )}
         />
       </div>
-      <div class="grid grid-cols-4 space-x-4">
-        <TextInput
-          label="Inserter Name"
-          value={props.settings.inserterName}
-          setValue={(v) => props.setSettings("inserterName", v)}
+
+      <h4>Output Chest</h4>
+      <div class="grid grid-cols-3 gap-x-4">
+        <SelectInput
+          label="Output chest"
+          entries={props.appData.logistic_containers
+            .filter((c) =>
+              [
+                "active-provider",
+                "buffer",
+                "passive-provider",
+                "storage",
+              ].includes(c.logistic_mode),
+            )
+            .map((c) => ({
+              label: c.display_name,
+              value: c.name,
+            }))}
+          currentValue={props.appData.settings.targetChest.name}
+          setValue={(v) =>
+            props.setAppData("settings", "targetChest", "name", v)
+          }
         />
-        <TextInput
-          label="Outserter Name"
-          value={props.settings.outserterName}
-          setValue={(v) => props.setSettings("outserterName", v)}
+        <CheckboxInput
+          label="Trash unrequested"
+          value={props.appData.settings.targetChest.trashUnrequested}
+          setValue={(v) =>
+            props.setAppData("settings", "targetChest", "trashUnrequested", v)
+          }
+          disabled={
+            !(["buffer"] as LogisticMode[]).includes(
+              currentTargetChest()?.logistic_mode!,
+            )
+          }
+        />
+        <CheckboxInput
+          label="Set request filter for product"
+          value={props.appData.settings.targetChest.setRequestFilter}
+          setValue={(v) =>
+            props.setAppData("settings", "targetChest", "setRequestFilter", v)
+          }
+          disabled={(
+            ["active-provider", "passive-provider"] as LogisticMode[]
+          ).includes(currentTargetChest()?.logistic_mode!)}
         />
       </div>
-      <div class="grid grid-cols-4 space-x-4">
-        <NumberInput
-          label="Request Stack Limit"
-          value={props.settings.requestStackLimit}
-          setValue={(v) => props.setSettings("requestStackLimit", v)}
-          min={0}
+
+      <h4>Inserter & Outserter</h4>
+      <div class="grid grid-cols-3 gap-x-4">
+        <SelectInput
+          label="Inserter"
+          entries={props.appData.inserters.map((i) => ({
+            label: i.display_name,
+            value: i.name,
+          }))}
+          currentValue={props.appData.settings.inserter.name}
+          setValue={(v) => props.setAppData("settings", "inserter", "name", v)}
         />
-        <NumberInput
-          label="Craft Stack Limit"
-          value={props.settings.craftStackLimit}
-          setValue={(v) => props.setSettings("craftStackLimit", v)}
-          min={0}
+        <CheckboxInput
+          label="Set inserter limit"
+          value={props.appData.settings.inserter.setLimit}
+          setValue={(v) =>
+            props.setAppData("settings", "inserter", "setLimit", v)
+          }
+        />
+        <div></div>
+        <SelectInput
+          label="Outserter"
+          entries={props.appData.inserters.map((i) => ({
+            label: i.display_name,
+            value: i.name,
+          }))}
+          currentValue={props.appData.settings.outserter.name}
+          setValue={(v) => props.setAppData("settings", "outserter", "name", v)}
+        />
+        <CheckboxInput
+          label="Set outserter limit"
+          value={props.appData.settings.outserter.setLimit}
+          setValue={(v) =>
+            props.setAppData("settings", "outserter", "setLimit", v)
+          }
         />
       </div>
     </>
@@ -543,28 +823,6 @@ const Page = () => {
   const [categoryFilter, setCategoryFilter] = createSignal("");
   const [groupFilter, setGroupFilter] = createSignal("");
   const [subgroupFilter, setSubgroupFilter] = createSignal("");
-
-  const [settings, setSettings] = createStore<Settings>({
-    machineName: "assembling-machine-3",
-    machineWidth: 3,
-    machineHeight: 3,
-    machineSpeed: 1.25,
-    rowLength: 5,
-    columnSpace: 0,
-    rowSpace: 0,
-    sourceChestName: "requester-chest",
-    sourceChestWidth: 1,
-    sourceChestHeight: 1,
-    requestFromBufferChests: true,
-    targetChestName: "buffer-chest",
-    targetChestWidth: 1,
-    targetChestHeight: 1,
-    targetChestSetRequest: true,
-    inserterName: "bulk-inserter",
-    outserterName: "bulk-inserter",
-    requestStackLimit: 3,
-    craftStackLimit: 4,
-  });
 
   const toggleRecipe = (name: string) => {
     setAppData(
@@ -615,9 +873,11 @@ const Page = () => {
 
   return (
     <div class="w-full max-w-4xl m-auto mb-48 prose">
-      <Title>Make Everything Generator | Factorio | Gaming Tools</Title>
+      <Title>
+        "Make Everything" Blueprint Generator | Factorio | Gaming Tools
+      </Title>
       <div>
-        <h2>Make Everything Generator</h2>
+        <h2>"Make Everything" Blueprint Generator</h2>
         <p>This tool can be used to build bot based malls/hubs.</p>
       </div>
       <div class="h-8"></div>
@@ -648,8 +908,10 @@ const Page = () => {
               Copy Cheat Command
             </button>
             <p>
-              Copy this cheat command and execute it ingame.
-              <br />A file called "recipes_dump.json" will be created in your{" "}
+              Copy this cheat command and execute it ingame. *
+              <br />A file called{" "}
+              <code>make-everything-generator-export.meg</code> will be created
+              in your{" "}
               <a
                 href="https://wiki.factorio.com/Application_directory"
                 target="_blank"
@@ -683,6 +945,10 @@ const Page = () => {
                 }
               }}
             />
+            <p class="text-sm">
+              * Executing cheat commands will disable achievements. You can take
+              a savegame and reload it afterwards.
+            </p>
           </div>
         </label>
       </div>
@@ -752,7 +1018,7 @@ const Page = () => {
               >
                 <option value={""}>filter...</option>
                 <For each={appData.categories}>
-                  {(category) => <option>{category}</option>}
+                  {(category) => <option>{category.name}</option>}
                 </For>
               </select>
             </th>
@@ -791,17 +1057,18 @@ const Page = () => {
         </tfoot>
       </table>
       <div class="mt-8">
-        <h3>Settings</h3>
-        <Settings settings={settings} setSettings={setSettings} />
+        <Settings appData={appData} setAppData={setAppData} />
       </div>
       <div class="mt-8">
         <button
           class="btn btn-primary"
           onClick={() => {
-            navigator.clipboard.writeText(getBlueprint(settings, appData));
+            navigator.clipboard.writeText(
+              getBlueprint(appData.settings, appData),
+            );
           }}
         >
-          Copy Blueprint
+          Generate & Copy Blueprint
         </button>
       </div>
     </div>

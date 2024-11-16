@@ -1,4 +1,5 @@
-export default `recipes.wooden-chest=Wooden chest
+export default `
+recipes.wooden-chest=Wooden chest
 recipes.iron-chest=Iron chest
 recipes.steel-chest=Steel chest
 recipes.storage-tank=Storage tank
@@ -309,4 +310,10 @@ crafting_machines.centrifuge=Centrifuge
 crafting_machines.electromagnetic-plant=Electromagnetic plant
 crafting_machines.cryogenic-plant=Cryogenic plant
 crafting_machines.rocket-silo=Rocket silo
-crafting_machines.crusher=Crusher`;
+crafting_machines.crusher=Crusher
+qualities.normal=Normal
+qualities.uncommon=Uncommon
+qualities.rare=Rare
+qualities.epic=Epic
+qualities.legendary=Legendary
+`;
