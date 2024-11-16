@@ -2,6 +2,7 @@ import {
   addEntity,
   COMPARATOR,
   createEmptyBlueprint,
+  DEFINES,
   encodePlan,
   Entity,
 } from "@jensforstmann/factorio-blueprint-tools";
@@ -443,7 +444,7 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
             x: currentX + inserter.tile_width / 2,
             y: currentY + machine.tile_height + inserter.tile_height / 2,
           },
-          direction: 8,
+          direction: DEFINES.direction.south,
           control_behavior: settings.inserter.setLimit
             ? getInserterLimitControlBehavior(r.main_product)
             : undefined,

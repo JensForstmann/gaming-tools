@@ -5,6 +5,7 @@ import {
   COMPARATOR,
   createEmptyBlueprint,
   decodePlan,
+  DEFINES,
   encodePlan,
   isBlueprint,
   isBlueprintBook,
@@ -148,9 +149,9 @@ const convert = (
         // add green wire
         blueprint.blueprint.wires!.push([
           constantCombinator.entity_number,
-          2,
+          DEFINES.wire_connector_id.circuit_green,
           requesterChest.entity_number,
-          2,
+          DEFINES.wire_connector_id.circuit_green,
         ]);
       }
     });
