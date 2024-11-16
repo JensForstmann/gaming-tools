@@ -1,7 +1,8 @@
 export default function NotFound() {
   return (
-    <main class="text-center mx-auto text-gray-700 p-4">
-      <h1 class="text-6xl text-sky-700 font-thin uppercase my-16">Not Found</h1>
+    <main class="mx-auto prose max-w-4xl">
+      <h1 class="text-6xl text-primary font-thin uppercase">Not Found</h1>
+      <p>The page does not exist.</p>
     </main>
   );
 }

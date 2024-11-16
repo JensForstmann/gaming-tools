@@ -3,8 +3,13 @@ import { A } from "@solidjs/router";
 
 const Page = () => {
   return (
-    <div class="w-full max-w-4xl m-auto">
+    <div class="w-full max-w-4xl m-auto ">
       <Title>Factorio | Gaming Tools</Title>
+
+      <div class="prose">
+        <h1 class="text-6xl text-primary font-thin uppercase">Factorio</h1>
+      </div>
+
       <div class="my-12 card w-full shadow-xl">
         <div class="card-body">
           <h2 class="card-title">"Make Everything" Blueprint Generator</h2>
@@ -19,6 +24,7 @@ const Page = () => {
           </div>
         </div>
       </div>
+
       <div class="my-12 card w-full shadow-xl">
         <div class="card-body">
           <h2 class="card-title">
@@ -38,6 +44,7 @@ const Page = () => {
           </div>
         </div>
       </div>
+
       <div class="my-12 card w-full shadow-xl">
         <div class="card-body">
           <h2 class="card-title">Blueprint Decoder & Encoder</h2>

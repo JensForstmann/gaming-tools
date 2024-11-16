@@ -50,11 +50,11 @@ function Nav() {
           <A class="link-hover" href="/">
             Home
           </A>
-          <A class="link-hover" href="/about">
-            About
-          </A>
           <A class="link-hover" href="/factorio">
             Factorio
+          </A>
+          <A class="link-hover" href="/changelog">
+            Changelog
           </A>
         </div>
         <div class="navbar-end">
@@ -68,7 +68,7 @@ function Nav() {
             >
               <div class="grid grid-cols-1 gap-3 p-3 text-neutral">
                 <div class="btn normal-case" onClick={() => setTheme(null)}>
-                  Default
+                  Default (System)
                 </div>
                 <div class="btn normal-case" onClick={() => setTheme("light")}>
                   Light
