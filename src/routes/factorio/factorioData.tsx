@@ -16,11 +16,11 @@ export type SourceRecipe<EmptyArray> = {
   request_paste_multiplier: number;
   main_product: string;
   ingredients:
-  | {
-    name: string;
-    amount: number;
-  }[]
-  | EmptyArray;
+    | {
+        name: string;
+        amount: number;
+      }[]
+    | EmptyArray;
 };
 
 export type SourceItem = {
@@ -76,12 +76,15 @@ export const VanillaData: SourceData<EmptyLuaArray> = VanillaDataRaw;
 export type Locales = Record<string, string>;
 const convertLocales = (raw: string) => {
   const locales: Locales = {};
-  raw.trim().split("\n").forEach((row) => {
-    const [key, value] = row.split("=", 2);
-    if (key && value) {
-      locales[key] = value;
-    }
-  });
+  raw
+    .trim()
+    .split("\n")
+    .forEach((row) => {
+      const [key, value] = row.split("=", 2);
+      if (key && value) {
+        locales[key] = value;
+      }
+    });
   return locales;
 };
 export const VanillaLocales = convertLocales(VanillaLocalesRaw);

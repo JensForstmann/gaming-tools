@@ -22,8 +22,13 @@ import {
   TextAreaInput,
   TextInput,
 } from "~/components/inputs";
-import { createStore } from "solid-js/store";
 import { useSettings } from "~/components/settings";
+import {
+  FactorioDataImporter,
+  VanillaData,
+  VanillaLocales,
+} from "./factorioData";
+import { createStore } from "solid-js/store";
 
 const convertToItem = (entity: string) => {
   return {
@@ -241,6 +246,10 @@ type Settings = {
 };
 
 const Page = () => {
+  const [appData, setAppData] = createStore({
+    data: VanillaData,
+    locales: VanillaLocales,
+  });
   const [inputBp, setInputBp] = createSignal("");
 
   const [settings, setSettings] = useSettings<Settings>({
@@ -270,6 +279,14 @@ const Page = () => {
       </div>
       <div class="h-8"></div>
       <HelpSection />
+      <FactorioDataImporter
+        onChange={(data, locales) => {
+          setAppData({
+            data: data,
+            locales: locales,
+          });
+        }}
+      />
       <div class="my-8">
         <TextAreaInput
           label="Input Blueprint String"
@@ -316,10 +333,17 @@ const Page = () => {
               disabled={settings.generationMode === "LOGISTIC_CHESTS"}
             />
           </div>
-          <TextInput
-            label="Logistic chest name"
-            value={settings.logisticChestName}
+          <SelectInput
+            label="Logistic chest"
+            currentValue={settings.logisticChestName}
             setValue={(v) => setSettings("logisticChestName", v)}
+            entries={appData.data.logistic_containers
+              .filter((c) => c.logistic_mode)
+              .map((c) => ({
+                label:
+                  appData.locales["logistic_containers." + c.name] || c.name,
+                value: c.name,
+              }))}
             disabled={settings.generationMode === "CONSTANT_COMBINATORS"}
           />
           <CheckboxInput

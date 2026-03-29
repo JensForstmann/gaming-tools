@@ -100,6 +100,7 @@ type SelectInputProps<T> = {
   }>;
   class?: string;
   setValue?: (value: T) => void;
+  disabled?: boolean;
 };
 
 export const SelectInput = <T extends string>(props: SelectInputProps<T>) => {
@@ -111,6 +112,7 @@ export const SelectInput = <T extends string>(props: SelectInputProps<T>) => {
       <select
         class={"select " + (props.class ?? "")}
         onInput={(e) => props.setValue?.(e.currentTarget.value as T)}
+        disabled={props.disabled}
       >
         <For each={props.entries}>
           {(entry) => (

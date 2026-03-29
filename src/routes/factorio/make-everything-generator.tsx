@@ -120,7 +120,7 @@ const convertSourceDataToAppData = (
           ? crafting_machine.crafting_categories
           : [],
         display_name:
-        locales["crafting_machines." + crafting_machine.name] ||
+          locales["crafting_machines." + crafting_machine.name] ||
           crafting_machine.name,
       }));
 
@@ -133,11 +133,9 @@ const convertSourceDataToAppData = (
             ? recipe.ingredients
             : [],
           selected: false,
-          display_name:
-            locales["recipes." + recipe.name] || recipe.name,
+          display_name: locales["recipes." + recipe.name] || recipe.name,
           group_display_name:
-            locales["groups." + recipe.group_name] ||
-            recipe.group_name,
+            locales["groups." + recipe.group_name] || recipe.group_name,
         })),
     items: !Array.isArray(data.items) ? [] : data.items,
     inserters: !Array.isArray(data.inserters)
@@ -158,15 +156,15 @@ const convertSourceDataToAppData = (
             ...logistic_container,
             logistic_mode: logistic_container.logistic_mode ?? "none",
             display_name:
-                locales["logistic_containers." + logistic_container.name] || logistic_container.name,
+              locales["logistic_containers." + logistic_container.name] ||
+              logistic_container.name,
           };
         }),
     groups: !Array.isArray(data.groups)
       ? []
       : data.groups.map((group) => ({
           ...group,
-          display_name:
-            locales["groups." + group.name] || group.name,
+          display_name: locales["groups." + group.name] || group.name,
         })),
     subgroups: !Array.isArray(data.subgroups) ? [] : data.subgroups,
     categories: Array.from(categoriesSet)
@@ -185,16 +183,12 @@ const convertSourceDataToAppData = (
       ? []
       : data.qualities.map((quality) => ({
           ...quality,
-          display_name:
-            locales["qualities." + quality.name] || quality.name,
+          display_name: locales["qualities." + quality.name] || quality.name,
         })),
   };
 };
 
-const VanillaAppData = convertSourceDataToAppData(
-  VanillaData,
-  VanillaLocales,
-);
+const VanillaAppData = convertSourceDataToAppData(VanillaData, VanillaLocales);
 
 type Settings = {
   selectedMachines: Array<{ category: string; machine: string }>;
