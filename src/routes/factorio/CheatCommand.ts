@@ -128,7 +128,7 @@ for _, quality_prototype in pairs(prototypes.quality) do
     end
 end
 
-local filename = "make-everything-generator-export.meg"
+local filename = "export-for-gaming-tools.data"
 helpers.write_file(filename, helpers.table_to_json(data), false, game.player.index)
 
 helpers.write_file(filename, "\\n\\n", true, game.player.index)

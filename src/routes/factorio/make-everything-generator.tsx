@@ -15,80 +15,20 @@ import {
   SelectInput,
   TextInput,
 } from "~/components/inputs";
-import { CheatCommand } from "./CheatCommand";
-import VanillaDataRaw from "./vanillaData.json";
-import VanillaLocalesRaw from "./vanillaLocales";
 import { useSettings } from "~/components/settings";
-
-type EmptyObj = Record<PropertyKey, never>;
-type EmptyLuaArray = EmptyObj; // Factorio's helpers.table_to_json() function will convert an empty array/table to {} instead of []
-
-type SourceRecipe<EmptyArray> = {
-  name: string;
-  category: string;
-  order: string;
-  energy: number;
-  group_name: string;
-  subgroup_name: string;
-  request_paste_multiplier: number;
-  main_product: string;
-  ingredients:
-    | {
-        name: string;
-        amount: number;
-      }[]
-    | EmptyArray;
-};
-
-type SourceItem = {
-  name: string;
-  stack_size: number;
-};
-
-type SourceEntity = {
-  name: string;
-  tile_width: number;
-  tile_height: number;
-};
-
-type SourceCraftingMachine<EmptyArray> = SourceEntity & {
-  crafting_categories: string[] | EmptyArray;
-  crafting_speed: number;
-  is_burner: boolean;
-};
-
-type SourceInserter = SourceEntity & {
-  inserter_pickup_position: number[];
-  inserter_drop_position: number[];
-};
-
-type SourceLogisticContainer = SourceEntity & {
-  logistic_mode?: string;
-};
-
-type SourceGroup = {
-  name: string;
-  order: string;
-};
-
-type SourceQuality = {
-  name: string;
-};
-
-type SourceData<EmptyArray> = {
-  recipes: SourceRecipe<EmptyArray>[] | EmptyArray;
-  items: SourceItem[] | EmptyArray;
-  crafting_machines: SourceCraftingMachine<EmptyArray>[] | EmptyArray;
-  inserters: SourceInserter[] | EmptyArray;
-  logistic_containers: SourceLogisticContainer[] | EmptyArray;
-  groups: SourceGroup[] | EmptyArray;
-  subgroups: SourceGroup[] | EmptyArray;
-  qualities: Array<SourceQuality> | EmptyArray;
-};
-
-// Assign imported data here to let typescript check our assumption (the defined types above).
-// If typescript errors here, then `vanillaData.json` is not in the expected format.
-const VanillaDataChecked: SourceData<EmptyLuaArray> = VanillaDataRaw;
+import {
+  FactorioDataImporter,
+  Locales,
+  type SourceCraftingMachine,
+  type SourceEntity,
+  type SourceGroup,
+  type SourceInserter,
+  type SourceItem,
+  type SourceQuality,
+  type SourceRecipe,
+  VanillaData,
+  VanillaLocales,
+} from "./factorioData";
 
 type AppCraftingMachine = SourceCraftingMachine<never> & {
   display_name: string;
@@ -141,13 +81,6 @@ type AppData = {
   qualities: Array<AppQuality>;
 };
 
-const getLocale = (rawLocales: string, key: string) => {
-  return rawLocales
-    .split("\n")
-    .find((row) => row.startsWith(key + "="))
-    ?.split("=", 2)[1];
-};
-
 const getBestCraftingMachine = (machines: AppCraftingMachine[]) => {
   let fastest: SourceCraftingMachine<string[]> | undefined;
 
@@ -172,8 +105,8 @@ const getBestCraftingMachine = (machines: AppCraftingMachine[]) => {
 };
 
 const convertSourceDataToAppData = (
-  data: SourceData<EmptyLuaArray>,
-  locales: string,
+  data: typeof VanillaData,
+  locales: Locales,
 ): AppData => {
   const categoriesSet = new Set<string>();
   data.recipes.forEach((r) => categoriesSet.add(r.category));
@@ -187,7 +120,7 @@ const convertSourceDataToAppData = (
           ? crafting_machine.crafting_categories
           : [],
         display_name:
-          getLocale(locales, "crafting_machines." + crafting_machine.name) ||
+        locales["crafting_machines." + crafting_machine.name] ||
           crafting_machine.name,
       }));
 
@@ -201,9 +134,9 @@ const convertSourceDataToAppData = (
             : [],
           selected: false,
           display_name:
-            getLocale(locales, "recipes." + recipe.name) || recipe.name,
+            locales["recipes." + recipe.name] || recipe.name,
           group_display_name:
-            getLocale(locales, "groups." + recipe.group_name) ||
+            locales["groups." + recipe.group_name] ||
             recipe.group_name,
         })),
     items: !Array.isArray(data.items) ? [] : data.items,
@@ -211,8 +144,7 @@ const convertSourceDataToAppData = (
       ? []
       : data.inserters.map((inserter) => ({
           ...inserter,
-          display_name:
-            getLocale(locales, "inserters." + inserter.name) || inserter.name,
+          display_name: locales["inserters." + inserter.name] || inserter.name,
         })),
     logistic_containers: !Array.isArray(data.logistic_containers)
       ? []
@@ -226,10 +158,7 @@ const convertSourceDataToAppData = (
             ...logistic_container,
             logistic_mode: logistic_container.logistic_mode ?? "none",
             display_name:
-              getLocale(
-                locales,
-                "logistic_containers." + logistic_container.name,
-              ) || logistic_container.name,
+                locales["logistic_containers." + logistic_container.name] || logistic_container.name,
           };
         }),
     groups: !Array.isArray(data.groups)
@@ -237,7 +166,7 @@ const convertSourceDataToAppData = (
       : data.groups.map((group) => ({
           ...group,
           display_name:
-            getLocale(locales, "groups." + group.name) || group.name,
+            locales["groups." + group.name] || group.name,
         })),
     subgroups: !Array.isArray(data.subgroups) ? [] : data.subgroups,
     categories: Array.from(categoriesSet)
@@ -257,14 +186,14 @@ const convertSourceDataToAppData = (
       : data.qualities.map((quality) => ({
           ...quality,
           display_name:
-            getLocale(locales, "qualities." + quality.name) || quality.name,
+            locales["qualities." + quality.name] || quality.name,
         })),
   };
 };
 
 const VanillaAppData = convertSourceDataToAppData(
-  VanillaDataChecked,
-  VanillaLocalesRaw,
+  VanillaData,
+  VanillaLocales,
 );
 
 type Settings = {
@@ -477,7 +406,6 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
         const ingredients = r.ingredients.map((ing) => ({
           name: ing.name,
           quality: settings.productQuality,
-          comparator: COMPARATOR.equal,
           count: Math.max(
             1,
             Math.floor(
@@ -881,7 +809,6 @@ const Settings: Component<{
 
 const Page = () => {
   let globalCheckbox: HTMLInputElement | undefined;
-  let showPopupInput: HTMLInputElement | undefined;
 
   const [appData, setAppData] = createStore<AppData>(VanillaAppData);
   const [settings, setSettings] = useSettings(DefaultSettings);
@@ -950,76 +877,12 @@ const Page = () => {
         </div>
         <div class="h-8"></div>
         <HelpSection />
-        <div class="mt-8">
-          <label for="import" class="btn">
-            Import Custom Recipes (Modded Gameplay)
-          </label>
-          <input
-            type="checkbox"
-            id="import"
-            class="modal-toggle"
-            ref={showPopupInput}
-          />
-          <label for="import" class="modal cursor-pointer">
-            <div class="modal-box relative">
-              <label
-                for="import"
-                class="btn btn-sm btn-circle absolute right-2 top-2"
-              >
-                ✕
-              </label>
-              <h3 class="mt-0">Import Recipes</h3>
-              <button
-                class="btn btn-primary"
-                onClick={() => navigator.clipboard.writeText(CheatCommand)}
-              >
-                Copy Cheat Command
-              </button>
-              <p>
-                Copy this cheat command and execute it ingame. *
-                <br />A file called{" "}
-                <code>make-everything-generator-export.meg</code> will be
-                created in your{" "}
-                <a
-                  href="https://wiki.factorio.com/Application_directory"
-                  target="_blank"
-                >
-                  script-output
-                </a>{" "}
-                folder of Factorio which you must select below.
-              </p>
-              <input
-                type="file"
-                class="file-input file-input-bordered w-full max-w-xs"
-                accept=".meg"
-                onChange={async (e) => {
-                  const file = e.currentTarget.files?.[0];
-                  const input = e.currentTarget;
-                  if (file) {
-                    try {
-                      const text = await file.text();
-                      const [json, locales] = text.split("\n\n", 2);
-                      setAppData(
-                        convertSourceDataToAppData(JSON.parse(json), locales),
-                      );
-                      resetSearchAndFilters();
-                      if (showPopupInput) {
-                        input.value = "";
-                        showPopupInput.checked = false;
-                      }
-                    } catch (err) {
-                      console.error(err);
-                    }
-                  }
-                }}
-              />
-              <p class="text-sm">
-                * Executing cheat commands will disable achievements. You can
-                take a savegame and reload it afterwards.
-              </p>
-            </div>
-          </label>
-        </div>
+        <FactorioDataImporter
+          onChange={(data, locales) => {
+            setAppData(convertSourceDataToAppData(data, locales));
+            resetSearchAndFilters();
+          }}
+        />
       </div>
       <div class="w-full max-w-4xl m-auto mb-48">
         <table class="table table-md w-full mt-8 table-pin-rows">
