@@ -232,7 +232,6 @@ const HelpSection = () => {
 };
 
 type Settings = {
-  // TODO: make sure every setting works!
   generationMode: "CONSTANT_COMBINATORS" | "LOGISTIC_CHESTS" | "BOTH";
   signalLimit: number;
   negateConstantCombinatorSignals: boolean;

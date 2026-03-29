@@ -63,7 +63,7 @@ type SourceInserter = SourceEntity & {
 };
 
 type SourceLogisticContainer = SourceEntity & {
-  logistic_mode: string;
+  logistic_mode?: string;
 };
 
 type SourceGroup = {
@@ -86,7 +86,8 @@ type SourceData<EmptyArray> = {
   qualities: Array<SourceQuality> | EmptyArray;
 };
 
-// assign imported data here to let typescript check our assumption (the defined types above)
+// Assign imported data here to let typescript check our assumption (the defined types above).
+// If typescript errors here, then `vanillaData.json` is not in the expected format.
 const VanillaDataChecked: SourceData<EmptyLuaArray> = VanillaDataRaw;
 
 type AppCraftingMachine = SourceCraftingMachine<never> & {
@@ -104,10 +105,11 @@ const LogisticModes = [
   "storage",
   "buffer",
   "requester",
+  "none",
 ] as const;
 type LogisticMode = (typeof LogisticModes)[number];
 const isLogisticMode = (x: unknown): x is LogisticMode =>
-  LogisticModes.includes(x as any);
+  x === undefined || LogisticModes.includes(x as any);
 
 type AppLogisticContainer = SourceEntity & {
   display_name: string;
@@ -137,7 +139,6 @@ type AppData = {
   subgroups: SourceGroup[];
   categories: Array<AppCategory>;
   qualities: Array<AppQuality>;
-  // settings: Settings;
 };
 
 const getLocale = (rawLocales: string, key: string) => {
@@ -223,7 +224,7 @@ const convertSourceDataToAppData = (
           }
           return {
             ...logistic_container,
-            logistic_mode: logistic_container.logistic_mode,
+            logistic_mode: logistic_container.logistic_mode ?? "none",
             display_name:
               getLocale(
                 locales,
@@ -473,6 +474,61 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
           : undefined,
       });
       if (r.ingredients.length > 0) {
+        const ingredients = r.ingredients.map((ing) => ({
+          name: ing.name,
+          quality: settings.productQuality,
+          comparator: COMPARATOR.equal,
+          count: Math.max(
+            1,
+            Math.floor(
+              Math.min(
+                getItemStackSize(ing.name, appData.items) *
+                  settings.sourceChest.limitRequestStacks,
+                Math.max(
+                  ing.amount,
+                  (ing.amount *
+                    r.request_paste_multiplier *
+                    machine.crafting_speed) /
+                    r.energy,
+                ),
+              ),
+            ),
+          ),
+        }));
+
+        const items: Entity["items"] = [];
+        if (
+          appData.logistic_containers.find(
+            (c) => c.name === settings.sourceChest.name,
+          )?.logistic_mode === "none"
+        ) {
+          let stack = 0;
+          ingredients.forEach((ing) => {
+            let rest = ing.count;
+            let stackSize =
+              appData.items.find((i) => i.name === ing.name)?.stack_size ?? 1;
+            while (rest > 0) {
+              let count = Math.min(ing.count, stackSize);
+              rest -= count;
+              items.push({
+                id: {
+                  name: ing.name,
+                  quality: ing.quality,
+                },
+                items: {
+                  in_inventory: [
+                    {
+                      inventory: 1,
+                      stack: stack++,
+                      count: count,
+                    },
+                  ],
+                },
+              });
+            }
+          });
+        }
+
         addEntity(bp, {
           name: settings.sourceChest.name,
           position: {
@@ -483,37 +539,33 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
               inserter.tile_height +
               sourceChest.tile_height / 2,
           },
-          request_filters: {
-            sections: [
-              {
-                index: 1,
-                filters: r.ingredients.map((ing, idx) => ({
-                  index: idx + 1,
-                  name: ing.name,
-                  quality: settings.productQuality,
-                  comparator: COMPARATOR.equal,
-                  count: Math.max(
-                    1,
-                    Math.floor(
-                      Math.min(
-                        getItemStackSize(ing.name, appData.items) *
-                          settings.sourceChest.limitRequestStacks,
-                        Math.max(
-                          ing.amount,
-                          (ing.amount *
-                            r.request_paste_multiplier *
-                            machine.crafting_speed) /
-                            r.energy,
-                        ),
-                      ),
-                    ),
-                  ),
-                })),
-              },
-            ],
-            request_from_buffers: settings.sourceChest.requestFromBuffers,
-            trash_not_requested: settings.sourceChest.trashUnrequested,
-          },
+          request_filters:
+            appData.logistic_containers.find(
+              (c) => c.name === settings.sourceChest.name,
+            )?.logistic_mode === "none"
+              ? undefined
+              : {
+                  sections: [
+                    {
+                      index: 1,
+                      filters: ingredients.map((ing, idx) => ({
+                        index: idx + 1,
+                        name: ing.name,
+                        quality: ing.quality,
+                        comparator: COMPARATOR.equal,
+                        count: ing.count,
+                      })),
+                    },
+                  ],
+                  request_from_buffers: settings.sourceChest.requestFromBuffers,
+                  trash_not_requested: settings.sourceChest.trashUnrequested,
+                },
+          items:
+            appData.logistic_containers.find(
+              (c) => c.name === settings.sourceChest.name,
+            )?.logistic_mode !== "none"
+              ? undefined
+              : items,
         });
       }
       addEntity(bp, {
@@ -709,7 +761,9 @@ const Settings: Component<{
         <SelectInput
           label="Input chest"
           entries={props.appData.logistic_containers
-            .filter((c) => ["buffer", "requester"].includes(c.logistic_mode))
+            .filter((c) =>
+              ["buffer", "requester", "none"].includes(c.logistic_mode),
+            )
             .map((c) => ({
               label: c.display_name,
               value: c.name,

@@ -17,6 +17,11 @@ export default function Changelog() {
       <h3>2026 March</h3>
       <ul>
         <li>
+          <FactorioBadge /> Make Everything: Allow normal chests to request
+          items from construction bots. Helpful when "Logistic system" isn't
+          researched, yet.
+        </li>
+        <li>
           <FactorioBadge /> Add save mechanism for all configured settings: They
           are now saved into the page URL. So just bookmark the page or share
           the specific link with a friend and never worry about reconfigure them

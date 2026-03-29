@@ -89,14 +89,16 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
     locale["inserters." .. entity_prototype.name] = entity_prototype.localised_name
 end
 
-for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"logistic-container"}}}) do
-    table.insert(data.logistic_containers, {
-        name = entity_prototype.name,
-        tile_width = entity_prototype.tile_width,
-        tile_height = entity_prototype.tile_height,
-        logistic_mode = entity_prototype.logistic_mode,
-    })
-    locale["logistic_containers." .. entity_prototype.name] = entity_prototype.localised_name
+for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"logistic-container", "container"}}}) do
+    if not entity_prototype.hidden then
+      table.insert(data.logistic_containers, {
+          name = entity_prototype.name,
+          tile_width = entity_prototype.tile_width,
+          tile_height = entity_prototype.tile_height,
+          logistic_mode = entity_prototype.logistic_mode,
+      })
+      locale["logistic_containers." .. entity_prototype.name] = entity_prototype.localised_name
+    end
 end
 
 for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"assembling-machine", "furnace", "rocket-silo"}}}) do
