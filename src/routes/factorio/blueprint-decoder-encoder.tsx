@@ -3,12 +3,15 @@ import {
   encodePlan,
 } from "@jensforstmann/factorio-blueprint-tools";
 import { Title } from "@solidjs/meta";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
+import { TextAreaInput } from "~/components/inputs";
 
 const Page = () => {
   const [inputBp, setInputBp] = createSignal("");
   const [json, setJson] = createSignal("");
   const [outputBp, setOutputBp] = createSignal("");
+
+  createEffect(() => {});
 
   return (
     <div class="w-full max-w-4xl m-auto mb-48">
@@ -17,56 +20,36 @@ const Page = () => {
         <h2>Blueprint Decoder & Encoder</h2>
         <p>
           Simply decode blueprint strings to JSON and encode JSON back to
-          factorio blueprint strings.
+          Factorio blueprint strings.
         </p>
       </div>
       <div class="my-8">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Input Blueprint String</span>
-          </label>
-          <textarea
-            class="textarea textarea-bordered h-24"
-            placeholder="Paste Blueprint String here"
-            value={inputBp()}
-            onInput={(e) => {
-              try {
-                setJson(
-                  JSON.stringify(decodePlan(e.currentTarget.value), null, 4),
-                );
-                setInputBp(e.currentTarget.value);
-              } catch (err) {
-                setJson("invalid blueprint string");
-              }
-            }}
-          ></textarea>
-        </div>
-      </div>
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Decoded (JSON)</span>
-        </label>
-        <textarea
-          class="textarea textarea-bordered h-96"
-          value={json()}
-          onInput={(e) => {
-            setJson(e.currentTarget.value);
+        <TextAreaInput
+          label="Input Blueprint String"
+          value={inputBp()}
+          setValue={(v) => {
             try {
-              setOutputBp(encodePlan(JSON.parse(e.currentTarget.value)));
+              setJson(JSON.stringify(decodePlan(v), null, 4));
+              setInputBp(v);
+            } catch (err) {
+              setJson("invalid blueprint string");
+            }
+          }}
+        />
+        <TextAreaInput
+          label="Decoded (JSON)"
+          value={json()}
+          setValue={(v) => {
+            setJson(v);
+            try {
+              setOutputBp(encodePlan(JSON.parse(v)));
             } catch (err) {
               setOutputBp("invalid JSON");
             }
           }}
-        ></textarea>
-      </div>
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Output Blueprint String</span>
-        </label>
-        <textarea
-          class="textarea textarea-bordered h-24"
-          value={outputBp()}
-        ></textarea>
+          class="h-96"
+        />
+        <TextAreaInput label="Output Blueprint String" value={outputBp()} />
       </div>
     </div>
   );

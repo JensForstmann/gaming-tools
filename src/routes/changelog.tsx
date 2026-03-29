@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 
-const FactorioBade = () => <span class="badge badge-neutral">Factorio</span>;
+const FactorioBadge = () => <span class="badge badge-neutral">Factorio</span>;
 
 export default function Changelog() {
   return (
@@ -14,17 +14,32 @@ export default function Changelog() {
         to see all changes.
       </p>
 
+      <h3>2026 March</h3>
+      <ul>
+        <li>
+          <FactorioBadge /> Add save mechanism for all configured settings: They
+          are now saved into the page URL. So just bookmark the page or share
+          the specific link with a friend and never worry about reconfigure them
+          again.
+        </li>
+        <li>
+          <FactorioBadge /> Blueprint to Constant Combinator: Add settings for
+          different generation modes, to set negative amounts and to define
+          specific logistic chest.
+        </li>
+      </ul>
+
       <h3>2024 November</h3>
       <ul>
         <li>
-          <FactorioBade /> Add Support for Factorio 2.0
+          <FactorioBadge /> Add Support for Factorio 2.0
         </li>
         <li>
-          <FactorioBade /> Make Everything: Add support for quality items &
+          <FactorioBadge /> Make Everything: Add support for quality items &
           recipes
         </li>
         <li>
-          <FactorioBade /> Make Everything: Add setting to allow different
+          <FactorioBadge /> Make Everything: Add setting to allow different
           crafting machines based on crafting category
         </li>
         <li>Add this changelog page :-P</li>

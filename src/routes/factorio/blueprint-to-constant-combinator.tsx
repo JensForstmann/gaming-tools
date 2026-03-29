@@ -7,6 +7,7 @@ import {
   decodePlan,
   DEFINES,
   encodePlan,
+  Entity,
   isBlueprint,
   isBlueprintBook,
   Plan,
@@ -14,6 +15,15 @@ import {
 import { Title } from "@solidjs/meta";
 import { createEffect, createSignal } from "solid-js";
 import { itemMapping } from "./item-mapping";
+import {
+  CheckboxInput,
+  NumberInput,
+  SelectInput,
+  TextAreaInput,
+  TextInput,
+} from "~/components/inputs";
+import { createStore } from "solid-js/store";
+import { useSettings } from "~/components/settings";
 
 const convertToItem = (entity: string) => {
   return {
@@ -23,6 +33,9 @@ const convertToItem = (entity: string) => {
 };
 
 const chunkArray = <T,>(myArray: T[], chunk_size: number): T[][] => {
+  if (chunk_size < 1) {
+    throw new Error(`chunkArray error: chunk size must be greater 0`);
+  }
   const results: T[][] = [];
   while (myArray.length) {
     results.push(myArray.splice(0, chunk_size));
@@ -36,12 +49,7 @@ type ItemToBuild = {
   count: number;
 };
 
-const convert = (
-  inputBp: string,
-  signalsPerCC: number,
-  includeRequester: boolean,
-  requestFromBuffer: boolean,
-): string => {
+const convert = (inputBp: string, settings: Settings): string => {
   try {
     const items: ItemToBuild[] = [];
 
@@ -74,6 +82,12 @@ const convert = (
       if (count === 0) {
         return;
       }
+      if (
+        settings.negateConstantCombinatorSignals &&
+        settings.generationMode !== "LOGISTIC_CHESTS"
+      ) {
+        count = -count;
+      }
       const existing = items.find(
         (item) => item.name === name && item.quality === quality,
       );
@@ -103,49 +117,81 @@ const convert = (
     ];
     blueprint.blueprint.wires = [];
 
-    chunkArray(items, signalsPerCC).forEach((chunk, index) => {
-      const constantCombinator = addEntity(blueprint, {
-        name: "constant-combinator",
-        position: {
-          x: 0.5 + index,
-          y: 0.5,
-        },
-        control_behavior: {
-          sections: {
-            sections: [
-              {
-                index: 1,
-                filters: chunk.map((item, index) => {
-                  return {
+    const signalLimit =
+      settings.signalLimit < 1 ? 1_000_000 : settings.signalLimit;
+
+    items.sort((a, b) => Math.abs(b.count) - Math.abs(a.count));
+
+    chunkArray(items, signalLimit).forEach((chunk, index) => {
+      let constantCombinator: Entity | undefined = undefined;
+      let requesterChest: Entity | undefined = undefined;
+
+      if (
+        settings.generationMode === "CONSTANT_COMBINATORS" ||
+        settings.generationMode === "BOTH"
+      ) {
+        constantCombinator = addEntity(blueprint, {
+          name: "constant-combinator",
+          position: {
+            x: 0.5 + index,
+            y: 0.5,
+          },
+          control_behavior: {
+            sections: {
+              sections: [
+                {
+                  index: 1,
+                  filters: chunk.map((item, index) => ({
                     index: index + 1,
                     name: item.name,
                     quality: item.quality,
                     comparator: COMPARATOR.equal,
                     count: item.count,
-                  };
-                }),
-              },
-            ],
+                  })),
+                },
+              ],
+            },
           },
-        },
-      });
+        });
+      }
 
-      if (includeRequester) {
-        const requesterChest = addEntity(blueprint, {
-          name: "requester-chest",
+      if (
+        settings.generationMode === "LOGISTIC_CHESTS" ||
+        settings.generationMode === "BOTH"
+      ) {
+        requesterChest = addEntity(blueprint, {
+          name: settings.logisticChestName,
           position: {
             x: 0.5 + index,
             y: 1.5,
           },
-          control_behavior: {
-            circuit_mode_of_operation: 1,
-            circuit_condition_enabled: false,
-          },
           request_filters: {
-            request_from_buffers: requestFromBuffer,
+            request_from_buffers: settings.requestFromBuffers,
+            trash_not_requested: settings.trashUnrequested,
+            sections:
+              settings.generationMode !== "LOGISTIC_CHESTS"
+                ? undefined
+                : [
+                    {
+                      index: 1,
+                      filters: chunk.map((item, index) => ({
+                        index: index + 1,
+                        name: item.name,
+                        quality: item.quality,
+                        comparator: COMPARATOR.equal,
+                        count: item.count,
+                      })),
+                    },
+                  ],
           },
         });
+      }
 
+      if (constantCombinator && requesterChest) {
+        requesterChest.control_behavior = {
+          circuit_mode_of_operation: 1,
+          circuit_condition_enabled: false,
+        };
         // add green wire
         blueprint.blueprint.wires!.push([
           constantCombinator.entity_number,
@@ -167,7 +213,7 @@ const HelpSection = () => {
   return (
     <div class="collapse collapse-arrow bg-base-200">
       <input type="checkbox" />
-      <h3 class="collapse-title m-0">Help / Example</h3>
+      <div class="collapse-title font-semibold">Help / Example</div>
       <div class="collapse-content">
         <img src="/images/blueprint-to-constant-combinator-blueprint.png" />
         <p>
@@ -185,24 +231,32 @@ const HelpSection = () => {
   );
 };
 
+type Settings = {
+  // TODO: make sure every setting works!
+  generationMode: "CONSTANT_COMBINATORS" | "LOGISTIC_CHESTS" | "BOTH";
+  signalLimit: number;
+  negateConstantCombinatorSignals: boolean;
+  trashUnrequested: boolean;
+  requestFromBuffers: boolean;
+  logisticChestName: string;
+};
+
 const Page = () => {
   const [inputBp, setInputBp] = createSignal("");
-  const [signalsPerCC, setSignalsPerCC] = createSignal(1);
-  const [includeRequester, setIncludeRequester] = createSignal(true);
-  const [requestFromBuffer, setRequestFromBuffer] = createSignal(true);
+
+  const [settings, setSettings] = useSettings<Settings>({
+    generationMode: "CONSTANT_COMBINATORS",
+    signalLimit: 1,
+    negateConstantCombinatorSignals: false,
+    trashUnrequested: false,
+    requestFromBuffers: false,
+    logisticChestName: "requester-chest",
+  });
+
   const [outputBp, setOutputBp] = createSignal("");
 
   createEffect(() => {
-    if (inputBp()) {
-      setOutputBp(
-        convert(
-          inputBp(),
-          signalsPerCC(),
-          includeRequester(),
-          requestFromBuffer(),
-        ),
-      );
-    }
+    setOutputBp(convert(inputBp(), settings));
   });
 
   return (
@@ -218,64 +272,75 @@ const Page = () => {
       <div class="h-8"></div>
       <HelpSection />
       <div class="my-8">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Input Blueprint String</span>
-          </label>
-          <textarea
-            class="textarea textarea-bordered h-24"
-            placeholder="Paste Blueprint String here"
-            value={inputBp()}
-            onInput={(e) => setInputBp(e.currentTarget.value)}
-          ></textarea>
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">
-              Maximum Signals per Constant Combinator
-            </span>
-          </label>
-          <input
-            type="number"
-            value={signalsPerCC()}
-            onInput={(e) => setSignalsPerCC(parseInt(e.currentTarget.value))}
-            min={1}
+        <TextAreaInput
+          label="Input Blueprint String"
+          value={inputBp()}
+          setValue={(v) => setInputBp(v)}
+        />
+        <div class="grid grid-cols-3 gap-x-4">
+          <div class="col-span-3">
+            <SelectInput
+              label="Generation mode"
+              currentValue={settings.generationMode}
+              setValue={(v) => setSettings("generationMode", v)}
+              entries={[
+                {
+                  label: "Only constant combinators",
+                  value: "CONSTANT_COMBINATORS",
+                },
+                {
+                  label: "Only logistic chests",
+                  value: "LOGISTIC_CHESTS",
+                },
+                {
+                  label: "Both (constant combinators and logistic chests)",
+                  value: "BOTH",
+                },
+              ]}
+              class="w-full"
+            />
+          </div>
+          <NumberInput
+            label={"Maximum signals per entity"}
+            value={settings.signalLimit}
+            setValue={(v) => setSettings("signalLimit", v)}
+            min={0}
             step={1}
-            class="input input-bordered"
+          />
+          <div class="col-span-2">
+            <CheckboxInput
+              label="Negative signals on constant combinators"
+              value={settings.negateConstantCombinatorSignals}
+              setValue={(v) => {
+                setSettings("negateConstantCombinatorSignals", v);
+              }}
+              disabled={settings.generationMode === "LOGISTIC_CHESTS"}
+            />
+          </div>
+          <TextInput
+            label="Logistic chest name"
+            value={settings.logisticChestName}
+            setValue={(v) => setSettings("logisticChestName", v)}
+            disabled={settings.generationMode === "CONSTANT_COMBINATORS"}
+          />
+          <CheckboxInput
+            label="Trasn unrequested"
+            value={settings.trashUnrequested}
+            setValue={(v) => {
+              setSettings("trashUnrequested", v);
+            }}
+            disabled={settings.generationMode === "CONSTANT_COMBINATORS"}
+          />
+          <CheckboxInput
+            label="Request from buffer chests"
+            value={settings.requestFromBuffers}
+            setValue={(v) => {
+              setSettings("requestFromBuffers", v);
+            }}
+            disabled={settings.generationMode === "CONSTANT_COMBINATORS"}
           />
         </div>
-        <div class="form-control">
-          <label class="label cursor-pointer">
-            <span class="label-text">Include Requester Chests</span>
-            <input
-              type="checkbox"
-              checked={includeRequester()}
-              onInput={(e) => setIncludeRequester(e.currentTarget.checked)}
-              class="checkbox"
-            />
-          </label>
-        </div>
-        <div class="form-control">
-          <label class="label cursor-pointer">
-            <span class={"label-text"}>Request from Buffer Chests</span>
-            <input
-              type="checkbox"
-              disabled={!includeRequester()}
-              checked={requestFromBuffer()}
-              onInput={(e) => setRequestFromBuffer(e.currentTarget.checked)}
-              class="checkbox"
-            />
-          </label>
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Output Blueprint String</span>
-          </label>
-          <textarea
-            class="textarea textarea-bordered h-24"
-            value={outputBp()}
-          ></textarea>
-        </div>
+        <TextAreaInput label="Output Blueprint String" value={outputBp()} />
         <div
           class="btn my-4 btn-primary w-full"
           onMouseDown={() => navigator.clipboard.writeText(outputBp())}

@@ -18,6 +18,7 @@ import {
 import { CheatCommand } from "./CheatCommand";
 import VanillaDataRaw from "./vanillaData.json";
 import VanillaLocalesRaw from "./vanillaLocales";
+import { useSettings } from "~/components/settings";
 
 type EmptyObj = Record<PropertyKey, never>;
 type EmptyLuaArray = EmptyObj; // Factorio's helpers.table_to_json() function will convert an empty array/table to {} instead of []
@@ -95,7 +96,6 @@ type AppCraftingMachine = SourceCraftingMachine<never> & {
 type AppCategory = {
   name: string;
   machines: Array<AppCraftingMachine>;
-  selectedMachine: string;
 };
 
 const LogisticModes = [
@@ -137,7 +137,7 @@ type AppData = {
   subgroups: SourceGroup[];
   categories: Array<AppCategory>;
   qualities: Array<AppQuality>;
-  settings: Settings;
+  // settings: Settings;
 };
 
 const getLocale = (rawLocales: string, key: string) => {
@@ -176,9 +176,6 @@ const convertSourceDataToAppData = (
 ): AppData => {
   const categoriesSet = new Set<string>();
   data.recipes.forEach((r) => categoriesSet.add(r.category));
-  const categories = Array.from(categoriesSet).sort((a, b) =>
-    a.localeCompare(b),
-  );
   const crafting_machines: AppCraftingMachine[] = !Array.isArray(
     data.crafting_machines,
   )
@@ -242,16 +239,18 @@ const convertSourceDataToAppData = (
             getLocale(locales, "groups." + group.name) || group.name,
         })),
     subgroups: !Array.isArray(data.subgroups) ? [] : data.subgroups,
-    categories: categories.map((category) => {
-      const machines = crafting_machines.filter((machine) =>
-        machine.crafting_categories.includes(category),
-      );
-      return {
-        name: category,
-        machines: machines,
-        selectedMachine: getBestCraftingMachine(machines)?.name ?? "",
-      };
-    }),
+    categories: Array.from(categoriesSet)
+      .sort((a, b) => a.localeCompare(b))
+      .map((category) => {
+        const machines = crafting_machines.filter((machine) =>
+          machine.crafting_categories.includes(category),
+        );
+        return {
+          name: category,
+          machines: machines,
+          selectedMachine: getBestCraftingMachine(machines)?.name ?? "",
+        };
+      }),
     qualities: !Array.isArray(data.qualities)
       ? []
       : data.qualities.map((quality) => ({
@@ -259,32 +258,6 @@ const convertSourceDataToAppData = (
           display_name:
             getLocale(locales, "qualities." + quality.name) || quality.name,
         })),
-    settings: {
-      blueprintMaxWidth: 12,
-      columnSpace: 0,
-      rowSpace: 0,
-      sourceChest: {
-        name: "requester-chest",
-        requestFromBuffers: true,
-        trashUnrequested: true,
-        limitRequestStacks: 3,
-      },
-      targetChest: {
-        name: "buffer-chest",
-        trashUnrequested: true,
-        setRequestFilter: true,
-      },
-      inserter: {
-        name: "bulk-inserter",
-        setLimit: false,
-      },
-      outserter: {
-        name: "bulk-inserter",
-        setLimit: true,
-      },
-      craftStackLimit: 4,
-      productQuality: "normal",
-    },
   };
 };
 
@@ -294,6 +267,7 @@ const VanillaAppData = convertSourceDataToAppData(
 );
 
 type Settings = {
+  selectedMachines: Array<{ category: string; machine: string }>;
   blueprintMaxWidth: number;
   columnSpace: number;
   rowSpace: number;
@@ -320,6 +294,37 @@ type Settings = {
   productQuality: string;
 };
 
+const DefaultSettings: Settings = {
+  selectedMachines: VanillaAppData.categories.map((category) => ({
+    category: category.name,
+    machine: getBestCraftingMachine(category.machines)?.name ?? "",
+  })),
+  blueprintMaxWidth: 12,
+  columnSpace: 0,
+  rowSpace: 0,
+  sourceChest: {
+    name: "requester-chest",
+    requestFromBuffers: true,
+    trashUnrequested: true,
+    limitRequestStacks: 3,
+  },
+  targetChest: {
+    name: "buffer-chest",
+    trashUnrequested: true,
+    setRequestFilter: true,
+  },
+  inserter: {
+    name: "bulk-inserter",
+    setLimit: false,
+  },
+  outserter: {
+    name: "bulk-inserter",
+    setLimit: true,
+  },
+  craftStackLimit: 4,
+  productQuality: "normal",
+};
+
 const getItemStackSize = (itemName: string, items: SourceItem[]) => {
   return items.find((i) => i.name === itemName)?.stack_size ?? 1;
 };
@@ -337,35 +342,31 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
   ];
 
   const inserter = appData.inserters.find(
-    (i) => i.name === appData.settings.inserter.name,
+    (i) => i.name === settings.inserter.name,
   );
   if (!inserter) {
-    throw new Error(`Inserter ${appData.settings.inserter.name} not found`);
+    throw new Error(`Inserter ${settings.inserter.name} not found`);
   }
 
   const outserter = appData.inserters.find(
-    (i) => i.name === appData.settings.outserter.name,
+    (i) => i.name === settings.outserter.name,
   );
   if (!outserter) {
-    throw new Error(`Outserter ${appData.settings.outserter.name} not found`);
+    throw new Error(`Outserter ${settings.outserter.name} not found`);
   }
 
   const sourceChest = appData.logistic_containers.find(
-    (c) => c.name === appData.settings.sourceChest.name,
+    (c) => c.name === settings.sourceChest.name,
   );
   if (!sourceChest) {
-    throw new Error(
-      `Requester chest ${appData.settings.sourceChest.name} not found`,
-    );
+    throw new Error(`Requester chest ${settings.sourceChest.name} not found`);
   }
 
   const targetChest = appData.logistic_containers.find(
-    (c) => c.name === appData.settings.targetChest.name,
+    (c) => c.name === settings.targetChest.name,
   );
   if (!targetChest) {
-    throw new Error(
-      `Provider chest ${appData.settings.targetChest.name} not found`,
-    );
+    throw new Error(`Provider chest ${settings.targetChest.name} not found`);
   }
 
   const getInserterLimitControlBehavior = (
@@ -396,12 +397,20 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
       if (!category) {
         throw new Error(`category ${r.category} not found`);
       }
+      const selectedMachineName = settings.selectedMachines.find(
+        (entry) => entry.category === category.name,
+      )?.machine;
+      if (!selectedMachineName) {
+        throw new Error(
+          `no selected machine found for category ${category.name}`,
+        );
+      }
       const machine = category.machines.find(
-        (machine) => machine.name === category.selectedMachine,
+        (machine) => machine.name === selectedMachineName,
       );
       if (!machine) {
         throw new Error(
-          `selected machine ${category.selectedMachine} not found for category ${category.name}`,
+          `selected machine ${selectedMachineName} not found for category ${category.name}`,
         );
       }
 
@@ -550,7 +559,7 @@ const HelpSection = () => {
   return (
     <div class="collapse collapse-arrow bg-base-200">
       <input type="checkbox" />
-      <h3 class="collapse-title m-0">Help / Example</h3>
+      <div class="collapse-title font-semibold">Help / Example</div>
       <div class="collapse-content">
         <p>
           This generator gives you a blueprint to produce the selected recipes.
@@ -596,8 +605,9 @@ const HelpSection = () => {
 };
 
 const Settings: Component<{
+  settings: Settings;
+  setSettings: SetStoreFunction<Settings>;
   appData: AppData;
-  setAppData: SetStoreFunction<AppData>;
 }> = (props) => {
   const currentCategories = () => {
     const categories = new Set<string>();
@@ -610,10 +620,10 @@ const Settings: Component<{
     return props.appData.logistic_containers.find((lc) => lc.name === name);
   };
   const currentSourceChest = () => {
-    return getChestByName(props.appData.settings.sourceChest.name);
+    return getChestByName(props.settings.sourceChest.name);
   };
   const currentTargetChest = () => {
-    return getChestByName(props.appData.settings.targetChest.name);
+    return getChestByName(props.settings.targetChest.name);
   };
   return (
     <>
@@ -634,10 +644,19 @@ const Settings: Component<{
                   label: machine.display_name,
                   value: machine.name,
                 }))}
-                currentValue={category.selectedMachine}
-                setValue={(v) =>
-                  props.setAppData("categories", idx(), "selectedMachine", v)
+                currentValue={
+                  props.settings.selectedMachines.find(
+                    (entry) => entry.category === category.name,
+                  )?.machine
                 }
+                setValue={(v) => {
+                  const index = props.settings.selectedMachines.findIndex(
+                    (entry) => entry.category === category.name,
+                  );
+                  if (index >= 0) {
+                    props.setSettings("selectedMachines", index, "machine", v);
+                  }
+                }}
               />
             </Show>
           )}
@@ -647,19 +666,19 @@ const Settings: Component<{
       <h4>Products</h4>
       <div class="grid grid-cols-3 gap-x-4">
         <NumberInput
-          label="Wanted product amount (in stacks)"
-          value={props.appData.settings.craftStackLimit}
-          setValue={(v) => props.setAppData("settings", "craftStackLimit", v)}
+          label="Wanted amount (in stacks)"
+          value={props.settings.craftStackLimit}
+          setValue={(v) => props.setSettings("craftStackLimit", v)}
           min={0}
         />
         <SelectInput
           label="Product quality"
-          currentValue={props.appData.settings.productQuality}
+          currentValue={props.settings.productQuality}
           entries={props.appData.qualities.map((q) => ({
             label: q.display_name,
             value: q.name,
           }))}
-          setValue={(v) => props.setAppData("settings", "productQuality", v)}
+          setValue={(v) => props.setSettings("productQuality", v)}
         />
       </div>
 
@@ -667,20 +686,20 @@ const Settings: Component<{
       <div class="grid grid-cols-3 gap-x-4">
         <NumberInput
           label="Blueprint max width (in tiles)"
-          value={props.appData.settings.blueprintMaxWidth}
-          setValue={(v) => props.setAppData("settings", "blueprintMaxWidth", v)}
+          value={props.settings.blueprintMaxWidth}
+          setValue={(v) => props.setSettings("blueprintMaxWidth", v)}
           min={0}
         />
         <NumberInput
           label="Space between rows (in tiles)"
-          value={props.appData.settings.rowSpace}
-          setValue={(v) => props.setAppData("settings", "rowSpace", v)}
+          value={props.settings.rowSpace}
+          setValue={(v) => props.setSettings("rowSpace", v)}
           min={0}
         />
         <NumberInput
           label="Space between columns (in tiles)"
-          value={props.appData.settings.columnSpace}
-          setValue={(v) => props.setAppData("settings", "columnSpace", v)}
+          value={props.settings.columnSpace}
+          setValue={(v) => props.setSettings("columnSpace", v)}
           min={0}
         />
       </div>
@@ -695,32 +714,30 @@ const Settings: Component<{
               label: c.display_name,
               value: c.name,
             }))}
-          currentValue={props.appData.settings.sourceChest.name}
-          setValue={(v) =>
-            props.setAppData("settings", "sourceChest", "name", v)
-          }
+          currentValue={props.settings.sourceChest.name}
+          setValue={(v) => props.setSettings("sourceChest", "name", v)}
         />
         <CheckboxInput
           label="Trash unrequested"
-          value={props.appData.settings.sourceChest.trashUnrequested}
+          value={props.settings.sourceChest.trashUnrequested}
           setValue={(v) =>
-            props.setAppData("settings", "sourceChest", "trashUnrequested", v)
+            props.setSettings("sourceChest", "trashUnrequested", v)
           }
         />
         <div></div>
         <NumberInput
           label="Limit requested items (in stacks)"
-          value={props.appData.settings.sourceChest.limitRequestStacks}
+          value={props.settings.sourceChest.limitRequestStacks}
           setValue={(v) =>
-            props.setAppData("settings", "sourceChest", "limitRequestStacks", v)
+            props.setSettings("sourceChest", "limitRequestStacks", v)
           }
           min={0}
         />
         <CheckboxInput
           label="Request from buffer chests"
-          value={props.appData.settings.sourceChest.requestFromBuffers}
+          value={props.settings.sourceChest.requestFromBuffers}
           setValue={(v) =>
-            props.setAppData("settings", "sourceChest", "requestFromBuffers", v)
+            props.setSettings("sourceChest", "requestFromBuffers", v)
           }
           disabled={(["buffer"] as LogisticMode[]).includes(
             currentSourceChest()?.logistic_mode!,
@@ -745,16 +762,14 @@ const Settings: Component<{
               label: c.display_name,
               value: c.name,
             }))}
-          currentValue={props.appData.settings.targetChest.name}
-          setValue={(v) =>
-            props.setAppData("settings", "targetChest", "name", v)
-          }
+          currentValue={props.settings.targetChest.name}
+          setValue={(v) => props.setSettings("targetChest", "name", v)}
         />
         <CheckboxInput
           label="Trash unrequested"
-          value={props.appData.settings.targetChest.trashUnrequested}
+          value={props.settings.targetChest.trashUnrequested}
           setValue={(v) =>
-            props.setAppData("settings", "targetChest", "trashUnrequested", v)
+            props.setSettings("targetChest", "trashUnrequested", v)
           }
           disabled={
             !(["buffer"] as LogisticMode[]).includes(
@@ -764,9 +779,9 @@ const Settings: Component<{
         />
         <CheckboxInput
           label="Set request filter for product"
-          value={props.appData.settings.targetChest.setRequestFilter}
+          value={props.settings.targetChest.setRequestFilter}
           setValue={(v) =>
-            props.setAppData("settings", "targetChest", "setRequestFilter", v)
+            props.setSettings("targetChest", "setRequestFilter", v)
           }
           disabled={(
             ["active-provider", "passive-provider"] as LogisticMode[]
@@ -782,15 +797,13 @@ const Settings: Component<{
             label: i.display_name,
             value: i.name,
           }))}
-          currentValue={props.appData.settings.inserter.name}
-          setValue={(v) => props.setAppData("settings", "inserter", "name", v)}
+          currentValue={props.settings.inserter.name}
+          setValue={(v) => props.setSettings("inserter", "name", v)}
         />
         <CheckboxInput
           label="Set inserter limit"
-          value={props.appData.settings.inserter.setLimit}
-          setValue={(v) =>
-            props.setAppData("settings", "inserter", "setLimit", v)
-          }
+          value={props.settings.inserter.setLimit}
+          setValue={(v) => props.setSettings("inserter", "setLimit", v)}
         />
         <div></div>
         <SelectInput
@@ -799,15 +812,13 @@ const Settings: Component<{
             label: i.display_name,
             value: i.name,
           }))}
-          currentValue={props.appData.settings.outserter.name}
-          setValue={(v) => props.setAppData("settings", "outserter", "name", v)}
+          currentValue={props.settings.outserter.name}
+          setValue={(v) => props.setSettings("outserter", "name", v)}
         />
         <CheckboxInput
           label="Set outserter limit"
-          value={props.appData.settings.outserter.setLimit}
-          setValue={(v) =>
-            props.setAppData("settings", "outserter", "setLimit", v)
-          }
+          value={props.settings.outserter.setLimit}
+          setValue={(v) => props.setSettings("outserter", "setLimit", v)}
         />
       </div>
     </>
@@ -819,6 +830,7 @@ const Page = () => {
   let showPopupInput: HTMLInputElement | undefined;
 
   const [appData, setAppData] = createStore<AppData>(VanillaAppData);
+  const [settings, setSettings] = useSettings(DefaultSettings);
 
   const [search, setSearch] = createSignal("");
   const [categoryFilter, setCategoryFilter] = createSignal("");
@@ -873,206 +885,212 @@ const Page = () => {
   });
 
   return (
-    <div class="w-full max-w-4xl m-auto mb-48 prose">
-      <Title>
-        "Make Everything" Blueprint Generator | Factorio | Gaming Tools
-      </Title>
-      <div>
-        <h2>"Make Everything" Blueprint Generator</h2>
-        <p>This tool can be used to build bot based malls/hubs.</p>
-      </div>
-      <div class="h-8"></div>
-      <HelpSection />
-      <div class="mt-8">
-        <label for="import" class="btn">
-          Import Custom Recipes (Modded Gameplay)
-        </label>
-        <input
-          type="checkbox"
-          id="import"
-          class="modal-toggle"
-          ref={showPopupInput}
-        />
-        <label for="import" class="modal cursor-pointer">
-          <div class="modal-box relative">
-            <label
-              for="import"
-              class="btn btn-sm btn-circle absolute right-2 top-2"
-            >
-              ✕
-            </label>
-            <h3 class="mt-0">Import Recipes</h3>
-            <button
-              class="btn btn-primary"
-              onClick={() => navigator.clipboard.writeText(CheatCommand)}
-            >
-              Copy Cheat Command
-            </button>
-            <p>
-              Copy this cheat command and execute it ingame. *
-              <br />A file called{" "}
-              <code>make-everything-generator-export.meg</code> will be created
-              in your{" "}
-              <a
-                href="https://wiki.factorio.com/Application_directory"
-                target="_blank"
+    <>
+      <div class="w-full max-w-4xl m-auto prose">
+        <Title>
+          "Make Everything" Blueprint Generator | Factorio | Gaming Tools
+        </Title>
+        <div>
+          <h2>"Make Everything" Blueprint Generator</h2>
+          <p>This tool can be used to build bot based malls/hubs.</p>
+        </div>
+        <div class="h-8"></div>
+        <HelpSection />
+        <div class="mt-8">
+          <label for="import" class="btn">
+            Import Custom Recipes (Modded Gameplay)
+          </label>
+          <input
+            type="checkbox"
+            id="import"
+            class="modal-toggle"
+            ref={showPopupInput}
+          />
+          <label for="import" class="modal cursor-pointer">
+            <div class="modal-box relative">
+              <label
+                for="import"
+                class="btn btn-sm btn-circle absolute right-2 top-2"
               >
-                script-output
-              </a>{" "}
-              folder of Factorio which you must select below.
-            </p>
-            <input
-              type="file"
-              class="file-input file-input-bordered w-full max-w-xs"
-              accept=".meg"
-              onChange={async (e) => {
-                const file = e.currentTarget.files?.[0];
-                const input = e.currentTarget;
-                if (file) {
-                  try {
-                    const text = await file.text();
-                    const [json, locales] = text.split("\n\n", 2);
-                    setAppData(
-                      convertSourceDataToAppData(JSON.parse(json), locales),
-                    );
-                    resetSearchAndFilters();
-                    if (showPopupInput) {
-                      input.value = "";
-                      showPopupInput.checked = false;
-                    }
-                  } catch (err) {
-                    console.error(err);
-                  }
-                }
-              }}
-            />
-            <p class="text-sm">
-              * Executing cheat commands will disable achievements. You can take
-              a savegame and reload it afterwards.
-            </p>
-          </div>
-        </label>
-      </div>
-      <table class="table table-sm w-full mt-8 table-pin-rows">
-        <thead>
-          <tr class="bg-base-300">
-            <th class="py-6 align-middle rounded-tl-lg">
-              <label>
-                <input
-                  type="checkbox"
-                  class="checkbox checkbox-lg"
-                  ref={globalCheckbox}
-                  onChange={() => {
-                    const _filteredRecipes = filteredRecipes();
-                    const _selectedRecipes = _filteredRecipes.filter(
-                      (recipe) => recipe.selected,
-                    );
-                    setAppData(
-                      "recipes",
-                      (r) =>
-                        _filteredRecipes.find((r2) => r2.name === r.name) !==
-                        undefined,
-                      "selected",
-                      _selectedRecipes.length !== _filteredRecipes.length,
-                    );
-                  }}
-                />
+                ✕
               </label>
-            </th>
-            <th class="py-6 align-top">
-              Recipe
-              <TextInput value={search()} setValue={setSearch} />
-            </th>
-            <th class="py-6 align-top">
-              <div>Group</div>
-              <select
-                class="select w-full max-w-xs"
-                onChange={(e) => setGroupFilter(e.currentTarget.value)}
+              <h3 class="mt-0">Import Recipes</h3>
+              <button
+                class="btn btn-primary"
+                onClick={() => navigator.clipboard.writeText(CheatCommand)}
               >
-                <option value={""}>filter...</option>
-                <For each={appData.groups}>
-                  {(group) => (
-                    <option value={group.name}>{group.display_name}</option>
-                  )}
-                </For>
-              </select>
-            </th>
-            <th class="py-6 align-top">
-              <div>Subgroup</div>
-              <select
-                class="select w-full max-w-xs"
-                onChange={(e) => setSubgroupFilter(e.currentTarget.value)}
-              >
-                <option value={""}>filter...</option>
-                <For each={appData.subgroups}>
-                  {(subgroup) => (
-                    <option value={subgroup.name}>{subgroup.name}</option>
-                  )}
-                </For>
-              </select>
-            </th>
-            <th class="py-6 align-top rounded-tr-lg">
-              <div>Category</div>
-              <select
-                class="select w-full max-w-xs"
-                onChange={(e) => setCategoryFilter(e.currentTarget.value)}
-              >
-                <option value={""}>filter...</option>
-                <For each={appData.categories}>
-                  {(category) => <option>{category.name}</option>}
-                </For>
-              </select>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <For each={filteredRecipes()}>
-            {(recipe) => (
-              <tr>
-                <td>
-                  <label>
-                    <input
-                      type="checkbox"
-                      class="checkbox"
-                      checked={recipe.selected}
-                      onChange={() => toggleRecipe(recipe.name)}
-                    />
-                  </label>
-                </td>
-                <td>{recipe.display_name}</td>
-                <td>{recipe.group_display_name}</td>
-                <td>{recipe.subgroup_name}</td>
-                <td>{recipe.category}</td>
-              </tr>
-            )}
-          </For>
-        </tbody>
-        <tfoot>
-          <tr class="bg-base-300">
-            <th class="rounded-bl-lg"></th>
-            <th>Recipe</th>
-            <th>Group</th>
-            <th>Subgroup</th>
-            <th class="rounded-br-lg">Category</th>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="mt-8">
-        <Settings appData={appData} setAppData={setAppData} />
+                Copy Cheat Command
+              </button>
+              <p>
+                Copy this cheat command and execute it ingame. *
+                <br />A file called{" "}
+                <code>make-everything-generator-export.meg</code> will be
+                created in your{" "}
+                <a
+                  href="https://wiki.factorio.com/Application_directory"
+                  target="_blank"
+                >
+                  script-output
+                </a>{" "}
+                folder of Factorio which you must select below.
+              </p>
+              <input
+                type="file"
+                class="file-input file-input-bordered w-full max-w-xs"
+                accept=".meg"
+                onChange={async (e) => {
+                  const file = e.currentTarget.files?.[0];
+                  const input = e.currentTarget;
+                  if (file) {
+                    try {
+                      const text = await file.text();
+                      const [json, locales] = text.split("\n\n", 2);
+                      setAppData(
+                        convertSourceDataToAppData(JSON.parse(json), locales),
+                      );
+                      resetSearchAndFilters();
+                      if (showPopupInput) {
+                        input.value = "";
+                        showPopupInput.checked = false;
+                      }
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }
+                }}
+              />
+              <p class="text-sm">
+                * Executing cheat commands will disable achievements. You can
+                take a savegame and reload it afterwards.
+              </p>
+            </div>
+          </label>
+        </div>
       </div>
-      <div class="mt-8">
-        <button
-          class="btn btn-primary"
-          onClick={() => {
-            navigator.clipboard.writeText(
-              getBlueprint(appData.settings, appData),
-            );
-          }}
-        >
-          Generate & Copy Blueprint
-        </button>
+      <div class="w-full max-w-4xl m-auto mb-48">
+        <table class="table table-md w-full mt-8 table-pin-rows">
+          <thead>
+            <tr class="bg-base-300">
+              <th class="py-6 align-middle rounded-tl-lg">
+                <label>
+                  <input
+                    type="checkbox"
+                    class="checkbox checkbox-lg"
+                    ref={globalCheckbox}
+                    onChange={() => {
+                      const _filteredRecipes = filteredRecipes();
+                      const _selectedRecipes = _filteredRecipes.filter(
+                        (recipe) => recipe.selected,
+                      );
+                      setAppData(
+                        "recipes",
+                        (r) =>
+                          _filteredRecipes.find((r2) => r2.name === r.name) !==
+                          undefined,
+                        "selected",
+                        _selectedRecipes.length !== _filteredRecipes.length,
+                      );
+                    }}
+                  />
+                </label>
+              </th>
+              <th class="py-6 align-top">
+                Recipe
+                <TextInput value={search()} setValue={setSearch} />
+              </th>
+              <th class="py-6 align-top">
+                <div>Group</div>
+                <select
+                  class="select w-full max-w-xs"
+                  onChange={(e) => setGroupFilter(e.currentTarget.value)}
+                >
+                  <option value={""}>filter...</option>
+                  <For each={appData.groups}>
+                    {(group) => (
+                      <option value={group.name}>{group.display_name}</option>
+                    )}
+                  </For>
+                </select>
+              </th>
+              <th class="py-6 align-top">
+                <div>Subgroup</div>
+                <select
+                  class="select w-full max-w-xs"
+                  onChange={(e) => setSubgroupFilter(e.currentTarget.value)}
+                >
+                  <option value={""}>filter...</option>
+                  <For each={appData.subgroups}>
+                    {(subgroup) => (
+                      <option value={subgroup.name}>{subgroup.name}</option>
+                    )}
+                  </For>
+                </select>
+              </th>
+              <th class="py-6 align-top rounded-tr-lg">
+                <div>Category</div>
+                <select
+                  class="select w-full max-w-xs"
+                  onChange={(e) => setCategoryFilter(e.currentTarget.value)}
+                >
+                  <option value={""}>filter...</option>
+                  <For each={appData.categories}>
+                    {(category) => <option>{category.name}</option>}
+                  </For>
+                </select>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <For each={filteredRecipes()}>
+              {(recipe) => (
+                <tr>
+                  <td>
+                    <label>
+                      <input
+                        type="checkbox"
+                        class="checkbox"
+                        checked={recipe.selected}
+                        onChange={() => toggleRecipe(recipe.name)}
+                      />
+                    </label>
+                  </td>
+                  <td>{recipe.display_name}</td>
+                  <td>{recipe.group_display_name}</td>
+                  <td>{recipe.subgroup_name}</td>
+                  <td>{recipe.category}</td>
+                </tr>
+              )}
+            </For>
+          </tbody>
+          <tfoot>
+            <tr class="bg-base-300">
+              <th class="rounded-bl-lg"></th>
+              <th>Recipe</th>
+              <th>Group</th>
+              <th>Subgroup</th>
+              <th class="rounded-br-lg">Category</th>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="mt-8 prose w-full max-w-4xl m-auto">
+          <Settings
+            settings={settings}
+            setSettings={setSettings}
+            appData={appData}
+          />
+        </div>
+        <div class="mt-8">
+          <button
+            class="btn btn-primary"
+            onClick={() => {
+              navigator.clipboard.writeText(getBlueprint(settings, appData));
+            }}
+          >
+            Generate & Copy Blueprint
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
