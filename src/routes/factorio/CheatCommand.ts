@@ -10,6 +10,7 @@ local data = {
     groups = {},
     subgroups = {},
     qualities = {},
+    rocket_silos = {},
 }
 
 local can_be_researched_map = {}
@@ -60,6 +61,7 @@ for _, item_prototype in pairs(prototypes.item) do
     table.insert(data.items, {
       name = item_prototype.name,
       stack_size = item_prototype.stack_size,
+      weight = item_prototype.weight
     })
 end
 
@@ -91,7 +93,7 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
         local inventory_sizes = {}
         for _, quality_prototype in pairs(prototypes.quality) do
             if not quality_prototype.hidden then
-                inventory_sizes[quality_prototype.name] = entity_prototype.get_inventory_size(1, quality_prototype)
+                inventory_sizes[quality_prototype.name] = entity_prototype.get_inventory_size(defines.inventory.chest, quality_prototype)
             end
         end
         table.insert(data.logistic_containers, {
@@ -103,6 +105,23 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
         })
         locale["logistic_containers." .. entity_prototype.name] = entity_prototype.localised_name
     end
+end
+
+for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"rocket-silo"}}}) do
+    local inventory_sizes = {}
+    for _, quality_prototype in pairs(prototypes.quality) do
+        if not quality_prototype.hidden then
+            inventory_sizes[quality_prototype.name] = entity_prototype.get_inventory_size(defines.inventory.rocket_silo_rocket, quality_prototype)
+        end
+    end
+    table.insert(data.rocket_silos, {
+        name = entity_prototype.name,
+        tile_width = entity_prototype.tile_width,
+        tile_height = entity_prototype.tile_height,
+        lift_weight = prototypes["utility_constants"].rocket_lift_weight,
+        inventory_sizes = inventory_sizes,
+    })
+    locale["rocket_silos." .. entity_prototype.name] = entity_prototype.localised_name
 end
 
 for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"assembling-machine", "furnace", "rocket-silo"}}}) do

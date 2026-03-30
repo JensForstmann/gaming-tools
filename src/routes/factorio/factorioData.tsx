@@ -26,6 +26,8 @@ export type SourceRecipe<EmptyArray> = {
 export type SourceItem = {
   name: string;
   stack_size: number;
+  /** in grams */
+  weight: number;
 };
 
 export type SourceEntity = {
@@ -45,9 +47,11 @@ export type SourceInserter = SourceEntity & {
   inserter_drop_position: number[];
 };
 
-type SourceLogisticContainer = SourceEntity & {
+type SourceInventorySizes = Record<string, number>;
+
+export type SourceLogisticContainer = SourceEntity & {
   /** key = quality */
-  inventory_sizes: Record<string, number>;
+  inventory_sizes: SourceInventorySizes;
   logistic_mode?: string;
 };
 
@@ -60,6 +64,13 @@ export type SourceQuality = {
   name: string;
 };
 
+export type SourceRocketSilo = SourceEntity & {
+  name: string;
+  inventory_sizes: SourceInventorySizes;
+  /** in grams */
+  lift_weight: number;
+};
+
 type SourceData<EmptyArray> = {
   recipes: SourceRecipe<EmptyArray>[] | EmptyArray;
   items: SourceItem[] | EmptyArray;
@@ -69,6 +80,7 @@ type SourceData<EmptyArray> = {
   groups: SourceGroup[] | EmptyArray;
   subgroups: SourceGroup[] | EmptyArray;
   qualities: Array<SourceQuality> | EmptyArray;
+  rocket_silos: SourceRocketSilo[] | EmptyArray;
 };
 
 // Assign imported data here to let typescript check our assumption (the defined types above).

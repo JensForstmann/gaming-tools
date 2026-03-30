@@ -299,6 +299,7 @@ logistic_containers.passive-provider-chest=Passive provider chest
 logistic_containers.storage-chest=Storage chest
 logistic_containers.buffer-chest=Buffer chest
 logistic_containers.requester-chest=Requester chest
+rocket_silos.rocket-silo=Rocket silo
 crafting_machines.stone-furnace=Stone furnace
 crafting_machines.steel-furnace=Steel furnace
 crafting_machines.electric-furnace=Electric furnace
