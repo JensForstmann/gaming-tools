@@ -436,14 +436,42 @@ const convert = (
         (s) => s.name === settings.logisticChestName,
       ) > -1;
 
+    const unitWidth =
+      settings.generationMode === "BOTH" ||
+      settings.generationMode === "LOGISTIC_CHESTS" ||
+      isRocketSilo
+        ? logisticChest.tile_width
+        : 1;
+    const unitHeight = isRocketSilo
+      ? logisticChest.tile_height
+      : settings.generationMode === "BOTH"
+        ? logisticChest.tile_height + 1
+        : settings.generationMode === "LOGISTIC_CHESTS"
+          ? logisticChest.tile_height
+          : 1;
+    const area =
+      unitWidth *
+      unitHeight *
+      (isRocketSilo
+        ? reallyChunked.rockets.length
+        : reallyChunked.spread.length);
+    const sqrt = Math.sqrt(area);
+    const unitsPerLine = Math.ceil(sqrt / unitWidth);
+
     if (isRocketSilo) {
       reallyChunked.rockets.forEach(({ items }, index) => {
+        const line =
+          settings.outputPlacement === "SQUARE"
+            ? Math.floor(index / unitsPerLine)
+            : 0;
+        const posInLine =
+          settings.outputPlacement === "SQUARE" ? index % unitsPerLine : index;
         addEntity(blueprint, {
           name: settings.logisticChestName,
           quality: settings.logisticChestQuality,
           position: {
-            x: logisticChest.tile_width * index + logisticChest.tile_width / 2,
-            y: logisticChest.tile_height / 2,
+            x: unitWidth * posInLine + unitWidth / 2,
+            y: line * unitHeight + unitHeight / 2,
           },
           items: items,
         });
@@ -457,6 +485,12 @@ const convert = (
       reallyChunked.spread.forEach(({ filter, items }, index) => {
         let constantCombinator: Entity | undefined = undefined;
         let requesterChest: Entity | undefined = undefined;
+        const line =
+          settings.outputPlacement === "SQUARE"
+            ? Math.floor(index / unitsPerLine)
+            : 0;
+        const posInLine =
+          settings.outputPlacement === "SQUARE" ? index % unitsPerLine : index;
 
         if (
           settings.generationMode === "CONSTANT_COMBINATORS" ||
@@ -465,9 +499,8 @@ const convert = (
           constantCombinator = addEntity(blueprint, {
             name: "constant-combinator",
             position: {
-              x:
-                logisticChest.tile_width * index + logisticChest.tile_width / 2,
-              y: 0.5,
+              x: unitWidth * posInLine + 0.5,
+              y: line * unitHeight + 0.5,
             },
             control_behavior: {
               sections: {
@@ -498,9 +531,8 @@ const convert = (
             name: settings.logisticChestName,
             quality: settings.logisticChestQuality,
             position: {
-              x:
-                logisticChest.tile_width * index + logisticChest.tile_width / 2,
-              y: 0.5 + logisticChest.tile_height / 2,
+              x: unitWidth * posInLine + unitWidth / 2,
+              y: line * unitHeight + 1 + logisticChest.tile_height / 2,
             },
             request_filters: isFakeLogisticChest
               ? undefined
@@ -578,6 +610,7 @@ const HelpSection = () => {
 
 type Settings = {
   generationMode: "CONSTANT_COMBINATORS" | "LOGISTIC_CHESTS" | "BOTH";
+  outputPlacement: "LINE" | "SQUARE";
   signalLimit: number;
   negateConstantCombinatorSignals: boolean;
   trashUnrequested: boolean;
@@ -596,6 +629,7 @@ const Page = () => {
 
   const [settings, setSettings] = useSettings<Settings>({
     generationMode: "CONSTANT_COMBINATORS",
+    outputPlacement: "LINE",
     signalLimit: 1,
     negateConstantCombinatorSignals: false,
     trashUnrequested: false,
@@ -667,7 +701,7 @@ const Page = () => {
           setValue={(v) => setInputBp(v)}
         />
         <div class="grid grid-cols-3 gap-x-4">
-          <div class="col-span-3">
+          <div class="col-span-2">
             <SelectInput
               label="Generation mode"
               currentValue={settings.generationMode}
@@ -689,6 +723,22 @@ const Page = () => {
               class="w-full"
             />
           </div>
+          <SelectInput
+            label="Output placement"
+            currentValue={settings.outputPlacement}
+            setValue={(v) => setSettings("outputPlacement", v)}
+            entries={[
+              {
+                label: "Line",
+                value: "LINE",
+              },
+              {
+                label: "Square",
+                value: "SQUARE",
+              },
+            ]}
+            class="w-full"
+          />
           <NumberInput
             label={"Maximum items per entity"}
             value={settings.signalLimit}

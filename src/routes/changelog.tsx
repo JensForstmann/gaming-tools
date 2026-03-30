@@ -17,26 +17,47 @@ export default function Changelog() {
       <h3>2026 March</h3>
       <ul>
         <li>
-          <FactorioBadge /> Make Everything: Allow normal chests to request
-          items from construction bots. Helpful when "Logistic system" isn't
-          researched, yet.
-        </li>
-        <li>
           <FactorioBadge /> Add save mechanism for all configured settings: They
           are now saved into the page URL. So just bookmark the page or share
           the specific link with a friend and never worry about reconfigure them
           again.
         </li>
         <li>
-          <FactorioBadge /> Blueprint to Constant Combinator: Add settings for
-          different generation modes, to set negative amounts and to define a
-          specific logistic chest. Also it's now possible to use normal chests
-          to request items from construction bots. Furthermore, inventory size
-          can be considered to spread a single item request or signal across
-          mutliple combinators or chests. Last but not least, when selecting the
-          rocket silo you will get rocket silos with item requests for
-          constructions bots perfectly configured (miminal amount of rocket
-          launches).
+          <FactorioBadge /> Make Everything: Allow normal chests to request
+          items from construction bots. Helpful when "Logistic system" isn't
+          researched, yet.
+        </li>
+        <li>
+          <FactorioBadge /> Blueprint to Constant Combinator:
+          <ul>
+            <li>
+              Different generation modes now available (only combinator, only
+              chest or both).
+            </li>
+            <li>
+              Get negative amounts instead of positives. Allows for easier
+              integration with other circuits.
+            </li>
+            <li>
+              New option to account for inventory sizes. Items with high
+              amounts, which don't fit into a single chest, now spread across
+              multiple combinators/chests.
+            </li>
+            <li>
+              Use all kind of chests, not only logistic ones. For normal chests
+              the items will be delivered by construction bots.
+            </li>
+            <li>
+              Rocket silo! Pick the rocket silo as a chest and get perfectly
+              filled rocket silos (delivered by construction bots). Allows for
+              very efficient rocket launches. Bring everything in orbit with
+              minimal rocket launches.
+            </li>
+            <li>
+              Choose between beteen differnt output placements. Place the
+              combinators/chests either in a line or in square.
+            </li>
+          </ul>
         </li>
       </ul>
 
