@@ -21,7 +21,6 @@ for _, tech in pairs(prototypes.technology) do
     end
 end
 
-local items = {}
 local groups = {}
 local subgroups = {}
 local locale = {}
@@ -35,7 +34,6 @@ for _, recipe_prototype in pairs(prototypes.recipe) do
                     name = ingredient.name,
                     amount = ingredient.amount,
                 })
-                items[ingredient.name] = true
             end
         end
         table.insert(data.recipes, {
@@ -49,7 +47,6 @@ for _, recipe_prototype in pairs(prototypes.recipe) do
             main_product = recipe_prototype.main_product.name,
             ingredients = ingredients,
         })
-        items[recipe_prototype.main_product.name] = true
         categories[recipe_prototype.category] = true
         groups[recipe_prototype.group.name] = recipe_prototype.group
         subgroups[recipe_prototype.subgroup.name] = recipe_prototype.subgroup
@@ -59,10 +56,10 @@ for _, recipe_prototype in pairs(prototypes.recipe) do
     end
 end
 
-for item_name, _ in pairs(items) do
+for _, item_prototype in pairs(prototypes.item) do
     table.insert(data.items, {
-        name = item_name,
-        stack_size = prototypes.item[item_name].stack_size,
+      name = item_prototype.name,
+      stack_size = item_prototype.stack_size,
     })
 end
 
@@ -91,13 +88,20 @@ end
 
 for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type", type = {"logistic-container", "container"}}}) do
     if not entity_prototype.hidden then
-      table.insert(data.logistic_containers, {
-          name = entity_prototype.name,
-          tile_width = entity_prototype.tile_width,
-          tile_height = entity_prototype.tile_height,
-          logistic_mode = entity_prototype.logistic_mode,
-      })
-      locale["logistic_containers." .. entity_prototype.name] = entity_prototype.localised_name
+        local inventory_sizes = {}
+        for _, quality_prototype in pairs(prototypes.quality) do
+            if not quality_prototype.hidden then
+                inventory_sizes[quality_prototype.name] = entity_prototype.get_inventory_size(1, quality_prototype)
+            end
+        end
+        table.insert(data.logistic_containers, {
+            name = entity_prototype.name,
+            tile_width = entity_prototype.tile_width,
+            tile_height = entity_prototype.tile_height,
+            logistic_mode = entity_prototype.logistic_mode,
+            inventory_sizes = inventory_sizes,
+        })
+        locale["logistic_containers." .. entity_prototype.name] = entity_prototype.localised_name
     end
 end
 
@@ -128,11 +132,13 @@ for _, quality_prototype in pairs(prototypes.quality) do
     end
 end
 
-local filename = "export-for-gaming-tools.data"
+local filename = "export-data-for-gaming-tools.gtd"
 helpers.write_file(filename, helpers.table_to_json(data), false, game.player.index)
 
 helpers.write_file(filename, "\\n\\n", true, game.player.index)
 for k, v in pairs(locale) do
     helpers.write_file(filename, {"?", {"", k .. "=", v, "\\n"}, ""}, true, game.player.index)
 end
+
+game.player.print("File " .. filename .. " has been generated in you script-output folder")
 `;

@@ -46,6 +46,8 @@ export type SourceInserter = SourceEntity & {
 };
 
 type SourceLogisticContainer = SourceEntity & {
+  /** key = quality */
+  inventory_sizes: Record<string, number>;
   logistic_mode?: string;
 };
 
@@ -125,7 +127,7 @@ export const FactorioDataImporter: Component<{
           </button>
           <p>Copy this cheat command and execute it ingame. *</p>
           <p>
-            A file called <code>export-for-gaming-tools.data</code> will be
+            A file called <code>export-data-for-gaming-tools.gtd</code> will be
             created in your{" "}
             <a
               href="https://wiki.factorio.com/Application_directory"
@@ -138,7 +140,7 @@ export const FactorioDataImporter: Component<{
           <input
             type="file"
             class="file-input file-input-bordered w-full max-w-xs"
-            accept=".meg"
+            accept=".gtd"
             onChange={async (e) => {
               const file = e.currentTarget.files?.[0];
               const input = e.currentTarget;

@@ -29,8 +29,11 @@ export default function Changelog() {
         </li>
         <li>
           <FactorioBadge /> Blueprint to Constant Combinator: Add settings for
-          different generation modes, to set negative amounts and to define
-          specific logistic chest.
+          different generation modes, to set negative amounts and to define a
+          specific logistic chest. Also it's now possible to use normal chests
+          to request items from construction bots. Last but not least, inventory
+          size can be considered to spread a single item request or signal
+          across mutliple combinators or chests.
         </li>
       </ul>
 

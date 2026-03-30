@@ -427,10 +427,10 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
           let stack = 0;
           ingredients.forEach((ing) => {
             let rest = ing.count;
-            let stackSize =
+            const stackSize =
               appData.items.find((i) => i.name === ing.name)?.stack_size ?? 1;
             while (rest > 0) {
-              let count = Math.min(ing.count, stackSize);
+              let count = Math.min(rest, stackSize);
               rest -= count;
               items.push({
                 id: {
