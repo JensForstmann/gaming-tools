@@ -404,7 +404,7 @@ const convert = (
       throw new Error(`Could not get container ${settings.logisticChestName}`);
     }
 
-    const chestSize = !settings.considerInventorySize
+    const chestSize = !settings.accountForInventorySize
       ? 1_000_000
       : logisticChest.inventory_sizes[settings.logisticChestQuality];
     if (!chestSize) {
@@ -617,7 +617,7 @@ type Settings = {
   requestFromBuffers: boolean;
   logisticChestName: string;
   logisticChestQuality: string;
-  considerInventorySize: boolean;
+  accountForInventorySize: boolean;
 };
 
 const Page = () => {
@@ -636,7 +636,7 @@ const Page = () => {
     requestFromBuffers: false,
     logisticChestName: "requester-chest",
     logisticChestQuality: "normal",
-    considerInventorySize: true,
+    accountForInventorySize: true,
   });
 
   const [outputBp, setOutputBp] = createSignal("");
@@ -747,10 +747,10 @@ const Page = () => {
             step={1}
           />
           <CheckboxInput
-            label="Consider inventory size"
-            value={settings.considerInventorySize}
+            label="Account for inventory size"
+            value={settings.accountForInventorySize}
             setValue={(v) => {
-              setSettings("considerInventorySize", v);
+              setSettings("accountForInventorySize", v);
             }}
           />
           <CheckboxInput
