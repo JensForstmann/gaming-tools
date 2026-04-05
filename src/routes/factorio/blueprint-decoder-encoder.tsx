@@ -14,13 +14,13 @@ const Page = () => {
   createEffect(() => {});
 
   return (
-    <div class="w-full max-w-4xl m-auto mb-48">
+    <div class="w-full max-w-4xl m-auto mb-48 prose">
       <Title>Blueprint Decoder & Encoder | Factorio | Gaming Tools</Title>
-      <div class="prose">
+      <div>
         <h2>Blueprint Decoder & Encoder</h2>
         <p>
-          Simply decode blueprint strings to JSON and encode JSON back to
-          Factorio blueprint strings.
+          Simply decode blueprint strings to JSON and encode (modified) JSON
+          back to factorio blueprint strings.
         </p>
       </div>
       <div class="my-8">
@@ -29,8 +29,12 @@ const Page = () => {
           value={inputBp()}
           setValue={(v) => {
             try {
-              setJson(JSON.stringify(decodePlan(v), null, 4));
               setInputBp(v);
+              if (v) {
+                setJson(JSON.stringify(decodePlan(v), null, 4));
+              } else {
+                setJson("");
+              }
             } catch (err) {
               setJson("invalid blueprint string");
             }

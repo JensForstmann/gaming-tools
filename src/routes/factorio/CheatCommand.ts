@@ -4,6 +4,8 @@ export const CheatCommand = `
 local data = {
     recipes = {},
     items = {},
+    entities = {},
+    tiles = {},
     crafting_machines = {},
     inserters = {},
     logistic_containers = {},
@@ -140,6 +142,26 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
         is_burner = entity_prototype.burner_prototype ~= nil
     })
     locale["crafting_machines." .. entity_prototype.name] = entity_prototype.localised_name
+end
+
+for _, entity_prototype in pairs(prototypes.entity) do
+    if entity_prototype.items_to_place_this then
+        table.insert(data.entities, {
+            name = entity_prototype.name,
+            item_to_place_this = entity_prototype.items_to_place_this[1],
+        })
+        locale["entity." .. entity_prototype.name] = entity_prototype.localised_name
+    end
+end
+
+for _, tile_prototype in pairs(prototypes.tile) do
+    if tile_prototype.items_to_place_this then
+        table.insert(data.tiles, {
+            name = tile_prototype.name,
+            item_to_place_this = tile_prototype.items_to_place_this[1],
+        })
+        locale["tile." .. tile_prototype.name] = tile_prototype.localised_name
+    end
 end
 
 for _, quality_prototype in pairs(prototypes.quality) do

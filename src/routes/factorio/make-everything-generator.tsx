@@ -20,7 +20,7 @@ import {
   FactorioDataImporter,
   Locales,
   type SourceCraftingMachine,
-  type SourceEntity,
+  type SourceEntityWithSize,
   type SourceGroup,
   type SourceInserter,
   type SourceItem,
@@ -51,7 +51,7 @@ type LogisticMode = (typeof LogisticModes)[number];
 const isLogisticMode = (x: unknown): x is LogisticMode =>
   x === undefined || LogisticModes.includes(x as any);
 
-type AppLogisticContainer = SourceEntity & {
+type AppLogisticContainer = SourceEntityWithSize & {
   display_name: string;
   logistic_mode: LogisticMode;
 };
@@ -867,7 +867,15 @@ const Page = () => {
         </Title>
         <div>
           <h2>"Make Everything" Blueprint Generator</h2>
-          <p>This tool can be used to build bot based malls/hubs.</p>
+          <p>
+            This tool can be used to build bot based malls/hubs. Just pick the
+            recipes you want to craft, select your machines, qualities and more
+            and you're good to go.
+            <br />
+            You don't have the logistic system unlocked, yet? Don't worry. Non
+            logistic chests are also supported. They will be filled by
+            constructions bots instead.
+          </p>
         </div>
         <div class="h-8"></div>
         <HelpSection />

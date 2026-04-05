@@ -32,24 +32,40 @@ export type SourceItem = {
 
 export type SourceEntity = {
   name: string;
+  item_to_place_this: {
+    name: string;
+    count: number;
+  };
+};
+
+export type SourceTile = {
+  name: string;
+  item_to_place_this: {
+    name: string;
+    count: number;
+  };
+};
+
+export type SourceEntityWithSize = {
+  name: string;
   tile_width: number;
   tile_height: number;
 };
 
-export type SourceCraftingMachine<EmptyArray> = SourceEntity & {
+export type SourceCraftingMachine<EmptyArray> = SourceEntityWithSize & {
   crafting_categories: string[] | EmptyArray;
   crafting_speed: number;
   is_burner: boolean;
 };
 
-export type SourceInserter = SourceEntity & {
+export type SourceInserter = SourceEntityWithSize & {
   inserter_pickup_position: number[];
   inserter_drop_position: number[];
 };
 
 type SourceInventorySizes = Record<string, number>;
 
-export type SourceLogisticContainer = SourceEntity & {
+export type SourceLogisticContainer = SourceEntityWithSize & {
   /** key = quality */
   inventory_sizes: SourceInventorySizes;
   logistic_mode?: string;
@@ -64,7 +80,7 @@ export type SourceQuality = {
   name: string;
 };
 
-export type SourceRocketSilo = SourceEntity & {
+export type SourceRocketSilo = SourceEntityWithSize & {
   name: string;
   inventory_sizes: SourceInventorySizes;
   /** in grams */
@@ -74,6 +90,8 @@ export type SourceRocketSilo = SourceEntity & {
 type SourceData<EmptyArray> = {
   recipes: SourceRecipe<EmptyArray>[] | EmptyArray;
   items: SourceItem[] | EmptyArray;
+  entities: SourceEntity[] | EmptyArray;
+  tiles: SourceTile[] | EmptyArray;
   crafting_machines: SourceCraftingMachine<EmptyArray>[] | EmptyArray;
   inserters: SourceInserter[] | EmptyArray;
   logistic_containers: SourceLogisticContainer[] | EmptyArray;
@@ -179,4 +197,13 @@ export const FactorioDataImporter: Component<{
       </label>
     </div>
   );
+};
+
+export const getItemToBuild = (
+  data: typeof VanillaData,
+  type: "entity" | "tile",
+  name: string,
+) => {
+  const key = type === "entity" ? "entities" : "tiles";
+  return data[key].find((x) => x.name === name)?.item_to_place_this;
 };

@@ -14,8 +14,7 @@ import {
   Plan,
 } from "@jensforstmann/factorio-blueprint-tools";
 import { Title } from "@solidjs/meta";
-import { createEffect, createSignal } from "solid-js";
-import { itemMapping } from "./item-mapping";
+import { createEffect, createSignal, Show } from "solid-js";
 import {
   CheckboxInput,
   NumberInput,
@@ -25,19 +24,11 @@ import {
 import { useSettings } from "~/components/settings";
 import {
   FactorioDataImporter,
-  SourceLogisticContainer,
-  SourceRocketSilo,
+  getItemToBuild,
   VanillaData,
   VanillaLocales,
 } from "./factorioData";
 import { createStore } from "solid-js/store";
-
-const convertToItem = (entity: string) => {
-  return {
-    item: itemMapping[entity]?.item ?? entity,
-    count: itemMapping[entity]?.count ?? 1,
-  };
-};
 
 // make this only for bp2cc
 // maximum signals -> only X signals per cc/req
@@ -332,7 +323,6 @@ type ItemToBuild = {
 const convert = (
   inputBp: string,
   settings: Settings,
-  containers: Array<SourceRocketSilo & SourceLogisticContainer>,
   factorioData: typeof VanillaData,
 ): string => {
   const startTime = Date.now();
@@ -351,17 +341,33 @@ const convert = (
     };
     const processBp = (bp: Blueprint) => {
       bp.blueprint.entities?.forEach((entity) => {
-        const { item, count } = convertToItem(entity.name);
-        addToItems(item, count, entity.quality ?? "normal");
+        const itemToBuild = getItemToBuild(factorioData, "entity", entity.name);
+        if (!itemToBuild) {
+          throw new Error(
+            `Could not find item to build entity ${entity.name}`,
+          );
+        }
+        addToItems(
+          itemToBuild.name,
+          itemToBuild.count,
+          entity.quality ?? "normal",
+        );
         entity.items?.forEach((item) => {
           // modules
-          const count = item.items.in_inventory?.length ?? 0;
+          const count =
+            item.items.in_inventory?.reduce(
+              (acc, x) => acc + (x.count ?? 1),
+              0,
+            ) ?? 0;
           addToItems(item.id.name, count, item.id.quality ?? "normal");
         });
       });
       bp.blueprint.tiles?.forEach((tile) => {
-        const { item, count } = convertToItem(tile.name);
-        addToItems(item, count, "normal");
+        const itemToBuild = getItemToBuild(factorioData, "tile", tile.name);
+        if (!itemToBuild) {
+          throw new Error(`Could not find item to build entity ${tile.name}`);
+        }
+        addToItems(itemToBuild.name, itemToBuild.count, "normal");
       });
     };
     const addToItems = (name: string, count: number, quality: string) => {
@@ -397,19 +403,26 @@ const convert = (
     ];
     blueprint.blueprint.wires = [];
 
-    const logisticChest = containers.find(
-      (c) => c.name === settings.logisticChestName,
-    );
-    if (!logisticChest) {
-      throw new Error(`Could not get container ${settings.logisticChestName}`);
+    const container =
+      settings.generationMode === "ROCKET_SILOS"
+        ? factorioData.rocket_silos.find(
+            (rs) => rs.name === settings.rocketSiloName,
+          )
+        : factorioData.logistic_containers.find(
+            (c) => c.name === settings.logisticChestName,
+          );
+    if (!container) {
+      throw new Error(
+        `Could not get container ${settings.generationMode === "ROCKET_SILOS" ? settings.rocketSiloName : settings.logisticChestName}`,
+      );
     }
 
     const chestSize = !settings.accountForInventorySize
       ? 1_000_000
-      : logisticChest.inventory_sizes[settings.logisticChestQuality];
+      : container.inventory_sizes[settings.quality];
     if (!chestSize) {
       throw new Error(
-        `Could not get container inventory size for ${settings.logisticChestQuality} ${settings.logisticChestName}, got ${chestSize}`,
+        `Could not get container inventory size for ${settings.quality} ${settings.generationMode === "ROCKET_SILOS" ? settings.rocketSiloName : settings.logisticChestName}, got ${chestSize}`,
       );
     }
 
@@ -422,43 +435,30 @@ const convert = (
       rocketWeightLimit: factorioData.rocket_silos[0].lift_weight || 1_000_000,
     });
 
-    /* Possible scenarions:
-        Option A: only CC, no chest limits
-        Option B: only CC, with chest limits
-        Option C: only Chest, no chest limits ~ (makes no sense)
-        Option D: only Chest, with chest limits
-        Option E: CC+Chest, no chest limits ~ (makes no sense)
-        Option F: CC+Chest, with chest limits
-    */
-
-    const isRocketSilo =
-      factorioData.rocket_silos.findIndex(
-        (s) => s.name === settings.logisticChestName,
-      ) > -1;
-
     const unitWidth =
-      settings.generationMode === "BOTH" ||
-      settings.generationMode === "LOGISTIC_CHESTS" ||
-      isRocketSilo
-        ? logisticChest.tile_width
+      settings.generationMode === "CONSTANT_COMBINATORS_AND_CHESTS" ||
+      settings.generationMode === "CHESTS" ||
+      settings.generationMode === "ROCKET_SILOS"
+        ? container.tile_width
         : 1;
-    const unitHeight = isRocketSilo
-      ? logisticChest.tile_height
-      : settings.generationMode === "BOTH"
-        ? logisticChest.tile_height + 1
-        : settings.generationMode === "LOGISTIC_CHESTS"
-          ? logisticChest.tile_height
-          : 1;
+    const unitHeight =
+      settings.generationMode === "ROCKET_SILOS"
+        ? container.tile_height
+        : settings.generationMode === "CONSTANT_COMBINATORS_AND_CHESTS"
+          ? container.tile_height + 1
+          : settings.generationMode === "CHESTS"
+            ? container.tile_height
+            : 1;
     const area =
       unitWidth *
       unitHeight *
-      (isRocketSilo
+      (settings.generationMode === "ROCKET_SILOS"
         ? reallyChunked.rockets.length
         : reallyChunked.spread.length);
     const sqrt = Math.sqrt(area);
     const unitsPerLine = Math.ceil(sqrt / unitWidth);
 
-    if (isRocketSilo) {
+    if (settings.generationMode === "ROCKET_SILOS") {
       reallyChunked.rockets.forEach(({ items }, index) => {
         const line =
           settings.outputPlacement === "SQUARE"
@@ -467,8 +467,8 @@ const convert = (
         const posInLine =
           settings.outputPlacement === "SQUARE" ? index % unitsPerLine : index;
         addEntity(blueprint, {
-          name: settings.logisticChestName,
-          quality: settings.logisticChestQuality,
+          name: settings.rocketSiloName,
+          quality: settings.quality,
           position: {
             x: unitWidth * posInLine + unitWidth / 2,
             y: line * unitHeight + unitHeight / 2,
@@ -478,13 +478,16 @@ const convert = (
       });
     } else {
       // fake logistic chest == will get requests for constructions bots
+      const logisticMode = factorioData.logistic_containers.find(
+        (c) => c.name === settings.logisticChestName,
+      )?.logistic_mode;
       const isFakeLogisticChest =
-        logisticChest.logistic_mode === undefined ||
-        !["buffer", "requester"].includes(logisticChest.logistic_mode);
+        logisticMode === undefined ||
+        (logisticMode !== "buffer" && logisticMode !== "requester");
 
       reallyChunked.spread.forEach(({ filter, items }, index) => {
         let constantCombinator: Entity | undefined = undefined;
-        let requesterChest: Entity | undefined = undefined;
+        let containerEntity: Entity | undefined = undefined;
         const line =
           settings.outputPlacement === "SQUARE"
             ? Math.floor(index / unitsPerLine)
@@ -494,7 +497,7 @@ const convert = (
 
         if (
           settings.generationMode === "CONSTANT_COMBINATORS" ||
-          settings.generationMode === "BOTH"
+          settings.generationMode === "CONSTANT_COMBINATORS_AND_CHESTS"
         ) {
           constantCombinator = addEntity(blueprint, {
             name: "constant-combinator",
@@ -524,15 +527,15 @@ const convert = (
         }
 
         if (
-          settings.generationMode === "LOGISTIC_CHESTS" ||
-          settings.generationMode === "BOTH"
+          settings.generationMode === "CHESTS" ||
+          settings.generationMode === "CONSTANT_COMBINATORS_AND_CHESTS"
         ) {
-          requesterChest = addEntity(blueprint, {
+          containerEntity = addEntity(blueprint, {
             name: settings.logisticChestName,
-            quality: settings.logisticChestQuality,
+            quality: settings.quality,
             position: {
               x: unitWidth * posInLine + unitWidth / 2,
-              y: line * unitHeight + 1 + logisticChest.tile_height / 2,
+              y: line * unitHeight + 1 + container.tile_height / 2,
             },
             request_filters: isFakeLogisticChest
               ? undefined
@@ -540,7 +543,7 @@ const convert = (
                   request_from_buffers: settings.requestFromBuffers,
                   trash_not_requested: settings.trashUnrequested,
                   sections:
-                    settings.generationMode !== "LOGISTIC_CHESTS"
+                    settings.generationMode !== "CHESTS"
                       ? undefined
                       : [
                           {
@@ -561,8 +564,8 @@ const convert = (
           });
         }
 
-        if (constantCombinator && requesterChest) {
-          requesterChest.control_behavior = {
+        if (constantCombinator && containerEntity) {
+          containerEntity.control_behavior = {
             circuit_mode_of_operation: 1,
             circuit_condition_enabled: false,
           };
@@ -570,7 +573,7 @@ const convert = (
           blueprint.blueprint.wires!.push([
             constantCombinator.entity_number,
             DEFINES.wire_connector_id.circuit_green,
-            requesterChest.entity_number,
+            containerEntity.entity_number,
             DEFINES.wire_connector_id.circuit_green,
           ]);
         }
@@ -609,14 +612,19 @@ const HelpSection = () => {
 };
 
 type Settings = {
-  generationMode: "CONSTANT_COMBINATORS" | "LOGISTIC_CHESTS" | "BOTH";
+  generationMode:
+    | "CONSTANT_COMBINATORS"
+    | "CHESTS"
+    | "CONSTANT_COMBINATORS_AND_CHESTS"
+    | "ROCKET_SILOS";
   outputPlacement: "LINE" | "SQUARE";
   signalLimit: number;
   negateConstantCombinatorSignals: boolean;
   trashUnrequested: boolean;
   requestFromBuffers: boolean;
   logisticChestName: string;
-  logisticChestQuality: string;
+  quality: string;
+  rocketSiloName: string;
   accountForInventorySize: boolean;
 };
 
@@ -635,53 +643,33 @@ const Page = () => {
     trashUnrequested: false,
     requestFromBuffers: false,
     logisticChestName: "requester-chest",
-    logisticChestQuality: "normal",
+    rocketSiloName: "rocket-silo",
+    quality: "normal",
     accountForInventorySize: true,
   });
 
   const [outputBp, setOutputBp] = createSignal("");
 
-  const logisticChests = () => {
-    const chests: Array<
-      SourceRocketSilo & SourceLogisticContainer & { locale: string }
-    > = [];
-    appData.data.logistic_containers.forEach((v) => {
-      chests.push({
-        name: v.name,
-        locale: appData.locales["logistic_containers." + v.name] || v.name,
-        inventory_sizes: v.inventory_sizes,
-        lift_weight: Number.MAX_SAFE_INTEGER,
-        tile_height: v.tile_height,
-        tile_width: v.tile_width,
-        logistic_mode: v.logistic_mode,
-      });
-    });
-    appData.data.rocket_silos.forEach((v) => {
-      chests.push({
-        name: v.name,
-        locale: appData.locales["rocket_silos." + v.name] || v.name,
-        inventory_sizes: v.inventory_sizes,
-        lift_weight: v.lift_weight,
-        tile_height: v.tile_height,
-        tile_width: v.tile_width,
-        logistic_mode: undefined,
-      });
-    });
-    return chests;
-  };
-
   createEffect(() => {
-    setOutputBp(convert(inputBp(), settings, logisticChests(), appData.data));
+    setOutputBp(convert(inputBp(), settings, appData.data));
   });
 
   return (
     <div class="w-full max-w-4xl m-auto prose">
       <Title>Blueprint to Constant Combinator | Factorio | Gaming Tools</Title>
       <div>
-        <h2>Blueprint to Constant Combinator</h2>
+        <h2>Blueprint to Constant Combinator/Chest/Rocket Silo</h2>
         <p>
-          Convert a factorio blueprint string to constant combinators holding
-          the signals of items needed to build the blueprint.
+          Convert a Factorio blueprint string to constant combinators holding
+          the signals of items needed to build the blueprint. It's also possible
+          to directly generalte logistic (requester/buffer) chests.
+          <br />
+          You don't have the logistic system unlocked, yet? Don't worry. Non
+          logistic chests are also supported. They will be filled by
+          constructions bots instead.
+          <br />
+          Wan't to travel to another planet? Generate perfectly filled rocket
+          silos, too.
         </p>
       </div>
       <div class="h-8"></div>
@@ -706,20 +694,29 @@ const Page = () => {
               label="Generation mode"
               currentValue={settings.generationMode}
               setValue={(v) => setSettings("generationMode", v)}
-              entries={[
-                {
-                  label: "Only constant combinators",
-                  value: "CONSTANT_COMBINATORS",
-                },
-                {
-                  label: "Only logistic chests",
-                  value: "LOGISTIC_CHESTS",
-                },
-                {
-                  label: "Both (constant combinators and logistic chests)",
-                  value: "BOTH",
-                },
-              ]}
+              entries={
+                [
+                  {
+                    label: "Only constant combinators",
+                    value: "CONSTANT_COMBINATORS",
+                  },
+                  {
+                    label: "Only chests",
+                    value: "CHESTS",
+                  },
+                  {
+                    label: "Constant combinators and chests",
+                    value: "CONSTANT_COMBINATORS_AND_CHESTS",
+                  },
+                  {
+                    label: "Rocket silos",
+                    value: "ROCKET_SILOS",
+                  },
+                ] satisfies Array<{
+                  label: string;
+                  value: Settings["generationMode"];
+                }>
+              }
               class="w-full"
             />
           </div>
@@ -760,24 +757,37 @@ const Page = () => {
               setSettings("negateConstantCombinatorSignals", v);
             }}
           />
-          <SelectInput
-            label="Logistic chest"
-            currentValue={settings.logisticChestName}
-            setValue={(v) => setSettings("logisticChestName", v)}
-            entries={logisticChests().map((c) => ({
-              label: c.locale,
-              value: c.name,
-            }))}
-          />
+          <Show when={settings.generationMode !== "ROCKET_SILOS"}>
+            <SelectInput
+              label="Chest"
+              currentValue={settings.logisticChestName}
+              setValue={(v) => setSettings("logisticChestName", v)}
+              entries={appData.data.logistic_containers.map((c) => ({
+                label: appData.locales["logistic_containers." + c.name],
+                value: c.name,
+              }))}
+            />
+          </Show>
+          <Show when={settings.generationMode === "ROCKET_SILOS"}>
+            <SelectInput
+              label="Rocket silo"
+              currentValue={settings.rocketSiloName}
+              setValue={(v) => setSettings("rocketSiloName", v)}
+              entries={appData.data.rocket_silos.map((rs) => ({
+                label: appData.locales["rocket_silos." + rs.name],
+                value: rs.name,
+              }))}
+            />
+          </Show>
           <div class="col-span-2">
             <SelectInput
-              label="Chest quality"
-              currentValue={settings.logisticChestQuality}
+              label="Quality"
+              currentValue={settings.quality}
               entries={appData.data.qualities.map((q) => ({
                 label: appData.locales["qualities." + q.name],
                 value: q.name,
               }))}
-              setValue={(v) => setSettings("logisticChestQuality", v)}
+              setValue={(v) => setSettings("quality", v)}
             />
           </div>
           <CheckboxInput
