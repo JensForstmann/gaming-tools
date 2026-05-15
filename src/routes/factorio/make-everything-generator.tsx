@@ -829,11 +829,17 @@ const Page = () => {
   };
 
   const filteredRecipes = () => {
+    const searchWords = search().toLocaleLowerCase().split(" ");
+    const searchMatch = (name: string, search: string[]) =>
+      search.reduce(
+        (pv, cv) => pv && name.toLocaleLowerCase().includes(cv),
+        true,
+      );
     return appData.recipes.filter(
       (r) =>
-        (search() === "" ||
-          r.name.includes(search()) ||
-          r.display_name.includes(search())) &&
+        (search().trim() === "" ||
+          searchMatch(r.name, searchWords) ||
+          searchMatch(r.display_name, searchWords)) &&
         (categoryFilter() === "" || r.category === categoryFilter()) &&
         (groupFilter() === "" || r.group_name === groupFilter()) &&
         (subgroupFilter() === "" || r.subgroup_name === subgroupFilter()),
