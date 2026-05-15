@@ -21,13 +21,13 @@ const decode = <T,>(str: string, fallback: T): T => {
   }
 };
 
-export const useSettings = <TSettings extends object>(fallback?: TSettings) => {
+export const useSettings = <TSettings extends object>(fallback: TSettings) => {
   const [params, setParams] = useSearchParams<{
     settings: string;
   }>();
 
   const [settings, setSettings] = createStore<TSettings>(
-    decode(params.settings || "", fallback!),
+    decode(params.settings || "", fallback),
   );
 
   createEffect((initialRun) => {
