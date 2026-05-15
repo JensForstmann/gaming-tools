@@ -343,9 +343,7 @@ const convert = (
       bp.blueprint.entities?.forEach((entity) => {
         const itemToBuild = getItemToBuild(factorioData, "entity", entity.name);
         if (!itemToBuild) {
-          throw new Error(
-            `Could not find item to build entity ${entity.name}`,
-          );
+          throw new Error(`Could not find item to build entity ${entity.name}`);
         }
         addToItems(
           itemToBuild.name,

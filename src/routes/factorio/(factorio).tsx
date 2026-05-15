@@ -35,7 +35,9 @@ const Page = () => {
 
       <div class="my-12 card w-full shadow-xl">
         <div class="card-body">
-          <h2 class="card-title">Blueprint to Constant Combinator/Chest/Rocket Silo</h2>
+          <h2 class="card-title">
+            Blueprint to Constant Combinator/Chest/Rocket Silo
+          </h2>
           <p>
             Convert a Factorio blueprint string to constant combinators holding
             the signals of items needed to build the blueprint. It's also
