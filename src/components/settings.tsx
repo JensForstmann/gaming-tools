@@ -14,9 +14,9 @@ const decode = <T,>(str: string, fallback: T): T => {
   try {
     return JSON.parse(inflate(Buffer.from(str, "base64"), { to: "string" }));
   } catch (e) {
-    console.info(
-      "Settings could not be encoded. Return empty settings object.",
-    );
+    if (typeof window !== "undefined") {
+      console.info("Settings could not be decoded. Return fallback.");
+    }
     return fallback;
   }
 };
