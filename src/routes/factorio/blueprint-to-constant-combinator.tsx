@@ -15,6 +15,7 @@ import {
 } from "@jensforstmann/factorio-blueprint-tools";
 import { Title } from "@solidjs/meta";
 import { createEffect, createSignal, Show } from "solid-js";
+import { createStore } from "solid-js/store";
 import {
   CheckboxInput,
   NumberInput,
@@ -25,10 +26,12 @@ import { useSettings } from "~/components/settings";
 import {
   FactorioDataImporter,
   getItemToBuild,
+  RecipeSet,
+  SpaceAgeData,
+  SpaceAgeLocales,
   VanillaData,
   VanillaLocales,
 } from "./factorioData";
-import { createStore } from "solid-js/store";
 
 // make this only for bp2cc
 // maximum signals -> only X signals per cc/req
@@ -610,6 +613,7 @@ const HelpSection = () => {
 };
 
 type Settings = {
+  recipeSet: RecipeSet;
   generationMode:
     | "CONSTANT_COMBINATORS"
     | "CHESTS"
@@ -627,13 +631,8 @@ type Settings = {
 };
 
 const Page = () => {
-  const [appData, setAppData] = createStore({
-    data: VanillaData,
-    locales: VanillaLocales,
-  });
-  const [inputBp, setInputBp] = createSignal("");
-
   const [settings, setSettings] = useSettings<Settings>({
+    recipeSet: "SPACE_AGE",
     generationMode: "CONSTANT_COMBINATORS",
     outputPlacement: "LINE",
     signalLimit: 1,
@@ -645,6 +644,18 @@ const Page = () => {
     quality: "normal",
     accountForInventorySize: true,
   });
+
+  if (settings.recipeSet === "CUSTOM") {
+    // Workaround for now, because custom recipe data is not saved in localStorage.
+    setSettings("recipeSet", "SPACE_AGE");
+  }
+
+  const [appData, setAppData] = createStore({
+    data: settings.recipeSet === "VANILLA" ? VanillaData : SpaceAgeData,
+    locales:
+      settings.recipeSet === "VANILLA" ? VanillaLocales : SpaceAgeLocales,
+  });
+  const [inputBp, setInputBp] = createSignal("");
 
   const [outputBp, setOutputBp] = createSignal("");
 
@@ -673,11 +684,13 @@ const Page = () => {
       <div class="h-8"></div>
       <HelpSection />
       <FactorioDataImporter
-        onChange={(data, locales) => {
+        recipeSet={settings.recipeSet}
+        onChange={(data, locales, recipeSet) => {
           setAppData({
             data: data,
             locales: locales,
           });
+          setSettings("recipeSet", recipeSet);
         }}
       />
       <div class="my-8">

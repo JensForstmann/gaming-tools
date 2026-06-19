@@ -19,6 +19,7 @@ import { useSettings } from "~/components/settings";
 import {
   FactorioDataImporter,
   Locales,
+  RecipeSet,
   type SourceCraftingMachine,
   type SourceEntityWithSize,
   type SourceGroup,
@@ -26,6 +27,8 @@ import {
   type SourceItem,
   type SourceQuality,
   type SourceRecipe,
+  SpaceAgeData,
+  SpaceAgeLocales,
   VanillaData,
   VanillaLocales,
 } from "./factorioData";
@@ -191,6 +194,7 @@ const convertSourceDataToAppData = (
 const VanillaAppData = convertSourceDataToAppData(VanillaData, VanillaLocales);
 
 type Settings = {
+  recipeSet: RecipeSet;
   selectedMachines: Array<{ category: string; machine: string }>;
   blueprintMaxWidth: number;
   columnSpace: number;
@@ -219,6 +223,7 @@ type Settings = {
 };
 
 const DefaultSettings: Settings = {
+  recipeSet: "SPACE_AGE",
   selectedMachines: VanillaAppData.categories.map((category) => ({
     category: category.name,
     machine: getBestCraftingMachine(category.machines)?.name ?? "",
@@ -645,15 +650,17 @@ const Settings: Component<{
           setValue={(v) => props.setSettings("craftStackLimit", v)}
           min={0}
         />
-        <SelectInput
-          label="Product quality"
-          currentValue={props.settings.productQuality}
-          entries={props.appData.qualities.map((q) => ({
-            label: q.display_name,
-            value: q.name,
-          }))}
-          setValue={(v) => props.setSettings("productQuality", v)}
-        />
+        <Show when={props.appData.qualities.length > 0}>
+          <SelectInput
+            label="Product quality"
+            currentValue={props.settings.productQuality}
+            entries={props.appData.qualities.map((q) => ({
+              label: q.display_name,
+              value: q.name,
+            }))}
+            setValue={(v) => props.setSettings("productQuality", v)}
+          />
+        </Show>
       </div>
 
       <h4>Layout</h4>
@@ -804,8 +811,16 @@ const Settings: Component<{
 const Page = () => {
   let globalCheckbox: HTMLInputElement | undefined;
 
-  const [appData, setAppData] = createStore<AppData>(VanillaAppData);
   const [settings, setSettings] = useSettings(DefaultSettings);
+  if (settings.recipeSet === "CUSTOM") {
+    // Workaround for now, because custom recipe data is not saved in localStorage.
+    setSettings("recipeSet", DefaultSettings.recipeSet);
+  }
+  const [appData, setAppData] = createStore<AppData>(
+    settings.recipeSet === "VANILLA"
+      ? convertSourceDataToAppData(VanillaData, VanillaLocales)
+      : convertSourceDataToAppData(SpaceAgeData, SpaceAgeLocales),
+  );
 
   const [search, setSearch] = createSignal("");
   const [categoryFilter, setCategoryFilter] = createSignal("");
@@ -886,9 +901,11 @@ const Page = () => {
         <div class="h-8"></div>
         <HelpSection />
         <FactorioDataImporter
-          onChange={(data, locales) => {
+          recipeSet={settings.recipeSet}
+          onChange={(data, locales, recipeSet) => {
             setAppData(convertSourceDataToAppData(data, locales));
             resetSearchAndFilters();
+            setSettings("recipeSet", recipeSet);
           }}
         />
       </div>
