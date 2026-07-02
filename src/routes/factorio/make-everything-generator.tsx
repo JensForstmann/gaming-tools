@@ -191,7 +191,7 @@ const convertSourceDataToAppData = (
   };
 };
 
-const VanillaAppData = convertSourceDataToAppData(VanillaData, VanillaLocales);
+const SpaceAgeAppData = convertSourceDataToAppData(SpaceAgeData, SpaceAgeLocales);
 
 type Settings = {
   recipeSet: RecipeSet;
@@ -224,7 +224,7 @@ type Settings = {
 
 const DefaultSettings: Settings = {
   recipeSet: "SPACE_AGE",
-  selectedMachines: VanillaAppData.categories.map((category) => ({
+  selectedMachines: SpaceAgeAppData.categories.map((category) => ({
     category: category.name,
     machine: getBestCraftingMachine(category.machines)?.name ?? "",
   })),
