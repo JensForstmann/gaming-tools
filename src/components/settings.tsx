@@ -2,17 +2,21 @@ import { createEffect } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useSearchParams } from "@solidjs/router";
 import { inflate, deflate } from "pako";
-import { Buffer } from "buffer";
 
 const encode = (settings: any): string => {
-  return Buffer.from(deflate(JSON.stringify(settings), { level: 9 })).toString(
-    "base64",
-  );
+  const json = JSON.stringify(settings);
+  const compressed = deflate(new TextEncoder().encode(json), { level: 9 });
+
+  let binary = "";
+  for (const byte of compressed) binary += String.fromCharCode(byte);
+
+  return btoa(binary);
 };
 
 const decode = <T,>(str: string, fallback: T): T => {
   try {
-    return JSON.parse(inflate(Buffer.from(str, "base64"), { to: "string" }));
+    const bytes = Uint8Array.from(atob(str), (c) => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(inflate(bytes)));
   } catch (e) {
     if (typeof window !== "undefined") {
       console.info("Settings could not be decoded. Return fallback.");
