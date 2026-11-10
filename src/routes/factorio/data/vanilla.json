@@ -2,7 +2,7 @@
   "recipes": [
     {
       "name": "wooden-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[items]-a[wooden-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -13,7 +13,7 @@
     },
     {
       "name": "iron-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[items]-b[iron-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -24,7 +24,7 @@
     },
     {
       "name": "steel-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[items]-c[steel-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -35,7 +35,7 @@
     },
     {
       "name": "storage-tank",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[fluid]-a[storage-tank]",
       "energy": 3,
       "group_name": "logistics",
@@ -49,7 +49,7 @@
     },
     {
       "name": "transport-belt",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[transport-belt]-a[transport-belt]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -63,7 +63,7 @@
     },
     {
       "name": "fast-transport-belt",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[transport-belt]-b[fast-transport-belt]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -77,7 +77,7 @@
     },
     {
       "name": "express-transport-belt",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[transport-belt]-c[express-transport-belt]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -91,7 +91,7 @@
     },
     {
       "name": "underground-belt",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[underground-belt]-a[underground-belt]",
       "energy": 1,
       "group_name": "logistics",
@@ -105,7 +105,7 @@
     },
     {
       "name": "fast-underground-belt",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[underground-belt]-b[fast-underground-belt]",
       "energy": 2,
       "group_name": "logistics",
@@ -119,7 +119,7 @@
     },
     {
       "name": "express-underground-belt",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "b[underground-belt]-c[express-underground-belt]",
       "energy": 2,
       "group_name": "logistics",
@@ -133,7 +133,7 @@
     },
     {
       "name": "splitter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[splitter]-a[splitter]",
       "energy": 1,
       "group_name": "logistics",
@@ -148,7 +148,7 @@
     },
     {
       "name": "fast-splitter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[splitter]-b[fast-splitter]",
       "energy": 2,
       "group_name": "logistics",
@@ -163,7 +163,7 @@
     },
     {
       "name": "express-splitter",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "c[splitter]-c[express-splitter]",
       "energy": 2,
       "group_name": "logistics",
@@ -178,7 +178,7 @@
     },
     {
       "name": "burner-inserter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[burner-inserter]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -192,7 +192,7 @@
     },
     {
       "name": "inserter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[inserter]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -207,7 +207,7 @@
     },
     {
       "name": "long-handed-inserter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[long-handed-inserter]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -222,7 +222,7 @@
     },
     {
       "name": "fast-inserter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[fast-inserter]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -237,7 +237,7 @@
     },
     {
       "name": "bulk-inserter",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[bulk-inserter]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -253,7 +253,7 @@
     },
     {
       "name": "small-electric-pole",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[energy]-a[small-electric-pole]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -267,7 +267,7 @@
     },
     {
       "name": "medium-electric-pole",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[energy]-b[medium-electric-pole]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -282,7 +282,7 @@
     },
     {
       "name": "big-electric-pole",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[energy]-c[big-electric-pole]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -297,7 +297,7 @@
     },
     {
       "name": "substation",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[energy]-d[substation]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -312,7 +312,7 @@
     },
     {
       "name": "pipe",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[pipe]-a[pipe]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -323,7 +323,7 @@
     },
     {
       "name": "pipe-to-ground",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[pipe]-b[pipe-to-ground]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -337,7 +337,7 @@
     },
     {
       "name": "pump",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[pipe]-c[pump]",
       "energy": 2,
       "group_name": "logistics",
@@ -352,7 +352,7 @@
     },
     {
       "name": "rail",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[rail]-a[rail]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -366,8 +366,37 @@
       ]
     },
     {
+      "name": "rail-ramp",
+      "categories": ["crafting"],
+      "order": "a[rail]-b[rail-ramp]",
+      "energy": 0.5,
+      "group_name": "logistics",
+      "subgroup_name": "train-transport",
+      "request_paste_multiplier": 30,
+      "main_product": "rail-ramp",
+      "ingredients": [
+        { "name": "steel-plate", "amount": 10 },
+        { "name": "rail", "amount": 8 },
+        { "name": "refined-concrete", "amount": 100 }
+      ]
+    },
+    {
+      "name": "rail-support",
+      "categories": ["crafting"],
+      "order": "a[rail]-c[rail-support]",
+      "energy": 0.5,
+      "group_name": "logistics",
+      "subgroup_name": "train-transport",
+      "request_paste_multiplier": 30,
+      "main_product": "rail-support",
+      "ingredients": [
+        { "name": "steel-plate", "amount": 10 },
+        { "name": "refined-concrete", "amount": 20 }
+      ]
+    },
+    {
       "name": "train-stop",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[train-automation]-a[train-stop]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -383,7 +412,7 @@
     },
     {
       "name": "rail-signal",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[train-automation]-b[rail-signal]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -397,7 +426,7 @@
     },
     {
       "name": "rail-chain-signal",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[train-automation]-c[rail-chain-signal]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -411,7 +440,7 @@
     },
     {
       "name": "locomotive",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[rolling-stock]-a[locomotive]",
       "energy": 4,
       "group_name": "logistics",
@@ -426,7 +455,7 @@
     },
     {
       "name": "cargo-wagon",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[rolling-stock]-b[cargo-wagon]",
       "energy": 1,
       "group_name": "logistics",
@@ -441,7 +470,7 @@
     },
     {
       "name": "fluid-wagon",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[rolling-stock]-c[fluid-wagon]",
       "energy": 1.5,
       "group_name": "logistics",
@@ -457,7 +486,7 @@
     },
     {
       "name": "artillery-wagon",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[rolling-stock]-d[artillery-wagon]",
       "energy": 4,
       "group_name": "logistics",
@@ -474,7 +503,7 @@
     },
     {
       "name": "car",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[personal-transport]-a[car]",
       "energy": 2,
       "group_name": "logistics",
@@ -489,7 +518,7 @@
     },
     {
       "name": "tank",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[personal-transport]-b[tank]",
       "energy": 5,
       "group_name": "logistics",
@@ -505,7 +534,7 @@
     },
     {
       "name": "spidertron",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[personal-transport]-c[spidertron]-a[spider]",
       "energy": 10,
       "group_name": "logistics",
@@ -525,7 +554,7 @@
     },
     {
       "name": "logistic-robot",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[robot]-a[logistic-robot]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -539,7 +568,7 @@
     },
     {
       "name": "construction-robot",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[robot]-b[construction-robot]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -553,7 +582,7 @@
     },
     {
       "name": "active-provider-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[storage]-c[active-provider-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -568,7 +597,7 @@
     },
     {
       "name": "passive-provider-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[storage]-c[passive-provider-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -583,7 +612,7 @@
     },
     {
       "name": "storage-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[storage]-c[storage-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -598,7 +627,7 @@
     },
     {
       "name": "buffer-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[storage]-d[buffer-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -613,7 +642,7 @@
     },
     {
       "name": "requester-chest",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[storage]-e[requester-chest]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -628,7 +657,7 @@
     },
     {
       "name": "roboport",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[signal]-a[roboport]",
       "energy": 5,
       "group_name": "logistics",
@@ -643,7 +672,7 @@
     },
     {
       "name": "small-lamp",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[light]-a[small-lamp]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -658,7 +687,7 @@
     },
     {
       "name": "arithmetic-combinator",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[combinators]-a[arithmetic-combinator]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -672,7 +701,7 @@
     },
     {
       "name": "decider-combinator",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[combinators]-b[decider-combinator]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -686,7 +715,7 @@
     },
     {
       "name": "selector-combinator",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[combinators]-c[selector-combinator]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -700,7 +729,7 @@
     },
     {
       "name": "constant-combinator",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[combinators]-d[constant-combinator]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -714,7 +743,7 @@
     },
     {
       "name": "power-switch",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[other]-a[power-switch]",
       "energy": 2,
       "group_name": "logistics",
@@ -729,7 +758,7 @@
     },
     {
       "name": "programmable-speaker",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[other]-b[programmable-speaker]",
       "energy": 2,
       "group_name": "logistics",
@@ -745,7 +774,7 @@
     },
     {
       "name": "display-panel",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "s[display-panel]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -759,7 +788,7 @@
     },
     {
       "name": "stone-brick",
-      "category": "smelting",
+      "categories": ["smelting"],
       "order": "a[stone-brick]",
       "energy": 3.20000000000000017763568394002504646778106689453125,
       "group_name": "logistics",
@@ -770,7 +799,7 @@
     },
     {
       "name": "concrete",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "b[concrete]-a[plain]",
       "energy": 10,
       "group_name": "logistics",
@@ -784,7 +813,7 @@
     },
     {
       "name": "hazard-concrete",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[concrete]-b[hazard]",
       "energy": 0.25,
       "group_name": "logistics",
@@ -795,7 +824,7 @@
     },
     {
       "name": "refined-concrete",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "b[concrete]-c[refined]",
       "energy": 15,
       "group_name": "logistics",
@@ -810,7 +839,7 @@
     },
     {
       "name": "refined-hazard-concrete",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[concrete]-d[refined-hazard]",
       "energy": 0.25,
       "group_name": "logistics",
@@ -821,7 +850,7 @@
     },
     {
       "name": "landfill",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[landfill]-a[dirt]",
       "energy": 0.5,
       "group_name": "logistics",
@@ -832,7 +861,7 @@
     },
     {
       "name": "cliff-explosives",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[cliff-explosives]",
       "energy": 8,
       "group_name": "logistics",
@@ -847,7 +876,7 @@
     },
     {
       "name": "repair-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[repair]-a[repair-pack]",
       "energy": 0.5,
       "group_name": "production",
@@ -861,7 +890,7 @@
     },
     {
       "name": "boiler",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[steam-power]-a[boiler]",
       "energy": 0.5,
       "group_name": "production",
@@ -875,7 +904,7 @@
     },
     {
       "name": "steam-engine",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[steam-power]-b[steam-engine]",
       "energy": 0.5,
       "group_name": "production",
@@ -890,7 +919,7 @@
     },
     {
       "name": "solar-panel",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[solar-panel]-a[solar-panel]",
       "energy": 10,
       "group_name": "production",
@@ -905,7 +934,7 @@
     },
     {
       "name": "accumulator",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[accumulator]-a[accumulator]",
       "energy": 10,
       "group_name": "production",
@@ -919,7 +948,7 @@
     },
     {
       "name": "nuclear-reactor",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[nuclear-energy]-a[reactor]",
       "energy": 8,
       "group_name": "production",
@@ -935,7 +964,7 @@
     },
     {
       "name": "heat-pipe",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[nuclear-energy]-b[heat-pipe]",
       "energy": 1,
       "group_name": "production",
@@ -949,7 +978,7 @@
     },
     {
       "name": "heat-exchanger",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[nuclear-energy]-c[heat-exchanger]",
       "energy": 3,
       "group_name": "production",
@@ -964,7 +993,7 @@
     },
     {
       "name": "steam-turbine",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[nuclear-energy]-d[steam-turbine]",
       "energy": 3,
       "group_name": "production",
@@ -979,7 +1008,7 @@
     },
     {
       "name": "burner-mining-drill",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[items]-a[burner-mining-drill]",
       "energy": 2,
       "group_name": "production",
@@ -994,7 +1023,7 @@
     },
     {
       "name": "electric-mining-drill",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[items]-b[electric-mining-drill]",
       "energy": 2,
       "group_name": "production",
@@ -1009,7 +1038,7 @@
     },
     {
       "name": "offshore-pump",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[fluids]-a[offshore-pump]",
       "energy": 0.5,
       "group_name": "production",
@@ -1023,7 +1052,7 @@
     },
     {
       "name": "pumpjack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[fluids]-b[pumpjack]",
       "energy": 5,
       "group_name": "production",
@@ -1039,7 +1068,7 @@
     },
     {
       "name": "stone-furnace",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[stone-furnace]",
       "energy": 0.5,
       "group_name": "production",
@@ -1050,7 +1079,7 @@
     },
     {
       "name": "steel-furnace",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[steel-furnace]",
       "energy": 3,
       "group_name": "production",
@@ -1064,7 +1093,7 @@
     },
     {
       "name": "electric-furnace",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[electric-furnace]",
       "energy": 5,
       "group_name": "production",
@@ -1078,8 +1107,24 @@
       ]
     },
     {
+      "name": "recycler",
+      "categories": ["crafting"],
+      "order": "d[recycler]",
+      "energy": 3,
+      "group_name": "production",
+      "subgroup_name": "smelting-machine",
+      "request_paste_multiplier": 30,
+      "main_product": "recycler",
+      "ingredients": [
+        { "name": "steel-plate", "amount": 20 },
+        { "name": "iron-gear-wheel", "amount": 40 },
+        { "name": "processing-unit", "amount": 6 },
+        { "name": "concrete", "amount": 20 }
+      ]
+    },
+    {
       "name": "assembling-machine-1",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[assembling-machine-1]",
       "energy": 0.5,
       "group_name": "production",
@@ -1094,7 +1139,7 @@
     },
     {
       "name": "assembling-machine-2",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[assembling-machine-2]",
       "energy": 0.5,
       "group_name": "production",
@@ -1110,7 +1155,7 @@
     },
     {
       "name": "assembling-machine-3",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[assembling-machine-3]",
       "energy": 0.5,
       "group_name": "production",
@@ -1124,7 +1169,7 @@
     },
     {
       "name": "oil-refinery",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[refinery]",
       "energy": 8,
       "group_name": "production",
@@ -1141,7 +1186,7 @@
     },
     {
       "name": "chemical-plant",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[chemical-plant]",
       "energy": 5,
       "group_name": "production",
@@ -1157,7 +1202,7 @@
     },
     {
       "name": "centrifuge",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[centrifuge]",
       "energy": 4,
       "group_name": "production",
@@ -1173,7 +1218,7 @@
     },
     {
       "name": "lab",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "z[lab]",
       "energy": 2,
       "group_name": "production",
@@ -1188,7 +1233,7 @@
     },
     {
       "name": "beacon",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[beacon]",
       "energy": 15,
       "group_name": "production",
@@ -1204,7 +1249,7 @@
     },
     {
       "name": "speed-module",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[speed]-a[speed-module-1]",
       "energy": 15,
       "group_name": "production",
@@ -1218,7 +1263,7 @@
     },
     {
       "name": "speed-module-2",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[speed]-b[speed-module-2]",
       "energy": 30,
       "group_name": "production",
@@ -1233,7 +1278,7 @@
     },
     {
       "name": "speed-module-3",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[speed]-c[speed-module-3]",
       "energy": 60,
       "group_name": "production",
@@ -1248,7 +1293,7 @@
     },
     {
       "name": "efficiency-module",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[efficiency]-a[efficiency-module-1]",
       "energy": 15,
       "group_name": "production",
@@ -1262,7 +1307,7 @@
     },
     {
       "name": "efficiency-module-2",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[efficiency]-b[efficiency-module-2]",
       "energy": 30,
       "group_name": "production",
@@ -1277,7 +1322,7 @@
     },
     {
       "name": "efficiency-module-3",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[efficiency]-c[efficiency-module-3]",
       "energy": 60,
       "group_name": "production",
@@ -1292,7 +1337,7 @@
     },
     {
       "name": "productivity-module",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[productivity]-a[productivity-module-1]",
       "energy": 15,
       "group_name": "production",
@@ -1306,7 +1351,7 @@
     },
     {
       "name": "productivity-module-2",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[productivity]-b[productivity-module-2]",
       "energy": 30,
       "group_name": "production",
@@ -1321,7 +1366,7 @@
     },
     {
       "name": "productivity-module-3",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[productivity]-c[productivity-module-3]",
       "energy": 60,
       "group_name": "production",
@@ -1335,8 +1380,52 @@
       ]
     },
     {
+      "name": "quality-module",
+      "categories": ["crafting"],
+      "order": "d[quality]-a[quality-module-1]",
+      "energy": 15,
+      "group_name": "production",
+      "subgroup_name": "module",
+      "request_paste_multiplier": 30,
+      "main_product": "quality-module",
+      "ingredients": [
+        { "name": "electronic-circuit", "amount": 5 },
+        { "name": "advanced-circuit", "amount": 5 }
+      ]
+    },
+    {
+      "name": "quality-module-2",
+      "categories": ["crafting"],
+      "order": "d[quality]-b[quality-module-2]",
+      "energy": 30,
+      "group_name": "production",
+      "subgroup_name": "module",
+      "request_paste_multiplier": 30,
+      "main_product": "quality-module-2",
+      "ingredients": [
+        { "name": "advanced-circuit", "amount": 5 },
+        { "name": "processing-unit", "amount": 5 },
+        { "name": "quality-module", "amount": 4 }
+      ]
+    },
+    {
+      "name": "quality-module-3",
+      "categories": ["crafting"],
+      "order": "d[quality]-c[quality-module-3]",
+      "energy": 60,
+      "group_name": "production",
+      "subgroup_name": "module",
+      "request_paste_multiplier": 30,
+      "main_product": "quality-module-3",
+      "ingredients": [
+        { "name": "advanced-circuit", "amount": 5 },
+        { "name": "processing-unit", "amount": 5 },
+        { "name": "quality-module-2", "amount": 4 }
+      ]
+    },
+    {
       "name": "rocket-silo",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[rocket-silo]",
       "energy": 30,
       "group_name": "production",
@@ -1353,8 +1442,8 @@
     },
     {
       "name": "cargo-landing-pad",
-      "category": "crafting",
-      "order": "c[cargo-landing-pad]",
+      "categories": ["crafting"],
+      "order": "c-a[cargo-landing-pad]",
       "energy": 30,
       "group_name": "production",
       "subgroup_name": "space-related",
@@ -1368,7 +1457,7 @@
     },
     {
       "name": "satellite",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[rocket-parts]-e[satellite]",
       "energy": 5,
       "group_name": "production",
@@ -1386,7 +1475,7 @@
     },
     {
       "name": "solid-fuel-from-petroleum-gas",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[fluid-chemistry]-c[solid-fuel-from-petroleum-gas]",
       "energy": 1,
       "group_name": "intermediate-products",
@@ -1397,7 +1486,7 @@
     },
     {
       "name": "solid-fuel-from-light-oil",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[fluid-chemistry]-d[solid-fuel-from-light-oil]",
       "energy": 1,
       "group_name": "intermediate-products",
@@ -1408,7 +1497,7 @@
     },
     {
       "name": "solid-fuel-from-heavy-oil",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[fluid-chemistry]-e[solid-fuel-from-heavy-oil]",
       "energy": 1,
       "group_name": "intermediate-products",
@@ -1419,7 +1508,7 @@
     },
     {
       "name": "iron-plate",
-      "category": "smelting",
+      "categories": ["smelting"],
       "order": "a[smelting]-a[iron-plate]",
       "energy": 3.20000000000000017763568394002504646778106689453125,
       "group_name": "intermediate-products",
@@ -1430,7 +1519,7 @@
     },
     {
       "name": "copper-plate",
-      "category": "smelting",
+      "categories": ["smelting"],
       "order": "a[smelting]-b[copper-plate]",
       "energy": 3.20000000000000017763568394002504646778106689453125,
       "group_name": "intermediate-products",
@@ -1441,7 +1530,7 @@
     },
     {
       "name": "steel-plate",
-      "category": "smelting",
+      "categories": ["smelting"],
       "order": "a[smelting]-c[steel-plate]",
       "energy": 16,
       "group_name": "intermediate-products",
@@ -1452,7 +1541,7 @@
     },
     {
       "name": "plastic-bar",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[chemistry]-b[plastic-bar]",
       "energy": 1,
       "group_name": "intermediate-products",
@@ -1463,7 +1552,7 @@
     },
     {
       "name": "sulfur",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[chemistry]-c[sulfur]",
       "energy": 1,
       "group_name": "intermediate-products",
@@ -1474,7 +1563,7 @@
     },
     {
       "name": "battery",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[chemistry]-d[battery]",
       "energy": 4,
       "group_name": "intermediate-products",
@@ -1488,7 +1577,7 @@
     },
     {
       "name": "explosives",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "b[chemistry]-e[explosives]",
       "energy": 4,
       "group_name": "intermediate-products",
@@ -1502,7 +1591,7 @@
     },
     {
       "name": "water-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-a[water]-a[water]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1513,7 +1602,7 @@
     },
     {
       "name": "crude-oil-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-b[oil]-a[crude-oil]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1524,7 +1613,7 @@
     },
     {
       "name": "petroleum-gas-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-b[oil]-b[petroleum-gas]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1535,7 +1624,7 @@
     },
     {
       "name": "light-oil-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-b[oil]-c[light-oil]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1546,7 +1635,7 @@
     },
     {
       "name": "heavy-oil-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-b[oil]-d[heavy-oil]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1557,7 +1646,7 @@
     },
     {
       "name": "lubricant-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-b[oil]-e[lubricant]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1568,7 +1657,7 @@
     },
     {
       "name": "sulfuric-acid-barrel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "a[fluid]-b[oil]-f[sulfuric-acid]",
       "energy": 0.2,
       "group_name": "intermediate-products",
@@ -1579,7 +1668,7 @@
     },
     {
       "name": "iron-gear-wheel",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-intermediates]-a[iron-gear-wheel]",
       "energy": 0.5,
       "group_name": "intermediate-products",
@@ -1590,7 +1679,7 @@
     },
     {
       "name": "iron-stick",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-intermediates]-b[iron-stick]",
       "energy": 0.5,
       "group_name": "intermediate-products",
@@ -1601,7 +1690,7 @@
     },
     {
       "name": "copper-cable",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-intermediates]-c[copper-cable]",
       "energy": 0.5,
       "group_name": "intermediate-products",
@@ -1612,7 +1701,7 @@
     },
     {
       "name": "barrel",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-intermediates]-d[empty-barrel]",
       "energy": 1,
       "group_name": "intermediate-products",
@@ -1623,7 +1712,7 @@
     },
     {
       "name": "electronic-circuit",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[circuits]-a[electronic-circuit]",
       "energy": 0.5,
       "group_name": "intermediate-products",
@@ -1637,7 +1726,7 @@
     },
     {
       "name": "advanced-circuit",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[circuits]-b[advanced-circuit]",
       "energy": 6,
       "group_name": "intermediate-products",
@@ -1652,7 +1741,7 @@
     },
     {
       "name": "processing-unit",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "b[circuits]-c[processing-unit]",
       "energy": 10,
       "group_name": "intermediate-products",
@@ -1666,7 +1755,7 @@
     },
     {
       "name": "engine-unit",
-      "category": "advanced-crafting",
+      "categories": ["advanced-crafting"],
       "order": "c[advanced-intermediates]-a[engine-unit]",
       "energy": 10,
       "group_name": "intermediate-products",
@@ -1681,7 +1770,7 @@
     },
     {
       "name": "electric-engine-unit",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "c[advanced-intermediates]-b[electric-engine-unit]",
       "energy": 10,
       "group_name": "intermediate-products",
@@ -1695,7 +1784,7 @@
     },
     {
       "name": "flying-robot-frame",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[advanced-intermediates]-c[flying-robot-frame]",
       "energy": 20,
       "group_name": "intermediate-products",
@@ -1711,7 +1800,7 @@
     },
     {
       "name": "low-density-structure",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[rocket-parts]-a[low-density-structure]",
       "energy": 15,
       "group_name": "intermediate-products",
@@ -1726,7 +1815,7 @@
     },
     {
       "name": "rocket-fuel",
-      "category": "crafting-with-fluid",
+      "categories": ["crafting-with-fluid"],
       "order": "d[rocket-parts]-b[rocket-fuel]",
       "energy": 15,
       "group_name": "intermediate-products",
@@ -1737,7 +1826,7 @@
     },
     {
       "name": "rocket-part",
-      "category": "rocket-building",
+      "categories": ["rocket-building"],
       "order": "d[rocket-parts]-d[rocket-part]",
       "energy": 3,
       "group_name": "intermediate-products",
@@ -1752,7 +1841,7 @@
     },
     {
       "name": "uranium-fuel-cell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[uranium-products]-a[uranium-fuel-cell]",
       "energy": 10,
       "group_name": "intermediate-products",
@@ -1767,7 +1856,7 @@
     },
     {
       "name": "nuclear-fuel",
-      "category": "centrifuging",
+      "categories": ["centrifuging"],
       "order": "b[uranium-products]-d[nuclear-fuel]",
       "energy": 90,
       "group_name": "intermediate-products",
@@ -1781,7 +1870,7 @@
     },
     {
       "name": "automation-science-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[automation-science-pack]",
       "energy": 5,
       "group_name": "intermediate-products",
@@ -1795,7 +1884,7 @@
     },
     {
       "name": "logistic-science-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[logistic-science-pack]",
       "energy": 6,
       "group_name": "intermediate-products",
@@ -1809,7 +1898,7 @@
     },
     {
       "name": "military-science-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[military-science-pack]",
       "energy": 10,
       "group_name": "intermediate-products",
@@ -1824,7 +1913,7 @@
     },
     {
       "name": "chemical-science-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[chemical-science-pack]",
       "energy": 24,
       "group_name": "intermediate-products",
@@ -1839,7 +1928,7 @@
     },
     {
       "name": "production-science-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[production-science-pack]",
       "energy": 21,
       "group_name": "intermediate-products",
@@ -1854,7 +1943,7 @@
     },
     {
       "name": "utility-science-pack",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[utility-science-pack]",
       "energy": 21,
       "group_name": "intermediate-products",
@@ -1869,7 +1958,7 @@
     },
     {
       "name": "submachine-gun",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-clips]-b[submachine-gun]",
       "energy": 10,
       "group_name": "combat",
@@ -1884,7 +1973,7 @@
     },
     {
       "name": "shotgun",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[shotgun]-a[basic]",
       "energy": 10,
       "group_name": "combat",
@@ -1900,7 +1989,7 @@
     },
     {
       "name": "combat-shotgun",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[shotgun]-a[combat]",
       "energy": 10,
       "group_name": "combat",
@@ -1916,7 +2005,7 @@
     },
     {
       "name": "rocket-launcher",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[rocket-launcher]",
       "energy": 10,
       "group_name": "combat",
@@ -1931,7 +2020,7 @@
     },
     {
       "name": "flamethrower",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[flamethrower]",
       "energy": 10,
       "group_name": "combat",
@@ -1945,7 +2034,7 @@
     },
     {
       "name": "firearm-magazine",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-clips]-a[firearm-magazine]",
       "energy": 1,
       "group_name": "combat",
@@ -1956,7 +2045,7 @@
     },
     {
       "name": "piercing-rounds-magazine",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-clips]-b[piercing-rounds-magazine]",
       "energy": 6,
       "group_name": "combat",
@@ -1971,7 +2060,7 @@
     },
     {
       "name": "uranium-rounds-magazine",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[basic-clips]-c[uranium-rounds-magazine]",
       "energy": 10,
       "group_name": "combat",
@@ -1985,7 +2074,7 @@
     },
     {
       "name": "shotgun-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[shotgun]-a[basic]",
       "energy": 3,
       "group_name": "combat",
@@ -1999,7 +2088,7 @@
     },
     {
       "name": "piercing-shotgun-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[shotgun]-b[piercing]",
       "energy": 8,
       "group_name": "combat",
@@ -2007,14 +2096,14 @@
       "request_paste_multiplier": 30,
       "main_product": "piercing-shotgun-shell",
       "ingredients": [
-        { "name": "copper-plate", "amount": 5 },
-        { "name": "steel-plate", "amount": 2 },
+        { "name": "copper-plate", "amount": 2 },
+        { "name": "steel-plate", "amount": 1 },
         { "name": "shotgun-shell", "amount": 2 }
       ]
     },
     {
       "name": "cannon-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[cannon-shell]-a[basic]",
       "energy": 8,
       "group_name": "combat",
@@ -2029,7 +2118,7 @@
     },
     {
       "name": "explosive-cannon-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[cannon-shell]-c[explosive]",
       "energy": 8,
       "group_name": "combat",
@@ -2044,7 +2133,7 @@
     },
     {
       "name": "uranium-cannon-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[cannon-shell]-c[uranium]",
       "energy": 12,
       "group_name": "combat",
@@ -2058,7 +2147,7 @@
     },
     {
       "name": "explosive-uranium-cannon-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[explosive-cannon-shell]-c[uranium]",
       "energy": 12,
       "group_name": "combat",
@@ -2072,7 +2161,7 @@
     },
     {
       "name": "artillery-shell",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[explosive-cannon-shell]-d[artillery]",
       "energy": 15,
       "group_name": "combat",
@@ -2087,7 +2176,7 @@
     },
     {
       "name": "rocket",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[rocket-launcher]-a[basic]",
       "energy": 4,
       "group_name": "combat",
@@ -2101,7 +2190,7 @@
     },
     {
       "name": "explosive-rocket",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[rocket-launcher]-b[explosive]",
       "energy": 8,
       "group_name": "combat",
@@ -2115,7 +2204,7 @@
     },
     {
       "name": "atomic-bomb",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[rocket-launcher]-d[atomic-bomb]",
       "energy": 50,
       "group_name": "combat",
@@ -2130,7 +2219,7 @@
     },
     {
       "name": "flamethrower-ammo",
-      "category": "chemistry",
+      "categories": ["chemistry"],
       "order": "e[flamethrower]",
       "energy": 6,
       "group_name": "combat",
@@ -2141,7 +2230,7 @@
     },
     {
       "name": "grenade",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[grenade]-a[normal]",
       "energy": 8,
       "group_name": "combat",
@@ -2155,7 +2244,7 @@
     },
     {
       "name": "cluster-grenade",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[grenade]-b[cluster]",
       "energy": 8,
       "group_name": "combat",
@@ -2170,7 +2259,7 @@
     },
     {
       "name": "poison-capsule",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[poison-capsule]",
       "energy": 8,
       "group_name": "combat",
@@ -2185,7 +2274,7 @@
     },
     {
       "name": "slowdown-capsule",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[slowdown-capsule]",
       "energy": 8,
       "group_name": "combat",
@@ -2200,7 +2289,7 @@
     },
     {
       "name": "defender-capsule",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[defender]-b[capsule]",
       "energy": 8,
       "group_name": "combat",
@@ -2215,7 +2304,7 @@
     },
     {
       "name": "distractor-capsule",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[distractor]-b[capsule]",
       "energy": 15,
       "group_name": "combat",
@@ -2229,7 +2318,7 @@
     },
     {
       "name": "destroyer-capsule",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[destroyer]-b[capsule]",
       "energy": 15,
       "group_name": "combat",
@@ -2243,7 +2332,7 @@
     },
     {
       "name": "light-armor",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[light-armor]",
       "energy": 3,
       "group_name": "combat",
@@ -2254,7 +2343,7 @@
     },
     {
       "name": "heavy-armor",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[heavy-armor]",
       "energy": 8,
       "group_name": "combat",
@@ -2268,7 +2357,7 @@
     },
     {
       "name": "modular-armor",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[modular-armor]",
       "energy": 15,
       "group_name": "combat",
@@ -2282,7 +2371,7 @@
     },
     {
       "name": "power-armor",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[power-armor]",
       "energy": 20,
       "group_name": "combat",
@@ -2297,7 +2386,7 @@
     },
     {
       "name": "power-armor-mk2",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[power-armor-mk2]",
       "energy": 25,
       "group_name": "combat",
@@ -2314,7 +2403,7 @@
     },
     {
       "name": "solar-panel-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[energy-source]-a[solar-panel]",
       "energy": 10,
       "group_name": "combat",
@@ -2329,7 +2418,7 @@
     },
     {
       "name": "fission-reactor-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[energy-source]-b[fission-reactor]",
       "energy": 10,
       "group_name": "combat",
@@ -2344,7 +2433,7 @@
     },
     {
       "name": "battery-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[battery]-a[battery-equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2358,7 +2447,7 @@
     },
     {
       "name": "battery-mk2-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[battery]-b[battery-equipment-mk2]",
       "energy": 10,
       "group_name": "combat",
@@ -2373,7 +2462,7 @@
     },
     {
       "name": "belt-immunity-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "c[belt-immunity]-a[belt-immunity]",
       "energy": 10,
       "group_name": "combat",
@@ -2387,7 +2476,7 @@
     },
     {
       "name": "exoskeleton-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[exoskeleton]-a[exoskeleton-equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2402,7 +2491,7 @@
     },
     {
       "name": "personal-roboport-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[robotics]-a[personal-roboport-equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2418,7 +2507,7 @@
     },
     {
       "name": "personal-roboport-mk2-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "e[robotics]-b[personal-roboport-mk2-equipment]",
       "energy": 20,
       "group_name": "combat",
@@ -2433,7 +2522,7 @@
     },
     {
       "name": "night-vision-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[night-vision]-a[night-vision-equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2447,7 +2536,7 @@
     },
     {
       "name": "energy-shield-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[shield]-a[energy-shield-equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2461,7 +2550,7 @@
     },
     {
       "name": "energy-shield-mk2-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[shield]-b[energy-shield-equipment-mk2]",
       "energy": 10,
       "group_name": "combat",
@@ -2476,7 +2565,7 @@
     },
     {
       "name": "personal-laser-defense-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[active-defense]-a[personal-laser-defense-equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2491,7 +2580,7 @@
     },
     {
       "name": "discharge-defense-equipment",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[active-defense]-b[discharge-defense-equipment]-a[equipment]",
       "energy": 10,
       "group_name": "combat",
@@ -2506,7 +2595,7 @@
     },
     {
       "name": "stone-wall",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[stone-wall]-a[stone-wall]",
       "energy": 0.5,
       "group_name": "combat",
@@ -2517,7 +2606,7 @@
     },
     {
       "name": "gate",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "a[wall]-b[gate]",
       "energy": 0.5,
       "group_name": "combat",
@@ -2532,7 +2621,7 @@
     },
     {
       "name": "radar",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "d[radar]-a[radar]",
       "energy": 0.5,
       "group_name": "combat",
@@ -2547,7 +2636,7 @@
     },
     {
       "name": "land-mine",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "f[land-mine]",
       "energy": 5,
       "group_name": "combat",
@@ -2561,7 +2650,7 @@
     },
     {
       "name": "gun-turret",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[turret]-a[gun-turret]",
       "energy": 8,
       "group_name": "combat",
@@ -2576,7 +2665,7 @@
     },
     {
       "name": "laser-turret",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[turret]-b[laser-turret]",
       "energy": 20,
       "group_name": "combat",
@@ -2591,7 +2680,7 @@
     },
     {
       "name": "flamethrower-turret",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[turret]-c[flamethrower-turret]",
       "energy": 20,
       "group_name": "combat",
@@ -2607,7 +2696,7 @@
     },
     {
       "name": "artillery-turret",
-      "category": "crafting",
+      "categories": ["crafting"],
       "order": "b[turret]-d[artillery-turret]-a[turret]",
       "energy": 40,
       "group_name": "combat",
@@ -2652,6 +2741,8 @@
     { "name": "pipe-to-ground", "stack_size": 50, "weight": 20000 },
     { "name": "pump", "stack_size": 50, "weight": 20000 },
     { "name": "rail", "stack_size": 100, "weight": 10000 },
+    { "name": "rail-ramp", "stack_size": 10, "weight": 500000 },
+    { "name": "rail-support", "stack_size": 20, "weight": 200000 },
     { "name": "train-stop", "stack_size": 10, "weight": 100000 },
     { "name": "rail-signal", "stack_size": 50, "weight": 20000 },
     { "name": "rail-chain-signal", "stack_size": 50, "weight": 20000 },
@@ -2707,12 +2798,13 @@
     { "name": "stone-furnace", "stack_size": 50, "weight": 20000 },
     { "name": "steel-furnace", "stack_size": 50, "weight": 20000 },
     { "name": "electric-furnace", "stack_size": 50, "weight": 20000 },
+    { "name": "recycler", "stack_size": 20, "weight": 100000 },
     { "name": "assembling-machine-1", "stack_size": 50, "weight": 20000 },
     { "name": "assembling-machine-2", "stack_size": 50, "weight": 20000 },
     { "name": "assembling-machine-3", "stack_size": 50, "weight": 40000 },
     { "name": "oil-refinery", "stack_size": 10, "weight": 100000 },
     { "name": "chemical-plant", "stack_size": 10, "weight": 100000 },
-    { "name": "centrifuge", "stack_size": 50, "weight": 662500 },
+    { "name": "centrifuge", "stack_size": 10, "weight": 662500 },
     { "name": "lab", "stack_size": 10, "weight": 100000 },
     { "name": "beacon", "stack_size": 20, "weight": 50000 },
     { "name": "speed-module", "stack_size": 50, "weight": 20000 },
@@ -2724,6 +2816,9 @@
     { "name": "productivity-module", "stack_size": 50, "weight": 20000 },
     { "name": "productivity-module-2", "stack_size": 50, "weight": 20000 },
     { "name": "productivity-module-3", "stack_size": 50, "weight": 20000 },
+    { "name": "quality-module", "stack_size": 50, "weight": 20000 },
+    { "name": "quality-module-2", "stack_size": 50, "weight": 20000 },
+    { "name": "quality-module-3", "stack_size": 50, "weight": 20000 },
     { "name": "empty-module-slot", "stack_size": 1, "weight": 100 },
     { "name": "rocket-silo", "stack_size": 1, "weight": 10000000 },
     { "name": "cargo-landing-pad", "stack_size": 1, "weight": 1000000 },
@@ -2893,6 +2988,11 @@
     { "name": "artillery-targeting-remote", "stack_size": 1, "weight": 0 },
     { "name": "item-unknown", "stack_size": 1, "weight": 100 },
     { "name": "no-item", "stack_size": 1, "weight": 100 },
+    {
+      "name": "electric-energy-interface-equipment",
+      "stack_size": 1,
+      "weight": 250000
+    },
     { "name": "electric-energy-interface", "stack_size": 50, "weight": 100 },
     { "name": "linked-chest", "stack_size": 10, "weight": 100 },
     { "name": "proxy-container", "stack_size": 10, "weight": 100 },
@@ -3035,12 +3135,36 @@
       "item_to_place_this": { "name": "rail", "count": 3 }
     },
     {
+      "name": "elevated-straight-rail",
+      "item_to_place_this": { "name": "rail", "count": 1 }
+    },
+    {
+      "name": "elevated-half-diagonal-rail",
+      "item_to_place_this": { "name": "rail", "count": 2 }
+    },
+    {
+      "name": "elevated-curved-rail-a",
+      "item_to_place_this": { "name": "rail", "count": 3 }
+    },
+    {
+      "name": "elevated-curved-rail-b",
+      "item_to_place_this": { "name": "rail", "count": 3 }
+    },
+    {
       "name": "legacy-straight-rail",
       "item_to_place_this": { "name": "rail", "count": 1 }
     },
     {
       "name": "legacy-curved-rail",
       "item_to_place_this": { "name": "rail", "count": 4 }
+    },
+    {
+      "name": "rail-ramp",
+      "item_to_place_this": { "name": "rail-ramp", "count": 1 }
+    },
+    {
+      "name": "rail-support",
+      "item_to_place_this": { "name": "rail-support", "count": 1 }
     },
     {
       "name": "train-stop",
@@ -3199,6 +3323,10 @@
     {
       "name": "electric-furnace",
       "item_to_place_this": { "name": "electric-furnace", "count": 1 }
+    },
+    {
+      "name": "recycler",
+      "item_to_place_this": { "name": "recycler", "count": 1 }
     },
     {
       "name": "assembling-machine-1",
@@ -3369,6 +3497,8 @@
       "tile_height": 2,
       "crafting_categories": ["smelting"],
       "crafting_speed": 1,
+      "productivity": 0,
+      "module_slots": 0,
       "is_burner": true
     },
     {
@@ -3377,6 +3507,8 @@
       "tile_height": 2,
       "crafting_categories": ["smelting"],
       "crafting_speed": 2,
+      "productivity": 0,
+      "module_slots": 0,
       "is_burner": true
     },
     {
@@ -3385,6 +3517,18 @@
       "tile_height": 3,
       "crafting_categories": ["smelting"],
       "crafting_speed": 2,
+      "productivity": 0,
+      "module_slots": 2,
+      "is_burner": false
+    },
+    {
+      "name": "recycler",
+      "tile_width": 2,
+      "tile_height": 4,
+      "crafting_categories": {},
+      "crafting_speed": 0.5,
+      "productivity": 0,
+      "module_slots": 4,
       "is_burner": false
     },
     {
@@ -3393,6 +3537,8 @@
       "tile_height": 3,
       "crafting_categories": ["crafting", "advanced-crafting"],
       "crafting_speed": 0.5,
+      "productivity": 0,
+      "module_slots": 0,
       "is_burner": false
     },
     {
@@ -3405,6 +3551,8 @@
         "crafting-with-fluid"
       ],
       "crafting_speed": 0.75,
+      "productivity": 0,
+      "module_slots": 2,
       "is_burner": false
     },
     {
@@ -3417,6 +3565,8 @@
         "crafting-with-fluid"
       ],
       "crafting_speed": 1.25,
+      "productivity": 0,
+      "module_slots": 4,
       "is_burner": false
     },
     {
@@ -3425,6 +3575,8 @@
       "tile_height": 5,
       "crafting_categories": {},
       "crafting_speed": 1,
+      "productivity": 0,
+      "module_slots": 3,
       "is_burner": false
     },
     {
@@ -3433,6 +3585,8 @@
       "tile_height": 3,
       "crafting_categories": ["chemistry"],
       "crafting_speed": 1,
+      "productivity": 0,
+      "module_slots": 3,
       "is_burner": false
     },
     {
@@ -3441,6 +3595,8 @@
       "tile_height": 3,
       "crafting_categories": ["centrifuging"],
       "crafting_speed": 1,
+      "productivity": 0,
+      "module_slots": 2,
       "is_burner": false
     },
     {
@@ -3449,6 +3605,8 @@
       "tile_height": 9,
       "crafting_categories": ["rocket-building"],
       "crafting_speed": 1,
+      "productivity": 0,
+      "module_slots": 4,
       "is_burner": false
     }
   ],
@@ -3504,54 +3662,102 @@
       "name": "wooden-chest",
       "tile_width": 1,
       "tile_height": 1,
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 16,
+        "uncommon": 20,
+        "rare": 25,
+        "epic": 30,
+        "legendary": 40
+      }
     },
     {
       "name": "iron-chest",
       "tile_width": 1,
       "tile_height": 1,
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 32,
+        "uncommon": 41,
+        "rare": 51,
+        "epic": 60,
+        "legendary": 80
+      }
     },
     {
       "name": "steel-chest",
       "tile_width": 1,
       "tile_height": 1,
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 48,
+        "uncommon": 62,
+        "rare": 76,
+        "epic": 91,
+        "legendary": 120
+      }
     },
     {
       "name": "active-provider-chest",
       "tile_width": 1,
       "tile_height": 1,
       "logistic_mode": "active-provider",
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 48,
+        "uncommon": 62,
+        "rare": 76,
+        "epic": 91,
+        "legendary": 120
+      }
     },
     {
       "name": "passive-provider-chest",
       "tile_width": 1,
       "tile_height": 1,
       "logistic_mode": "passive-provider",
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 48,
+        "uncommon": 62,
+        "rare": 76,
+        "epic": 91,
+        "legendary": 120
+      }
     },
     {
       "name": "storage-chest",
       "tile_width": 1,
       "tile_height": 1,
       "logistic_mode": "storage",
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 48,
+        "uncommon": 62,
+        "rare": 76,
+        "epic": 91,
+        "legendary": 120
+      }
     },
     {
       "name": "buffer-chest",
       "tile_width": 1,
       "tile_height": 1,
       "logistic_mode": "buffer",
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 48,
+        "uncommon": 62,
+        "rare": 76,
+        "epic": 91,
+        "legendary": 120
+      }
     },
     {
       "name": "requester-chest",
       "tile_width": 1,
       "tile_height": 1,
       "logistic_mode": "requester",
-      "inventory_sizes": {}
+      "inventory_sizes": {
+        "normal": 48,
+        "uncommon": 62,
+        "rare": 76,
+        "epic": 91,
+        "legendary": 120
+      }
     }
   ],
   "groups": [
@@ -3593,14 +3799,26 @@
     { "name": "defensive-structure", "order": "h" },
     { "name": "turret", "order": "i" }
   ],
-  "qualities": {},
+  "qualities": [
+    { "name": "normal" },
+    { "name": "uncommon" },
+    { "name": "rare" },
+    { "name": "epic" },
+    { "name": "legendary" }
+  ],
   "rocket_silos": [
     {
       "name": "rocket-silo",
       "tile_width": 9,
       "tile_height": 9,
-      "lift_weight": 1000000,
-      "inventory_sizes": {}
+      "lift_weight": 281474976710656,
+      "inventory_sizes": {
+        "normal": 1,
+        "uncommon": 1,
+        "rare": 1,
+        "epic": 1,
+        "legendary": 1
+      }
     }
   ]
 }

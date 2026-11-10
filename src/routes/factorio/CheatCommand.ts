@@ -41,7 +41,7 @@ for _, recipe_prototype in pairs(prototypes.recipe) do
         end
         table.insert(data.recipes, {
             name = recipe_prototype.name,
-            category = recipe_prototype.category,
+            categories = recipe_prototype.categories,
             order = recipe_prototype.order,
             energy = recipe_prototype.energy,
             group_name = recipe_prototype.group.name,
@@ -50,7 +50,9 @@ for _, recipe_prototype in pairs(prototypes.recipe) do
             main_product = recipe_prototype.main_product.name,
             ingredients = ingredients,
         })
-        categories[recipe_prototype.category] = true
+        for _, category in pairs(recipe_prototype.categories) do
+          categories[category] = true
+        end
         groups[recipe_prototype.group.name] = recipe_prototype.group
         subgroups[recipe_prototype.subgroup.name] = recipe_prototype.subgroup
         if recipe_prototype.localised_name then
@@ -120,7 +122,7 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
         name = entity_prototype.name,
         tile_width = entity_prototype.tile_width,
         tile_height = entity_prototype.tile_height,
-        lift_weight = prototypes["utility_constants"].rocket_lift_weight,
+        lift_weight = entity_prototype.lift_weight,
         inventory_sizes = inventory_sizes,
     })
     locale["rocket_silos." .. entity_prototype.name] = entity_prototype.localised_name
@@ -139,6 +141,8 @@ for _, entity_prototype in pairs(prototypes.get_entity_filtered{{filter = "type"
         tile_height = entity_prototype.tile_height,
         crafting_categories = crafting_categories,
         crafting_speed = entity_prototype.get_crafting_speed(),
+        productivity = entity_prototype.effect_receiver and entity_prototype.effect_receiver.base_effect.productivity or 0,
+        module_slots = entity_prototype.module_inventory_size or 0,
         is_burner = entity_prototype.burner_prototype ~= nil
     })
     locale["crafting_machines." .. entity_prototype.name] = entity_prototype.localised_name

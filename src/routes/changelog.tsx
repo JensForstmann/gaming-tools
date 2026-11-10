@@ -14,6 +14,13 @@ export default function Changelog() {
         to see all changes.
       </p>
 
+      <h3>2026 November</h3>
+      <ul>
+        <li>
+          <FactorioBadge /> Add support for Factorio 2.1
+        </li>
+      </ul>
+
       <h3>2026 March</h3>
       <ul>
         <li>
@@ -64,7 +71,7 @@ export default function Changelog() {
       <h3>2024 November</h3>
       <ul>
         <li>
-          <FactorioBadge /> Add Support for Factorio 2.0
+          <FactorioBadge /> Add support for Factorio 2.0
         </li>
         <li>
           <FactorioBadge /> Make Everything: Add support for quality items &

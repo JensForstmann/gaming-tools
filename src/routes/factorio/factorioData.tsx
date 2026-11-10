@@ -19,7 +19,7 @@ const isEmptyObject = (value: unknown): value is {} => {
 
 export type SourceRecipe<EmptyArray> = {
   name: string;
-  category: string;
+  categories: string[] | EmptyArray;
   order: string;
   energy: number;
   group_name: string;
@@ -66,6 +66,8 @@ export type SourceEntityWithSize = {
 export type SourceCraftingMachine<EmptyArray> = SourceEntityWithSize & {
   crafting_categories: string[] | EmptyArray;
   crafting_speed: number;
+  productivity: number;
+  module_slots: number;
   is_burner: boolean;
 };
 
@@ -95,7 +97,7 @@ export type SourceRocketSilo = SourceEntityWithSize & {
   name: string;
   inventory_sizes: SourceInventorySizes;
   /** in grams */
-  lift_weight: number;
+  lift_weight?: number;
 };
 
 type SourceData<EmptyArray> = {

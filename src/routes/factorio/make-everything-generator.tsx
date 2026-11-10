@@ -1,3 +1,4 @@
+import { createAutoAnimate } from "@formkit/auto-animate/solid";
 import {
   addEntity,
   COMPARATOR,
@@ -72,6 +73,7 @@ type AppData = {
     }
   >;
   items: SourceItem[];
+  crafting_machines: Array<AppCraftingMachine>;
   inserters: Array<
     SourceInserter & {
       display_name: string;
@@ -84,27 +86,17 @@ type AppData = {
   qualities: Array<AppQuality>;
 };
 
-const getBestCraftingMachine = (machines: AppCraftingMachine[]) => {
-  let fastest: SourceCraftingMachine<string[]> | undefined;
-
-  machines.forEach((machine) => {
-    if (!fastest) {
-      fastest = machine;
-      return;
-    }
-    if (fastest.is_burner && !machine.is_burner) {
-      fastest = machine; // electrical machines are always better (mostly)
-      return;
-    }
-    if (
-      fastest.is_burner === machine.is_burner &&
-      machine.crafting_speed > fastest.crafting_speed
-    ) {
-      fastest = machine;
-    }
+const sortCraftingMachines = (
+  machines: AppCraftingMachine[],
+): AppCraftingMachine[] => {
+  return machines.toSorted((a, b) => {
+    return (
+      Number(a.is_burner) - Number(b.is_burner) ||
+      b.module_slots - a.module_slots ||
+      b.crafting_speed - a.crafting_speed ||
+      a.name.localeCompare(b.name)
+    );
   });
-
-  return fastest;
 };
 
 const convertSourceDataToAppData = (
@@ -112,7 +104,9 @@ const convertSourceDataToAppData = (
   locales: Locales,
 ): AppData => {
   const categoriesSet = new Set<string>();
-  data.recipes.forEach((r) => categoriesSet.add(r.category));
+  data.recipes.forEach((r) =>
+    r.categories.forEach((c) => categoriesSet.add(c)),
+  );
   const crafting_machines: AppCraftingMachine[] = !Array.isArray(
     data.crafting_machines,
   )
@@ -132,6 +126,7 @@ const convertSourceDataToAppData = (
       ? []
       : data.recipes.map((recipe) => ({
           ...recipe,
+          categories: Array.isArray(recipe.categories) ? recipe.categories : [],
           ingredients: Array.isArray(recipe.ingredients)
             ? recipe.ingredients
             : [],
@@ -141,6 +136,7 @@ const convertSourceDataToAppData = (
             locales["groups." + recipe.group_name] || recipe.group_name,
         })),
     items: !Array.isArray(data.items) ? [] : data.items,
+    crafting_machines: crafting_machines,
     inserters: !Array.isArray(data.inserters)
       ? []
       : data.inserters.map((inserter) => ({
@@ -172,14 +168,13 @@ const convertSourceDataToAppData = (
     subgroups: !Array.isArray(data.subgroups) ? [] : data.subgroups,
     categories: Array.from(categoriesSet)
       .sort((a, b) => a.localeCompare(b))
-      .map((category) => {
+      .map((category): AppCategory => {
         const machines = crafting_machines.filter((machine) =>
           machine.crafting_categories.includes(category),
         );
         return {
           name: category,
           machines: machines,
-          selectedMachine: getBestCraftingMachine(machines)?.name ?? "",
         };
       }),
     qualities: !Array.isArray(data.qualities)
@@ -191,11 +186,15 @@ const convertSourceDataToAppData = (
   };
 };
 
-const SpaceAgeAppData = convertSourceDataToAppData(SpaceAgeData, SpaceAgeLocales);
+const SpaceAgeAppData = convertSourceDataToAppData(
+  SpaceAgeData,
+  SpaceAgeLocales,
+);
 
 type Settings = {
   recipeSet: RecipeSet;
-  selectedMachines: Array<{ category: string; machine: string }>;
+  /** lowest index used first */
+  machinePriority: string[];
   blueprintMaxWidth: number;
   columnSpace: number;
   rowSpace: number;
@@ -224,10 +223,9 @@ type Settings = {
 
 const DefaultSettings: Settings = {
   recipeSet: "SPACE_AGE",
-  selectedMachines: SpaceAgeAppData.categories.map((category) => ({
-    category: category.name,
-    machine: getBestCraftingMachine(category.machines)?.name ?? "",
-  })),
+  machinePriority: sortCraftingMachines(SpaceAgeAppData.crafting_machines).map(
+    (cm) => cm.name,
+  ),
   blueprintMaxWidth: 12,
   columnSpace: 0,
   rowSpace: 0,
@@ -322,24 +320,30 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
   appData.recipes
     .filter((r) => r.selected)
     .forEach((r) => {
-      const category = appData.categories.find((c) => c.name === r.category);
-      if (!category) {
-        throw new Error(`category ${r.category} not found`);
-      }
-      const selectedMachineName = settings.selectedMachines.find(
-        (entry) => entry.category === category.name,
-      )?.machine;
+      const selectedMachineName = settings.machinePriority.find(
+        (crafingMachineName) => {
+          const craftingMachine = appData.crafting_machines.find(
+            (cm) => cm.name === crafingMachineName,
+          );
+          if (!craftingMachine) {
+            return false;
+          }
+          return craftingMachine.crafting_categories.some((craftingCategory) =>
+            r.categories.includes(craftingCategory),
+          );
+        },
+      );
       if (!selectedMachineName) {
         throw new Error(
-          `no selected machine found for category ${category.name}`,
+          `no machine found for the recipe categories: ${r.categories.join(", ")}`,
         );
       }
-      const machine = category.machines.find(
-        (machine) => machine.name === selectedMachineName,
+      const machine = appData.crafting_machines.find(
+        (crafting_machine) => crafting_machine.name === selectedMachineName,
       );
       if (!machine) {
         throw new Error(
-          `selected machine ${selectedMachineName} not found for category ${category.name}`,
+          `machine "${selectedMachineName}" not found as a crafting machine`,
         );
       }
 
@@ -592,8 +596,96 @@ const Settings: Component<{
     const categories = new Set<string>();
     props.appData.recipes
       .filter((r) => r.selected)
-      .forEach((r) => categories.add(r.category));
+      .forEach((r) => r.categories.forEach((c) => categories.add(c)));
     return Array.from(categories);
+  };
+  const visibleCraftingMachines = () => {
+    const categories = new Set(currentCategories());
+    return props.settings.machinePriority
+      .map((name) =>
+        props.appData.crafting_machines.find((cm) => cm.name === name),
+      )
+      .filter(
+        (machine): machine is AppCraftingMachine =>
+          machine !== undefined &&
+          machine.crafting_categories.some((c) => categories.has(c)),
+      );
+  };
+  const moveCraftingMachineByButton = (
+    machine: AppCraftingMachine,
+    direction: "up" | "down",
+  ) => {
+    const machines = visibleCraftingMachines();
+    const index = machines.findIndex((m) => m.name === machine.name);
+
+    const targetIndex = index + (direction === "up" ? -1 : 1);
+    const target = machines[targetIndex];
+
+    if (!target) return;
+
+    moveCraftingMachine(
+      machine.name,
+      target.name,
+      direction === "up" ? "before" : "after",
+    );
+  };
+  const moveCraftingMachine = (
+    draggedName: string,
+    targetName: string,
+    position: "before" | "after",
+  ) => {
+    if (draggedName === targetName) return;
+
+    const priority = [...props.settings.machinePriority];
+
+    const draggedIndex = priority.indexOf(draggedName);
+    if (draggedIndex === -1 || !priority.includes(targetName)) return;
+
+    // Remove the dragged machine.
+    priority.splice(draggedIndex, 1);
+
+    // Find the target again because its index may have changed.
+    const targetIndex = priority.indexOf(targetName);
+
+    // Insert directly before or after the target.
+    priority.splice(
+      targetIndex + (position === "after" ? 1 : 0),
+      0,
+      draggedName,
+    );
+
+    props.setSettings("machinePriority", priority);
+    console.log("new", priority);
+  };
+  const handleDragStart = (event: DragEvent, machineName: string) => {
+    if (event.dataTransfer) {
+      event.dataTransfer.setData("text/plain", machineName);
+      event.dataTransfer.effectAllowed = "move";
+    }
+  };
+
+  const handleDragOver = (event: DragEvent) => {
+    event.preventDefault();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = "move";
+    }
+  };
+  const handleDrop = (event: DragEvent, targetName: string) => {
+    event.preventDefault();
+
+    const draggedName = event.dataTransfer?.getData("text/plain");
+    if (!draggedName || draggedName === targetName) {
+      return;
+    }
+
+    const priority = props.settings.machinePriority;
+
+    const draggedIndex = priority.indexOf(draggedName);
+    const targetIndex = priority.indexOf(targetName);
+
+    const position = draggedIndex < targetIndex ? "after" : "before";
+
+    moveCraftingMachine(draggedName, targetName, position);
   };
   const getChestByName = (name: string) => {
     return props.appData.logistic_containers.find((lc) => lc.name === name);
@@ -604,6 +696,8 @@ const Settings: Component<{
   const currentTargetChest = () => {
     return getChestByName(props.settings.targetChest.name);
   };
+  const [autoAnimateParent] = createAutoAnimate();
+
   return (
     <>
       <h3>Settings</h3>
@@ -613,31 +707,80 @@ const Settings: Component<{
       <Show when={currentCategories().length === 0}>
         Select recipes to produce. Then configure the crafting machines here.
       </Show>
-      <div class="grid grid-cols-3 gap-x-4">
-        <For each={props.appData.categories}>
-          {(category, idx) => (
-            <Show when={currentCategories().includes(category.name)}>
-              <SelectInput
-                label={category.name}
-                entries={category.machines.map((machine) => ({
-                  label: machine.display_name,
-                  value: machine.name,
-                }))}
-                currentValue={
-                  props.settings.selectedMachines.find(
-                    (entry) => entry.category === category.name,
-                  )?.machine
-                }
-                setValue={(v) => {
-                  const index = props.settings.selectedMachines.findIndex(
-                    (entry) => entry.category === category.name,
-                  );
-                  if (index >= 0) {
-                    props.setSettings("selectedMachines", index, "machine", v);
-                  }
-                }}
-              />
-            </Show>
+      <div class="flex flex-col gap-2" ref={autoAnimateParent}>
+        <For each={visibleCraftingMachines()}>
+          {(craftingMachine, index) => (
+            <div
+              class="flex items-center gap-2 p-3 border rounded-box bg-base-200"
+              on:dragover={handleDragOver}
+              on:drop={(event) => handleDrop(event, craftingMachine.name)}
+              on:dragstart={(event) =>
+                handleDragStart(event, craftingMachine.name)
+              }
+              draggable={true}
+            >
+              <span class="drag-handle cursor-grab active:cursor-grabbing">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  height="24px"
+                  width="24px"
+                  fill="#e3e3e3"
+                >
+                  <path d="M9,20q-0.82,0-1.41-0.59T7,18t0.59-1.41T9,16q0.83,0 1.41,0.59Q11,17.18 11,18t-0.59,1.41T9,20Zm6,0q-0.82,0-1.41-0.59T13,18t0.59-1.41T15,16t1.41,0.59Q17,17.18 17,18t-0.59,1.41T15,20ZM9,14q-0.82,0-1.41-0.59T7,12t0.59-1.41T9,10q0.83,0 1.41,0.59Q11,11.18 11,12t-0.59,1.41T9,14Zm6,0q-0.82,0-1.41-0.59T13,12t0.59-1.41T15,10t1.41,0.59Q17,11.18 17,12t-0.59,1.41T15,14ZM9,8Q8.18,8 7.59,7.41T7,6T7.59,4.59T9,4q0.83,0 1.41,0.59Q11,5.18 11,6T10.41,7.41T9,8Zm6,0q-0.82,0-1.41-0.59T13,6t0.59-1.41T15,4t1.41,0.59Q17,5.18 17,6T16.41,7.41T15,8Z" />
+                </svg>
+              </span>
+
+              <span class="flex-1">{craftingMachine.display_name}</span>
+
+              <div class="flex gap-1">
+                <button
+                  type="button"
+                  class="btn btn-ghost btn-sm btn-square"
+                  title="Move up"
+                  aria-label={`Move ${craftingMachine.display_name} up`}
+                  disabled={index() === 0}
+                  draggable={false}
+                  on:click={(event) => {
+                    event.stopPropagation();
+                    moveCraftingMachineByButton(craftingMachine, "up");
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    height="24px"
+                    width="24px"
+                    fill="#e3e3e3"
+                  >
+                    <path d="M11,20V7.82l-5.6,5.6L4,12l8-8l8,8l-1.4,1.42L13,7.82V20H11Z" />
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-ghost btn-sm btn-square"
+                  title="Move down"
+                  aria-label={`Move ${craftingMachine.display_name} down`}
+                  disabled={index() === visibleCraftingMachines().length - 1}
+                  draggable={false}
+                  on:click={(event) => {
+                    event.stopPropagation();
+                    moveCraftingMachineByButton(craftingMachine, "down");
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    height="24px"
+                    width="24px"
+                    fill="#e3e3e3"
+                  >
+                    <path d="M11,4V16.18l-5.6-5.6L4,12l8,8l8-8l-1.4-1.43L13,16.18V4H11Z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           )}
         </For>
       </div>
@@ -855,7 +998,7 @@ const Page = () => {
         (search().trim() === "" ||
           searchMatch(r.name, searchWords) ||
           searchMatch(r.display_name, searchWords)) &&
-        (categoryFilter() === "" || r.category === categoryFilter()) &&
+        (categoryFilter() === "" || r.categories.includes(categoryFilter())) &&
         (groupFilter() === "" || r.group_name === groupFilter()) &&
         (subgroupFilter() === "" || r.subgroup_name === subgroupFilter()),
     );
@@ -999,7 +1142,7 @@ const Page = () => {
                   <td>{recipe.display_name}</td>
                   <td>{recipe.group_display_name}</td>
                   <td>{recipe.subgroup_name}</td>
-                  <td>{recipe.category}</td>
+                  <td>{recipe.categories.join(", ")}</td>
                 </tr>
               )}
             </For>
