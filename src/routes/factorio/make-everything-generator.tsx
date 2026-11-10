@@ -209,16 +209,15 @@ type Settings = {
     trashUnrequested: boolean;
     setRequestFilter: boolean;
   };
-  inserter: {
-    name: string;
-    setLimit: boolean;
-  };
-  outserter: {
-    name: string;
-    setLimit: boolean;
-  };
+  inserter: string;
+  outserter: string;
   craftStackLimit: number;
   productQuality: string;
+  limit: {
+    inserter: boolean;
+    outserter: boolean;
+    machine: boolean;
+  };
 };
 
 const DefaultSettings: Settings = {
@@ -240,16 +239,15 @@ const DefaultSettings: Settings = {
     trashUnrequested: true,
     setRequestFilter: true,
   },
-  inserter: {
-    name: "bulk-inserter",
-    setLimit: false,
-  },
-  outserter: {
-    name: "bulk-inserter",
-    setLimit: true,
-  },
+  inserter: "bulk-inserter",
+  outserter: "bulk-inserter",
   craftStackLimit: 4,
   productQuality: "normal",
+  limit: {
+    inserter: false,
+    outserter: false,
+    machine: true,
+  },
 };
 
 const getItemStackSize = (itemName: string, items: SourceItem[]) => {
@@ -268,18 +266,16 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
     { signal: { type: "virtual", name: "signal-black" }, index: 4 },
   ];
 
-  const inserter = appData.inserters.find(
-    (i) => i.name === settings.inserter.name,
-  );
+  const inserter = appData.inserters.find((i) => i.name === settings.inserter);
   if (!inserter) {
-    throw new Error(`Inserter ${settings.inserter.name} not found`);
+    throw new Error(`Inserter ${settings.inserter} not found`);
   }
 
   const outserter = appData.inserters.find(
-    (i) => i.name === settings.outserter.name,
+    (i) => i.name === settings.outserter,
   );
   if (!outserter) {
-    throw new Error(`Outserter ${settings.outserter.name} not found`);
+    throw new Error(`Outserter ${settings.outserter} not found`);
   }
 
   const sourceChest = appData.logistic_containers.find(
@@ -296,7 +292,7 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
     throw new Error(`Provider chest ${settings.targetChest.name} not found`);
   }
 
-  const getInserterLimitControlBehavior = (
+  const getLimitControlBehavior = (
     main_product: string,
   ): Entity["control_behavior"] => ({
     logistic_condition: {
@@ -378,22 +374,25 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
         },
         recipe: r.name,
         recipe_quality: settings.productQuality,
+        control_behavior: settings.limit.machine
+          ? getLimitControlBehavior(r.main_product)
+          : undefined,
       });
       if (r.ingredients.length > 0) {
         addEntity(bp, {
-          name: settings.inserter.name,
+          name: settings.inserter,
           position: {
             x: currentX + inserter.tile_width / 2,
             y: currentY + machine.tile_height + inserter.tile_height / 2,
           },
           direction: DEFINES.direction.south,
-          control_behavior: settings.inserter.setLimit
-            ? getInserterLimitControlBehavior(r.main_product)
+          control_behavior: settings.limit.inserter
+            ? getLimitControlBehavior(r.main_product)
             : undefined,
         });
       }
       addEntity(bp, {
-        name: settings.outserter.name,
+        name: settings.outserter,
         position: {
           x:
             currentX +
@@ -401,8 +400,8 @@ const getBlueprint = (settings: Settings, appData: AppData): string => {
             outserter.tile_width / 2,
           y: currentY + machine.tile_height + outserter.tile_height / 2,
         },
-        control_behavior: settings.outserter.setLimit
-          ? getInserterLimitControlBehavior(r.main_product)
+        control_behavior: settings.limit.outserter
+          ? getLimitControlBehavior(r.main_product)
           : undefined,
       });
       if (r.ingredients.length > 0) {
@@ -804,6 +803,22 @@ const Settings: Component<{
             setValue={(v) => props.setSettings("productQuality", v)}
           />
         </Show>
+        <div></div>
+        <CheckboxInput
+          label="Limit machine"
+          value={props.settings.limit.machine}
+          setValue={(v) => props.setSettings("limit", "machine", v)}
+        />
+        <CheckboxInput
+          label="Limit inserter"
+          value={props.settings.limit.inserter}
+          setValue={(v) => props.setSettings("limit", "inserter", v)}
+        />
+        <CheckboxInput
+          label="Limit outserter"
+          value={props.settings.limit.outserter}
+          setValue={(v) => props.setSettings("limit", "outserter", v)}
+        />
       </div>
 
       <h4>Layout</h4>
@@ -923,28 +938,17 @@ const Settings: Component<{
             label: i.display_name,
             value: i.name,
           }))}
-          currentValue={props.settings.inserter.name}
-          setValue={(v) => props.setSettings("inserter", "name", v)}
+          currentValue={props.settings.inserter}
+          setValue={(v) => props.setSettings("inserter", v)}
         />
-        <CheckboxInput
-          label="Set inserter limit"
-          value={props.settings.inserter.setLimit}
-          setValue={(v) => props.setSettings("inserter", "setLimit", v)}
-        />
-        <div></div>
         <SelectInput
           label="Outserter"
           entries={props.appData.inserters.map((i) => ({
             label: i.display_name,
             value: i.name,
           }))}
-          currentValue={props.settings.outserter.name}
-          setValue={(v) => props.setSettings("outserter", "name", v)}
-        />
-        <CheckboxInput
-          label="Set outserter limit"
-          value={props.settings.outserter.setLimit}
-          setValue={(v) => props.setSettings("outserter", "setLimit", v)}
+          currentValue={props.settings.outserter}
+          setValue={(v) => props.setSettings("outserter", v)}
         />
       </div>
     </>

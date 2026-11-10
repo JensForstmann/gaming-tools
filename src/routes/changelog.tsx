@@ -19,6 +19,10 @@ export default function Changelog() {
         <li>
           <FactorioBadge /> Add support for Factorio 2.1
         </li>
+        <li>
+          <FactorioBadge /> Make Everything: Add settings to limit the crafting
+          machine.
+        </li>
       </ul>
 
       <h3>2026 March</h3>
